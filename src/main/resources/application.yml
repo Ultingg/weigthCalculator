@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: root
+    password: 9999
+    url: jdbc:mysql://localhost:3306/weight?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create

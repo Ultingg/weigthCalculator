@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ru.isaykin.application.logic.MeasureWindow">
+  <grid id="27dc6" binding="measurePanel" layout-manager="GridLayoutManager" row-count="8" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="643" height="479"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="27b3f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <icon value="scale32.png"/>
+          <text value="Введите показания манометров для расчета нагрузок"/>
+        </properties>
+      </component>
+      <vspacer id="6fcf8">
+        <constraints>
+          <grid row="1" column="3" row-span="4" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <grid id="c3f8b" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="2" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="a0365" class="javax.swing.JLabel" binding="regNumberNameLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Рег. номер:"/>
+            </properties>
+          </component>
+          <component id="9d923" class="javax.swing.JLabel" binding="regNumberTextLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="TYV-855/DKN-585"/>
+            </properties>
+          </component>
+          <component id="75ae3" class="javax.swing.JLabel" binding="rearPriceLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Цена деления 2й м."/>
+            </properties>
+          </component>
+          <component id="b6c2d" class="javax.swing.JLabel" binding="frontPriceLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Цена деления 1й м."/>
+            </properties>
+          </component>
+          <component id="dbdff" class="javax.swing.JLabel" binding="rearPriceTextLabel">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="495"/>
+            </properties>
+          </component>
+          <component id="3e58d" class="javax.swing.JLabel" binding="frontPriceTextLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="385"/>
+            </properties>
+          </component>
+          <component id="4aa03" class="javax.swing.JLabel" binding="truckWeightLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Масса ТС(кг):"/>
+            </properties>
+          </component>
+          <component id="bd3e9" class="javax.swing.JLabel" binding="truckWeightTextLabel">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="16530"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="c3745" class="javax.swing.JTextField" binding="rearBarTextField">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="164" height="30"/>
+            <maximum-size width="80" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="cd0b" class="javax.swing.JLabel" binding="rearBarLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <horizontalTextPosition value="2"/>
+          <icon value="manometer32.png"/>
+          <labelFor value="c3745"/>
+          <text value="Манометр №2"/>
+        </properties>
+      </component>
+      <component id="9d20b" class="javax.swing.JTextField" binding="frontBarTextField">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="164" height="30"/>
+            <maximum-size width="80" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="86df2" class="javax.swing.JLabel" binding="frontBarLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <horizontalTextPosition value="2"/>
+          <icon value="manometer32.png"/>
+          <labelFor value="9d20b"/>
+          <text value="Манометр №1"/>
+        </properties>
+      </component>
+      <grid id="4e39b" binding="axePanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="true"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b4e94" class="javax.swing.JLabel" binding="frontAxeWeightLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="29" height="20"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Нагрузка на ведущую ось"/>
+            </properties>
+          </component>
+          <component id="71942" class="javax.swing.JLabel" binding="rearAxeWeightTextLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="не рассчитано"/>
+            </properties>
+          </component>
+          <component id="192dd" class="javax.swing.JLabel" binding="rearAxeWeight">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="true"/>
+              <text value="Нагрузка на заднюю ось"/>
+            </properties>
+          </component>
+          <component id="749d8" class="javax.swing.JLabel" binding="frontAxeWeightTextLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="не рассчитано"/>
+              <verticalAlignment value="0"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="74c89" binding="weightPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="ab243" class="javax.swing.JLabel" binding="completeWeightLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Общий вес:"/>
+            </properties>
+          </component>
+          <component id="9142" class="javax.swing.JLabel" binding="completeWeightTextLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="не расчитано"/>
+            </properties>
+          </component>
+          <component id="9c4ca" class="javax.swing.JLabel" binding="cargoWeightLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Вес груза:"/>
+            </properties>
+          </component>
+          <component id="2e408" class="javax.swing.JLabel" binding="cargoWeightTextLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="не рассчитано"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="bcd98" class="javax.swing.JButton" binding="countButton">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="215" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Расчет"/>
+        </properties>
+      </component>
+      <component id="b4899" class="javax.swing.JButton" binding="mainWindowButton">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="215" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Главное меню"/>
+        </properties>
+      </component>
+      <component id="e589" class="javax.swing.JButton" binding="sendReportButton">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Записать статистику"/>
+        </properties>
+      </component>
+      <component id="2dfa2" class="javax.swing.JButton" binding="truckWindowButton">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Выбор ТС"/>
+        </properties>
+      </component>
+      <component id="b8053" class="javax.swing.JComboBox" binding="truckNumberComboBox" custom-create="true">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+    </children>
+  </grid>
+</form>
