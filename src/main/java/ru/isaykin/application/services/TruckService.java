@@ -16,10 +16,6 @@ public class TruckService {
         this.truckRepository = truckRepository;
     }
 
-    public Iterable<Truck> getAll() {
-        return truckRepository.findAll();
-    }
-
     public List<Truck> getAll2() {
         return truckRepository.getAll();
     }
@@ -30,7 +26,6 @@ public class TruckService {
                 , truck.getRearPrice()
                 , truck.getTruckNumber()
                 , truck.getTruckWeight());
-
         return truckRepository.getByTruckNumber(truck.getTruckNumber());
     }
 
@@ -48,7 +43,16 @@ public class TruckService {
             truckRepository.deleteById(id);
         }
         return response;
-
     }
 
+    public Truck updateById(Long id, Truck updatedTruck) {
+        Truck truckToUpdate = truckRepository.getById(id);
+        if (truckToUpdate == null) {
+            return null;
+        } else {
+            updatedTruck.setId(id);
+            truckRepository.save(updatedTruck);
+            return updatedTruck;
+        }
+    }
 }

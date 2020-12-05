@@ -52,7 +52,6 @@ public class TruckController {
         } else {
             responseEntity = new ResponseEntity<Truck>(truck, OK);
         }
-
         return responseEntity;
     }
 
@@ -61,12 +60,21 @@ public class TruckController {
         ResponseEntity<?> responseEntity;
         boolean serviceResponse = truckService.deleteById(id);
         if (serviceResponse) {
-
             responseEntity = new ResponseEntity<>("Truck with id " + id + " was deleted", OK);
-
         } else {
             responseEntity = new ResponseEntity<>("Truck with this number not found", NOT_FOUND);
         }
         return responseEntity;
+    }
+    @PutMapping("trucks/{id}")
+    public ResponseEntity<?> updateTruck(@PathVariable Long id, @RequestBody Truck updatedTruck) {
+            ResponseEntity<?> responseEntity;
+            Truck truckToUpdate = truckService.updateById(id, updatedTruck);
+            if(truckToUpdate == null) {
+                responseEntity = new ResponseEntity<>(NOT_MODIFIED);
+            } else {
+                responseEntity = new ResponseEntity<>(truckToUpdate, OK);
+            }
+            return responseEntity;
     }
 }
