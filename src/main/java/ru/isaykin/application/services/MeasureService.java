@@ -6,10 +6,8 @@ import ru.isaykin.application.logic.model.Measure;
 import ru.isaykin.application.logic.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-
-import static java.sql.Date.*;
+import java.util.List;
 
 
 @Service
@@ -33,7 +31,8 @@ public class MeasureService {
                 , rearBar
                 , createdMeasure.getRearWeight()
                 , createdMeasure.getTruckNumber()
-                , createdMeasure.getTruckWeight());
+                , createdMeasure.getTruckWeight()
+                , createdMeasure.isOverloaded());
         return measureRepository.getByDateOfMeasure(Timestamp.valueOf(createdMeasure.getDateOfMeasure()));
     }
 
@@ -43,5 +42,21 @@ public class MeasureService {
 
     public Measure getByDateOfMeasure(Timestamp dateOfMeasure) {
         return measureRepository.getByDateOfMeasure(dateOfMeasure);
+    }
+
+    public boolean deleteById(Long id) {
+        Measure measureToDelete = measureRepository.getById(id);
+        boolean response;
+        if (measureToDelete == null) {
+            response = false;
+        } else {
+            response = true;
+            measureRepository.deleteById(id);
+        }
+        return response;
+    }
+
+    public List<Measure> getAll() {
+        return measureRepository.getAll();
     }
 }

@@ -27,10 +27,10 @@ public class Truck {
 
     public Truck(String truckNumber, double truckWeight,
                  double firstWheelWeight, double frontPrice,
-                 double rearBar) {
+                 double rearPrice) {
         this.truckNumber = truckNumber;
         this.frontPrice = frontPrice;
-        this.rearPrice = rearBar;
+        this.rearPrice = rearPrice;
         this.firstWheelWeight = firstWheelWeight;
         this.truckWeight = truckWeight;
     }

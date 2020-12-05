@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.lang.Nullable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +24,7 @@ public class Measure {
     private double truckWeight;
     private double cargoWeight;
     private LocalDateTime dateOfMeasure;
+    @Nullable
     private boolean overloaded;
 
     public Measure() {
@@ -37,6 +38,7 @@ public class Measure {
         this.truckWeight = truckWeight;
         this.cargoWeight = cargoWeight;
         this.dateOfMeasure = LocalDateTime.now();
+        this.overloaded = isOverloaded(frontWeight, rearWeight, completeWeight);
     }
 
     public void calcWeights(Truck truck, double frontBar, double rearBar) {
@@ -44,14 +46,17 @@ public class Measure {
         rearWeight = rearBar * 10 * truck.getRearPrice();
         completeWeight = frontWeight + rearWeight + truck.getFirstWheelWeight();
         cargoWeight = completeWeight - truck.getTruckWeight();
+
         measureSet(truck.getTruckNumber(), frontWeight,
                 rearWeight, completeWeight,
                 truck.getTruckWeight(), cargoWeight);
+
     }
+
     public boolean isOverloaded(double frontWeight, double rearWeight, double completeWeight) {
-          double completeWeightLimit = 47000;
-          double frontWeightLimit = 15461;
-          double rearWeightLimit = 23192;
+        double completeWeightLimit = 44000;
+        double frontWeightLimit = 15461;
+        double rearWeightLimit = 23192;
         return frontWeight > frontWeightLimit || rearWeight > rearWeightLimit || completeWeight > completeWeightLimit;
     }
 

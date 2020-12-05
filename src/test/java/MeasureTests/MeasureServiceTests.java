@@ -1,17 +1,15 @@
 package MeasureTests;
 
-import org.mockito.Mockito;
-import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.Test;
 import ru.isaykin.application.logic.model.Measure;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.services.MeasureService;
-import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-import static org.springframework.http.HttpStatus.OK;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MeasureServiceTests {
 
@@ -20,7 +18,7 @@ public class MeasureServiceTests {
 
 
     @Test
-void getByDateOfMeasure() {
+    void getByDateOfMeasure() {
         measureRepository = mock(MeasureRepository.class);
         measureService = new MeasureService(measureRepository);
         Measure measure = new Measure();
@@ -30,9 +28,7 @@ void getByDateOfMeasure() {
 
         Measure actual = measureService.getByDateOfMeasure(Timestamp.valueOf("2020-12-05 09:26:12.578099"));
 
-                assertEquals(expected, actual);
-
-
+        assertEquals(expected, actual);
     }
 
 

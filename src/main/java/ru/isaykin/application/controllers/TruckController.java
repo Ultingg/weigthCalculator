@@ -26,7 +26,7 @@ public class TruckController {
         if (truckList == null) {
             responseEntity = new ResponseEntity<>(NOT_FOUND);
         } else {
-            responseEntity = new ResponseEntity<Object>(truckList, OK);
+            responseEntity = new ResponseEntity<>(truckList, OK);
         }
         return responseEntity;
     }
