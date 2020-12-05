@@ -7,4 +7,4 @@ spring:
     initialization-mode: never
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
