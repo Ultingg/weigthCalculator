@@ -1,22 +1,20 @@
 package ru.isaykin.application.logic.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-@Entity(name = "measure")
+@Table("measure")
+@AllArgsConstructor
 public class Measure {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String truckNumber;
@@ -25,9 +23,8 @@ public class Measure {
     private double completeWeight;
     private double truckWeight;
     private double cargoWeight;
-    private double frontBar;
-    private double rearBar;
-    private Date dateOfMeasure;
+    private LocalDateTime dateOfMeasure;
+    private boolean overloaded;
 
     public Measure() {
     }
@@ -39,7 +36,7 @@ public class Measure {
         this.completeWeight = completeWeight;
         this.truckWeight = truckWeight;
         this.cargoWeight = cargoWeight;
-        this.dateOfMeasure = Date.from(Instant.now());
+        this.dateOfMeasure = LocalDateTime.now();
     }
 
     public void calcWeights(Truck truck, double frontBar, double rearBar) {
@@ -51,12 +48,18 @@ public class Measure {
                 rearWeight, completeWeight,
                 truck.getTruckWeight(), cargoWeight);
     }
-
-    public String toString() {
-        return String.format(
-                " Квитанция взвешивания \n рег. номер ТС: %s \n Дата взвешивания: %tF \n" +
-                        " Полная масса: %.2f \n Масса груза:  %.2f\n Нагрузка на ведущую ось: %.2f \n" +
-                        " Нагрузка на заднюю ось прицепа: %.2f\n",
-                truckNumber, dateOfMeasure, completeWeight, cargoWeight, frontWeight, rearWeight);
+    public boolean isOverloaded(double frontWeight, double rearWeight, double completeWeight) {
+          double completeWeightLimit = 47000;
+          double frontWeightLimit = 15461;
+          double rearWeightLimit = 23192;
+        return frontWeight > frontWeightLimit || rearWeight > rearWeightLimit || completeWeight > completeWeightLimit;
     }
+
+//    public String toString() {
+//        return String.format(
+//                " Квитанция взвешивания \n рег. номер ТС: %s \n Дата взвешивания: %tF \n" +
+//                        " Полная масса: %.2f \n Масса груза:  %.2f\n Нагрузка на ведущую ось: %.2f \n" +
+//                        " Нагрузка на заднюю ось прицепа: %.2f\n",
+//                truckNumber, dateOfMeasure, completeWeight, cargoWeight, frontWeight, rearWeight);
+//    }
 }

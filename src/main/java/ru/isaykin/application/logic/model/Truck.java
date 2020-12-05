@@ -3,22 +3,19 @@ package ru.isaykin.application.logic.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.*;
-import java.util.Date;
-
 @Data
-@Entity(name = "truck")
-//@Table("truck")
+
+@Table("truck")
 @AllArgsConstructor
 public class Truck {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String truckNumber;
     private double frontPrice;
     private double rearPrice;

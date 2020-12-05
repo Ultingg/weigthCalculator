@@ -1,14 +1,10 @@
 package ru.isaykin.application.controllers;
 
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.isaykin.application.logic.model.Truck;
 import ru.isaykin.application.services.TruckService;
-
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -26,7 +22,7 @@ public class TruckController {
     @GetMapping("trucks")
     public ResponseEntity<Object> getAll() {
         ResponseEntity<Object> responseEntity;
-        Iterable<Truck> truckList = truckService.getAll();
+        Iterable<Truck> truckList = truckService.getAll2();
         if (truckList == null) {
             responseEntity = new ResponseEntity<>(NOT_FOUND);
         } else {
@@ -34,17 +30,18 @@ public class TruckController {
         }
         return responseEntity;
     }
-//    @PostMapping("trucks")
-//    public ResponseEntity<Truck> insertTruck(@RequestBody Truck truck) {
-//        ResponseEntity<Truck> responseEntity;
-//        if (truck == null) {
-//            responseEntity = new ResponseEntity<>(NO_CONTENT);
-//        } else {
-//            Truck truckToShow = truckService.addTruck(truck);
-//            responseEntity = new ResponseEntity<Truck>(truckToShow, OK);
-//        }
-//        return responseEntity;
-//    }
+
+    @PostMapping("trucks")
+    public ResponseEntity<?> insertTruck(@RequestBody Truck truck) {
+        ResponseEntity<Truck> responseEntity;
+        if (truck == null) {
+            responseEntity = new ResponseEntity<>(NO_CONTENT);
+        } else {
+            Truck truckToShow = truckService.addTruck(truck);
+            responseEntity = new ResponseEntity<Truck>(truckToShow, OK);
+        }
+        return responseEntity;
+    }
 
     @GetMapping("trucks/{id}")
     public ResponseEntity<?> getTruck(@PathVariable Long id) {
@@ -56,6 +53,20 @@ public class TruckController {
             responseEntity = new ResponseEntity<Truck>(truck, OK);
         }
 
+        return responseEntity;
+    }
+
+    @DeleteMapping("trucks/{id}")
+    public ResponseEntity<?> deleteTruck(@PathVariable Long id) {
+        ResponseEntity<?> responseEntity;
+        boolean serviceResponse = truckService.deleteById(id);
+        if (serviceResponse) {
+
+            responseEntity = new ResponseEntity<>("Truck with id " + id + " was deleted", OK);
+
+        } else {
+            responseEntity = new ResponseEntity<>("Truck with this number not found", NOT_FOUND);
+        }
         return responseEntity;
     }
 }
