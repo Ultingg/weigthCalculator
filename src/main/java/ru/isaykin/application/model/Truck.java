@@ -1,4 +1,4 @@
-package ru.isaykin.application.logic.model;
+package ru.isaykin.application.model;
 
 
 import lombok.AllArgsConstructor;

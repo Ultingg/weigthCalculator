@@ -1,7 +1,7 @@
 package ru.isaykin.application.services;
 
 import org.springframework.stereotype.Service;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.TruckRepository;
 
 import java.util.List;

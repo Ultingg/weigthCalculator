@@ -1,7 +1,7 @@
 package MeasureTests;
 
 import org.junit.jupiter.api.Test;
-import ru.isaykin.application.logic.model.Measure;
+import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.services.MeasureService;
 

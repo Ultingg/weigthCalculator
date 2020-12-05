@@ -2,8 +2,8 @@ package MeasureTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.isaykin.application.logic.model.Measure;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Measure;
+import ru.isaykin.application.model.Truck;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

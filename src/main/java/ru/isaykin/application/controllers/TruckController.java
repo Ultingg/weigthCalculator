@@ -3,7 +3,7 @@ package ru.isaykin.application.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
 import static org.springframework.http.HttpStatus.*;

@@ -3,8 +3,8 @@ package ru.isaykin.application.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.isaykin.application.logic.model.Measure;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Measure;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.MeasureService;
 import ru.isaykin.application.services.TruckService;
 
@@ -12,6 +12,8 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
+
+//TODO: exceptionHandler for internalErrors when there is no Truck for measure and so on
 
 @Controller
 public class MeasureController {

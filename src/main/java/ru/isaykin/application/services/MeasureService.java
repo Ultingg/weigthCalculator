@@ -2,8 +2,8 @@ package ru.isaykin.application.services;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import ru.isaykin.application.logic.model.Measure;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Measure;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 
 import java.sql.Timestamp;
