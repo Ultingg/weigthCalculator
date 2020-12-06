@@ -7,6 +7,7 @@ import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -33,14 +34,14 @@ public class MeasureService {
                 , createdMeasure.getTruckNumber()
                 , createdMeasure.getTruckWeight()
                 , createdMeasure.isOverloaded());
-        return measureRepository.getByDateOfMeasure(Timestamp.valueOf(createdMeasure.getDateOfMeasure()));
+        return measureRepository.getByDateOfMeasure(createdMeasure.getDateOfMeasure());
     }
 
     public Measure getById(Long id) {
         return measureRepository.getById(id);
     }
 
-    public Measure getByDateOfMeasure(Timestamp dateOfMeasure) {
+    public Measure getByDateOfMeasure(LocalDateTime dateOfMeasure) {
         return measureRepository.getByDateOfMeasure(dateOfMeasure);
     }
 

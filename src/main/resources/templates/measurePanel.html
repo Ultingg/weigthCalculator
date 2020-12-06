@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 	<head>
 	<title>Рассчет нагрузок</title>
 	<meta charset="UTF-8"> 
 	</head>
-	<body> 
+
+	<body>
 	
 	<div>
 	
@@ -16,11 +17,11 @@
 	<div>
 	<form method="post">
 	<h4>Данные транспортного средства:</h4> 
-	<select name="truckNumber">
+	<select id="truckNumber">
 	<option></option>
 	<option>TYV-855/DKN-585</option>
 	<option>MOY-909/DKN-586</option>
-	</select>
+	</select> <label for="truckNumber"> Выберите ТС из списка</label>
 	<br>Цена деления ведущей оси: 385 кг
 	<br>Цена деления оси прицепа: 495 кг
 	<br>Вес порожнего транспортного средства: 16530 кг
@@ -28,12 +29,14 @@
 	
 	<br>
 	Введите показания манометров, чтобы рассчитать нагрузки.<br>
-	<input name="frontBar", placeholder="Ведущая ось" type="text"> Ведущая ось <br>
-	<input name="rearBar", placeholder="Оси прицепа" type="text"> Оси прицепа<br>
+		<input id="frontBar" placeholder="Ведущая ось" type="text">
+		<label for="frontBar">Ведущая ось </label><br>
+		<input id="rearBar" placeholder="Оси прицепа" type="text">
+		<label for="rearBar">Оси прицепа</label><br>
 
 	<button name="example_button" type="submit" value="1">Рассчитать</button>
 	</form>
-	
+	</div>
 	
 	
 	</body>

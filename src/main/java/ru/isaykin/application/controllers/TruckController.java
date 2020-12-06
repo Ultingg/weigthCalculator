@@ -43,7 +43,7 @@ public class TruckController {
             responseEntity = new ResponseEntity<>(NO_CONTENT);
         } else {
             Truck truckToShow = truckService.addTruck(truck);
-            responseEntity = new ResponseEntity<Truck>(truckToShow, OK);
+            responseEntity = new ResponseEntity<>(truckToShow, OK);
         }
         return responseEntity;
     }
@@ -55,7 +55,7 @@ public class TruckController {
         if (truck == null) {
             responseEntity = new ResponseEntity<>(NOT_FOUND);
         } else {
-            responseEntity = new ResponseEntity<Truck>(truck, OK);
+            responseEntity = new ResponseEntity<>(truck, OK);
         }
         return responseEntity;
     }

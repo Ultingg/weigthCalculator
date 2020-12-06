@@ -1,4 +1,4 @@
-package MeasureTests;
+package measureTests;
 
 import org.junit.jupiter.api.Test;
 import ru.isaykin.application.model.Measure;
@@ -24,11 +24,10 @@ public class MeasureServiceTests {
         Measure measure = new Measure();
         when(measureRepository.getByDateOfMeasure(Timestamp.valueOf("2020-12-05 09:26:12.578099")))
                 .thenReturn(measure);
-        Measure expected = measure;
 
         Measure actual = measureService.getByDateOfMeasure(Timestamp.valueOf("2020-12-05 09:26:12.578099"));
 
-        assertEquals(expected, actual);
+        assertEquals(measure, actual);
     }
 
 

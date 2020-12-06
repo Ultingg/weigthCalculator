@@ -10,6 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table("truck")
 @AllArgsConstructor
+
 public class Truck {
 
 
