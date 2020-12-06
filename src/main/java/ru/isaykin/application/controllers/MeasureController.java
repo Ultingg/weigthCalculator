@@ -25,7 +25,10 @@ public class MeasureController {
         this.truckService = truckService;
         this.measureService = measureService;
     }
-
+    @GetMapping("measure")
+    public String measurePanel(){
+        return "measurePanel";
+    }
     @PostMapping("trucks/{id}/measure")
     public ResponseEntity<?> createMeasure(@RequestParam(name = "front") double frontBar,
                                            @RequestParam(name = "rear") double rearBar,

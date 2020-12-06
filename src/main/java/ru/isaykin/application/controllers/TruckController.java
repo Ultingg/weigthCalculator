@@ -2,14 +2,15 @@ package ru.isaykin.application.controllers;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
 import static org.springframework.http.HttpStatus.*;
 
-@RestController
-@RequestMapping
+@Controller
+
 public class TruckController {
 
     private final TruckService truckService;
@@ -18,6 +19,10 @@ public class TruckController {
         this.truckService = truckService;
     }
 
+    @GetMapping("truck")
+    public String truckPanel() {
+        return "truck";
+    }
 
     @GetMapping("trucks")
     public ResponseEntity<Object> getAll() {
@@ -66,15 +71,16 @@ public class TruckController {
         }
         return responseEntity;
     }
+
     @PutMapping("trucks/{id}")
     public ResponseEntity<?> updateTruck(@PathVariable Long id, @RequestBody Truck updatedTruck) {
-            ResponseEntity<?> responseEntity;
-            Truck truckToUpdate = truckService.updateById(id, updatedTruck);
-            if(truckToUpdate == null) {
-                responseEntity = new ResponseEntity<>(NOT_MODIFIED);
-            } else {
-                responseEntity = new ResponseEntity<>(truckToUpdate, OK);
-            }
-            return responseEntity;
+        ResponseEntity<?> responseEntity;
+        Truck truckToUpdate = truckService.updateById(id, updatedTruck);
+        if (truckToUpdate == null) {
+            responseEntity = new ResponseEntity<>(NOT_MODIFIED);
+        } else {
+            responseEntity = new ResponseEntity<>(truckToUpdate, OK);
+        }
+        return responseEntity;
     }
 }
