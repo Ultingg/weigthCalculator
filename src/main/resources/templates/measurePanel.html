@@ -18,16 +18,16 @@
     <form method="post">
         <h4>Данные транспортного средства:</h4>
 
-        <select id="truckNumber" th:field="*{truckList}">
+        <select id="truckNumber" th:field="${truckList}">
             <option value="">--</option>
             <option th:each="truck : ${truckList}"
                     th:value="${truck.getTruckNumber()}"
-                    th:text="${truck.getTruckNumber()}"
+                    th:text="*{truck.getTruckNumber()}"
                     th:selected="${truck.getTruckNumber()}"></option>
             <!--            <option>MOY-909/DKN-586</option>-->
         </select> <label for="truckNumber"> Выберите ТС из списка</label>
         <br>
-        <table border="1">
+        <table  border="1">
             <thead>
             <tr>
                 <th>Рег. номер</th>
@@ -37,9 +37,9 @@
             </thead>
             <tbody>
             <tr th:each="truck, iterStat : ${truckList}">
-                <td th:text="${truck.getTruckNumber()}"></td>
-                <td th:text="${truck.getFrontPrice()}"></td>
-                <td th:text="${truck.getRearPrice()}"></td>
+                <td th:text="${truck.getTruckNumber()}">Рег. номер</td>
+                <td th:text="${truck.getFrontPrice()}">Тягач</td>
+                <td th:text="${truck.getRearPrice()}">Прицеп</td>
             </tr>
             </tbody>
         </table>
