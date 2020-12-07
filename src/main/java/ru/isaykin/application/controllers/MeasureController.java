@@ -2,6 +2,7 @@ package ru.isaykin.application.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
@@ -26,9 +27,20 @@ public class MeasureController {
         this.measureService = measureService;
     }
     @GetMapping("measure")
-    public String measurePanel(){
+    public String measurePanel(Model model){
+        List<Truck> truckList = truckService.getAll2();
+        model.addAttribute("truckList", truckList);
+        
         return "measurePanel";
     }
+//    @PostMapping("measureUpdate")
+//    public String measureUpdate(Model model){
+//
+//    model.addAttribute("truck2");
+//
+//    return "forward:/measurePanel";
+//    }
+    
     @PostMapping("trucks/{id}/measure")
     public ResponseEntity<?> createMeasure(@RequestParam(name = "front") double frontBar,
                                            @RequestParam(name = "rear") double rearBar,

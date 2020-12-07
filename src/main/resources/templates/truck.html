@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Создание ТС</title>
     <meta charset="UTF-8">
@@ -24,8 +24,38 @@
     <p><input type="submit" value="Создать"></p>
         </form>
 
-
+<a th:href="@{measure}">измерения-а-а-а-а</a>
 </div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Рег. номер</th>
+        <th>Тягач</th>
+        <th>Прицеп</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="truck, iterStat : ${truckList}">
+        <td th:text="${truck.getTruckNumber()}"></td>
+        <td th:text="${truck.getFrontPrice()}"></td>
+        <td th:text="${truck.getRearPrice()}"></td>
+    </tr>
+
+
+    </tbody>
+</table>
+<!--<form th:action="@{/truck}"-->
+<!--      th:object="${Truck}" method="post">-->
+<!--        Рег. номер:-->
+<!--    <input type="text" th:field="*{truckNumber}"/>-->
+<!--    <br/>-->
+<!--        Цене деление оси тягача:-->
+<!--    <input type="text" th:field="*{frontPrice}"/>-->
+<!--    <br/>-->
+<!--    <input type="submit" value="Создать">-->
+
+<!--</form>-->
 
 </body>
 </html>

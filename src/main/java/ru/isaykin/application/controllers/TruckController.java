@@ -3,9 +3,12 @@ package ru.isaykin.application.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -20,7 +23,11 @@ public class TruckController {
     }
 
     @GetMapping("truck")
-    public String truckPanel() {
+    public String truckPanel(Model model) {
+        List<Truck> truckList = truckService.getAll2();
+        model.addAttribute("truckList", truckList);
+
+
         return "truck";
     }
 
