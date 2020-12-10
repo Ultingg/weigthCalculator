@@ -28,18 +28,13 @@ public class MeasureController {
     }
     @GetMapping("measure")
     public String measurePanel(Model model){
-        List<Truck> truckList = truckService.getAll2();
-        model.addAttribute("truckList", truckList);
-        
-        return "measurePanel";
+        List<Measure> measuresList = measureService.getAll();
+        List<Truck> trucks = truckService.getAll2();
+        model.addAttribute("measureList", measuresList);
+        model.addAttribute("truckList", trucks);
+        return "measureList";
     }
-//    @PostMapping("measureUpdate")
-//    public String measureUpdate(Model model){
-//
-//    model.addAttribute("truck2");
-//
-//    return "forward:/measurePanel";
-//    }
+
     
     @PostMapping("trucks/{id}/measure")
     public ResponseEntity<?> createMeasure(@RequestParam(name = "front") double frontBar,
@@ -86,5 +81,8 @@ public class MeasureController {
         List<Measure> measureList = measureService.getAll();
         return new ResponseEntity<>(measureList, OK);
     }
+
+
+
 
 }

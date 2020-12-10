@@ -15,9 +15,9 @@ import java.util.List;
 public interface MeasureRepository extends CrudRepository<Measure, Long> {
 
     @Query("INSERT INTO measure (cargo_weight, complete_weight, date_of_measure," +
-            "front_bar, front_weight, rear_bar, rear_weight, truck_number, truck_weight, overloaded)" +
+            "front_bar, front_weight, rear_bar, rear_weight, overloaded, truck_id)" +
             " VALUES(:cargoWeight, :completeWeight, :dateOfMeasure, :frontBar, :frontWeight," +
-            ":rearBar, :rearWeight, :truckNumber, :truckWeight, :overloaded)")
+            ":rearBar, :rearWeight, :overloaded, :truckId)")
     @Modifying
     void create(@Param("cargoWeight") double cargoWeight,
                 @Param("completeWeight") double completeWeight,
@@ -26,8 +26,7 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
                 @Param("frontWeight") double frontWeight,
                 @Param("rearBar") double reaBar,
                 @Param("rearWeight") double rearWeight,
-                @Param("truckNumber") String truckNumber,
-                @Param("truckWeight") double truckWeight,
+                @Param("truckId") Long truckId,
                 @Param("overloaded") boolean overloaded);
 
     Measure getById(Long id);
@@ -37,6 +36,20 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
     @Query("SELECT * FROM measure")
     List<Measure> getAll();
 
+    @Query("SELECT t.truck_number, m.date_of_measure, m.cargo_weight, m.front_weight, m.rear_weight, m.complete_weight, m.overloaded" +
+            "FROM truck  as t" +
+            " JOIN measure as m  " +
+            " ON t.id = m.truck_id" +
+            " where m.overloaded = :overloaded")
+    @Modifying
+    List<Measure> getListOfOverloadedMeasures(@Param("overloaded") boolean overloaded);
 
+    @Query("SELECT t.truck_number, m.date_of_measure, m.cargo_weight, m.front_weight, m.rear_weight, m.complete_weight, m.overloaded" +
+            "FROM truck  as t" +
+            "JOIN measure as m  " +
+            "ON t.id = m.truck_id" +
+            "where t.id   = :id")
+    @Modifying
+    List<Measure> getListOfMeasuresByTruckId(@Param("id") Long id);
 
 }

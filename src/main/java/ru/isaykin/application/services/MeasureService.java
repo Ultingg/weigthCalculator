@@ -31,8 +31,7 @@ public class MeasureService {
                 , createdMeasure.getFrontWeight()
                 , rearBar
                 , createdMeasure.getRearWeight()
-                , createdMeasure.getTruckNumber()
-                , createdMeasure.getTruckWeight()
+                , truck.getId()
                 , createdMeasure.isOverloaded());
         return measureRepository.getByDateOfMeasure(createdMeasure.getDateOfMeasure());
     }
@@ -59,5 +58,14 @@ public class MeasureService {
 
     public List<Measure> getAll() {
         return measureRepository.getAll();
+    }
+
+
+    public List<Measure> getListOfMeasuresByTruckId(Long id) {
+        return measureRepository.getListOfMeasuresByTruckId(id);
+    }
+
+    public List<Measure> getListOfOverloads(boolean overload) {
+        return measureRepository.getListOfOverloadedMeasures(overload);
     }
 }

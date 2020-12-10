@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список измерений</title>
+</head>
+<body>
+
+<h2>Список измерений</h2>
+
+<form>
+<table  border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Id ТС</th>
+        <th>Дата</th>
+        <th>Тягач(бар)</th>
+        <th>Тягач(кг)</th>
+        <th>Прицеп(бар)</th>
+        <th>Прицеп(кг)</th>
+        <th>Вес груза</th>
+        <th>Полная масса</th>
+        <th>Перегрузка</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="measure, iterStat : ${measureList}">
+        <td th:text="*{measure.getId()}">Id</td>
+        <td th:text="*{measure.getTruckId()}">Id ТС</td>
+        <td th:text="${measure.getDateOfMeasure()}">Дата</td>
+        <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
+        <td th:text="*{measure.getRearWeight()}">Тягач(кг)</td>
+        <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
+        <td th:text="*{measure.getRearWeight()}">Прицеп(кг)</td>
+        <td th:text="${measure.getCargoWeight()}">Вес груза</td>
+        <td th:text="${measure.getCompleteWeight()}">Полная масса</td>
+        <td th:text="${measure.isOverloaded()}" th:if="true">Перегрузка</td>
+    </tr>
+    </tbody>
+</table>
+</form>
+
+
+
+</body>
+</html>

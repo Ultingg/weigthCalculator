@@ -17,28 +17,31 @@ public class Measure {
     @Id
     private Long id;
 
-    private String truckNumber;
+    private Long truckId;
     private double frontWeight;
     private double rearWeight;
     private double completeWeight;
-    private double truckWeight;
     private double cargoWeight;
     private LocalDateTime dateOfMeasure;
+    private double frontBar;
+    private double rearBar;
     @Nullable
     private boolean overloaded;
 
     public Measure() {
     }
 
-    public void measureSet(String truckNumber, double frontWeight, double rearWeight, double completeWeight, double truckWeight, double cargoWeight) {
-        this.truckNumber = truckNumber;
+    public void measureSet(Long truckId, double frontWeight, double rearWeight, double completeWeight, double cargoWeight, double frontBar, double rearBar) {
+        this.truckId = truckId;
         this.frontWeight = frontWeight;
         this.rearWeight = rearWeight;
         this.completeWeight = completeWeight;
-        this.truckWeight = truckWeight;
         this.cargoWeight = cargoWeight;
         this.dateOfMeasure = LocalDateTime.now();
         this.overloaded = isOverloaded(frontWeight, rearWeight, completeWeight);
+        this.frontBar = frontBar;
+        this.rearBar = rearBar;
+
     }
 
     public void calcWeights(Truck truck, double frontBar, double rearBar) {
@@ -47,9 +50,9 @@ public class Measure {
         completeWeight = frontWeight + rearWeight + truck.getFirstWheelWeight();
         cargoWeight = completeWeight - truck.getTruckWeight();
 
-        measureSet(truck.getTruckNumber(), frontWeight,
+        measureSet(truck.getId(), frontWeight,
                 rearWeight, completeWeight,
-                truck.getTruckWeight(), cargoWeight);
+                cargoWeight, frontBar, rearBar);
 
     }
 
