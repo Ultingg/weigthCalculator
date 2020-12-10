@@ -24,7 +24,11 @@
         <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}" placeholder="Вес порожнего ТС, кг" size="30">
         <label for="truckWeight">Введите вес порожнего ТС</label>
         <br>
-        <p><input type="submit" value="Создать"></p>
+        <p><input type="submit" value="Создать">
+        <form name="backToList" th:action="@{/trucks/list}" th:method="get">
+            <input type="submit" value="Назад к списку ТС"> </form>
+        </p>
     </form>
+
 </body>
 </html>

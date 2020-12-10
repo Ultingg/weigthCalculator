@@ -28,7 +28,7 @@ public class TruckController {
         List<Truck> truckList = truckService.getAll2();
         model.addAttribute("truckList", truckList);
         model.addAttribute("truck", new Truck());
-        return "truck";
+        return "truckList";
     }
 
     @GetMapping("new")
@@ -39,8 +39,14 @@ public class TruckController {
     @PostMapping("creation")
     public String creatingTruck(@ModelAttribute("truck") Truck truck) {
         truckService.addTruck(truck);
-        return "redirect:/trucks";
+        return "redirect:/trucks/list";
 
+    }
+    @GetMapping("list")
+    public String getListOfTrucks(Model model){
+        List<Truck> truckList = truckService.getAll2();
+        model.addAttribute("truckList", truckList);
+        return "truckList";
     }
 
 
