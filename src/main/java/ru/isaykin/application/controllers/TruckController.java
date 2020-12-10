@@ -11,7 +11,12 @@ import ru.isaykin.application.services.TruckService;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
-//TODO: отдельная страница для создания ТС. Страничка SUCCESS после создания ТС
+/*TODO: отдельная страница для создания ТС.
+ Страничка SUCCESS после создания ТС
+
+
+*/
+
 
 @Controller
 @RequestMapping("/trucks")

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Рассчет осевых нагрузок</title>
+</head>
+
+<body>
+<form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
+    <input type="submit" value="Создать новый ТС">
+</form>
+<form name="ToTruckList" th:action="@{/trucks/list}" th:method="get">
+    <input type="submit" value="Список ТС">
+</form>
+<form name="ToMeasureList" th:action="@{/trucks/list}" th:method="get">
+    <input type="submit" value="Список измерений">
+</form>
+
+</body>
+</html>

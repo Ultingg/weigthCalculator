@@ -14,6 +14,7 @@
 <table border="1">
     <thead>
     <tr>
+        <th>Id</th>
         <th>Рег. номер</th>
         <th>Тягач, 0,1 бар/кг</th>
         <th>Прицеп, 0,1 бар/кг</th>
@@ -22,6 +23,7 @@
     </thead>
     <tbody>
     <tr th:each="truck, iterStat : ${truckList}">
+        <td th:text="${truck.getId()}"></td>
         <td th:text="${truck.getTruckNumber()}"></td>
         <td th:text="${truck.getFrontPrice()}"></td>
         <td th:text="${truck.getRearPrice()}"></td>
@@ -34,5 +36,7 @@
 <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
     <input type="submit" value="Создать новый ТС">
 </form>
+<form name="backToMainMEnu" th:action="@{/}" th:method="get">
+    <input type="submit" value="Назад главное меню"></form>
 </body>
 </html>
