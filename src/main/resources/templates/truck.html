@@ -6,23 +6,8 @@
 </head>
 
 <body>
-<p>
-<h3>Введите данные транспортного средства</h3>
 
-<div>
-    <form name="truckDetails" method="post">
-    <input id="truckNumber" type="text" placeholder="Рег. номер ТС" size="30">
-    <label for="truckNumber">Введите рег. номер ТС</label><br>
-    <input id="frontPrice" type="text" placeholder="Цена деления ведущей оси, кг" size="30">
-    <label for="frontPrice">Введите цену деления ведущей оси</label><br>
-    <input id="rearPrice" type="text" placeholder="Цена деления оси прицепа, кг" size="30">
-    <label for="rearPrice">Введите цену деления оси прицепа</label><br>
-    <input id="firstWheelWeight" type="text" placeholder="Нагрузка на рулевое колесо, кг" size="30">
-    <label for="firstWheelWeight">Введите нагрузку на рулевое колесо</label><br>
-    <input id="truckWeight" type="text" placeholder="Вес порожнего ТС, кг" size="30">
-    <label for="truckWeight">Введите вес порожнего ТС</label><br>
-    <p><input type="submit" value="Создать"></p>
-        </form>
+
 
 <a th:href="@{measure}">измерения-а-а-а-а</a>
 </div>
@@ -45,17 +30,6 @@
 
     </tbody>
 </table>
-<!--<form th:action="@{/truck}"-->
-<!--      th:object="${Truck}" method="post">-->
-<!--        Рег. номер:-->
-<!--    <input type="text" th:field="*{truckNumber}"/>-->
-<!--    <br/>-->
-<!--        Цене деление оси тягача:-->
-<!--    <input type="text" th:field="*{frontPrice}"/>-->
-<!--    <br/>-->
-<!--    <input type="submit" value="Создать">-->
-
-<!--</form>-->
 
 </body>
 </html>
