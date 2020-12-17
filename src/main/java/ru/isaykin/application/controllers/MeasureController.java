@@ -26,8 +26,9 @@ public class MeasureController {
         this.truckService = truckService;
         this.measureService = measureService;
     }
+
     @GetMapping("measure")
-    public String measurePanel(Model model){
+    public String measurePanel(Model model) {
         List<Measure> measuresList = measureService.getAll();
         List<Truck> trucks = truckService.getAll2();
         model.addAttribute("measureList", measuresList);
@@ -35,7 +36,17 @@ public class MeasureController {
         return "measureList";
     }
 
-    
+    @GetMapping("measure/listById")
+    public String getMeasuresByTruckId(@RequestParam(name = "truck") Long id, Model model) {
+        List<Truck> trucks = truckService.getAll2();
+        List<Measure> measureList = measureService.getListOfMeasuresByTruckId(id);
+        model.addAttribute("measureList", measureList);
+        model.addAttribute("truckList", trucks);
+
+        return "measureListId";
+    }
+
+
     @PostMapping("trucks/{id}/measure")
     public ResponseEntity<?> createMeasure(@RequestParam(name = "front") double frontBar,
                                            @RequestParam(name = "rear") double rearBar,
@@ -68,7 +79,7 @@ public class MeasureController {
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         ResponseEntity<?> responseEntity;
         boolean response = measureService.deleteById(id);
-        if(response) {
+        if (response) {
             responseEntity = new ResponseEntity<>(OK);
         } else {
             responseEntity = new ResponseEntity<>(NOT_FOUND);
@@ -82,7 +93,28 @@ public class MeasureController {
         return new ResponseEntity<>(measureList, OK);
     }
 
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
+    }
 
+    @PostMapping("trucks/measure/created")
+    public String measureRecipe(@ModelAttribute("measure") Measure measure,
+                                @ModelAttribute("truck") Truck truck,
+                                Model model) {
+        Measure newMeasure = measureService.create(truck, measure.getFrontBar(), measure.getRearBar());
+        model.addAttribute("newMeasure", newMeasure);
+        return "measureRecipe";
+
+    }
+
+    @GetMapping("trucks/measure/new")
+    public String calculation (@ModelAttribute("measure") Measure measure,  Model model) {
+        List<Truck> trucks = truckService.getAll2();
+        model.addAttribute("truckList", trucks);
+
+        return "calculation";
+    }
 
 
 }

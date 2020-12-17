@@ -47,8 +47,9 @@ public class TruckController {
         return "redirect:/trucks/list";
 
     }
+
     @GetMapping("list")
-    public String getListOfTrucks(Model model){
+    public String getListOfTrucks(Model model) {
         List<Truck> truckList = truckService.getAll2();
         model.addAttribute("truckList", truckList);
         return "truckList";
@@ -92,16 +93,22 @@ public class TruckController {
         return responseEntity;
     }
 
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<?> deleteTruck(@PathVariable Long id) {
+//        ResponseEntity<?> responseEntity;
+//        boolean serviceResponse = truckService.deleteById(id);
+//        if (serviceResponse) {
+//            responseEntity = new ResponseEntity<>("Truck with id " + id + " was deleted", OK);
+//        } else {
+//            responseEntity = new ResponseEntity<>("Truck with this number not found", NOT_FOUND);
+//        }
+//        return responseEntity;
+//    }
+
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteTruck(@PathVariable Long id) {
-        ResponseEntity<?> responseEntity;
-        boolean serviceResponse = truckService.deleteById(id);
-        if (serviceResponse) {
-            responseEntity = new ResponseEntity<>("Truck with id " + id + " was deleted", OK);
-        } else {
-            responseEntity = new ResponseEntity<>("Truck with this number not found", NOT_FOUND);
-        }
-        return responseEntity;
+       public String deleteTruck(@PathVariable Long id) {
+        truckService.deleteById(id);
+        return "redirect:/trucks/list";
     }
 
     @PutMapping("{id}")
@@ -114,5 +121,10 @@ public class TruckController {
             responseEntity = new ResponseEntity<>(truckToUpdate, OK);
         }
         return responseEntity;
+    }
+
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
     }
 }

@@ -5,18 +5,18 @@
     <title>Список измерений</title>
 </head>
 <body>
-<form th:object="${greetingsMessage}">
-    <h2 th:text="${greetingsMessage}"></h2>
-</form>
-<br>
-<h2>Список измерений</h2>
-
 <form>
+
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
+    <br>
+
+    <h2>Список измерений</h2>
     <table border="1">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Id ТС</th>
             <th>Дата</th>
             <th>Тягач(бар)</th>
             <th>Тягач(кг)</th>
@@ -30,7 +30,6 @@
         <tbody>
         <tr th:each="measure, iterStat : ${measureList}">
             <td th:text="*{measure.getId()}">Id</td>
-            <td th:text="*{measure.getTruckId()}">Id ТС</td>
             <td th:text="${measure.getDateOfMeasure()}">Дата</td>
             <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
             <td th:text="*{measure.getRearWeight()}">Тягач(кг)</td>
@@ -42,9 +41,8 @@
         </tr>
         </tbody>
     </table>
+    <br>
 </form>
-<form name="backToMainMEnu" th:action="@{/}" th:method="get">
-    <input type="submit" value="Назад главное меню"></form>
 
 <h3>Отфильтровать измерения по номеру ТС</h3>
 
@@ -56,6 +54,12 @@
                 th:text="${truck.getTruckNumber()}"></option>
     </select>
     <input type="submit" value="Фильтровать"></form>
-
+<br>
+<form name="backToMainMEnu" th:action="@{/}" th:method="get">
+    <input type="submit" value="Назад главное меню"></form>
+<br>
+<form name="ToMeasureList" th:action="@{/measure}" th:method="get">
+    <input type="submit" value="Список всех измерений">
+</form>
 </body>
 </html>

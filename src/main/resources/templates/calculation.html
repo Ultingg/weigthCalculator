@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет</title>
+</head>
+<body>
+<form th:object="${greetingsMessage}">
+    <h2 th:text="${greetingsMessage}"></h2>
+</form>
+<h3>Внесите данные для подсчета</h3>
+
+
+<form name="calculation" th:action="@{/trucks/measure/created}" th:method="post">
+    <select name="truck" th:object="${truckList}">
+        <option value="">--</option>
+        <option th:each="truck : ${truckList}"
+                th:value="${truck}"
+                th:text="${truck.getTruckNumber()}"></option>
+    </select>
+    <br>
+    <label for="frontBar">Манометр Тягача: </label>
+    <input id="frontBar" type="text" th:field="${measure.frontBar}">
+    <br>
+    <label for="rearBar">Манометр прицепа</label>
+    <input id="rearBar" type="text" th:field="${measure.rearBar}">
+
+
+
+    <input type="submit" value="Посчитать"></form>
+
+</body>
+</html>

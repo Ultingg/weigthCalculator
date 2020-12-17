@@ -6,7 +6,10 @@
 </head>
 
 <body>
-
+<form th:object="${greetingsMessage}">
+    <h2 th:text="${greetingsMessage}"></h2>
+</form>
+<br>
 
 <h2>Полный список транспортных средств</h2>
 
@@ -32,6 +35,53 @@
 
 </table>
 <br>
+
+
+<h3>Отфильтровать измерения по номеру ТС</h3>
+
+<form name="listById" th:action="@{/measure/listById}" th:method="get">
+    <select name="truck" th:object="${truckList}">
+        <option value="">--</option>
+        <option th:each="truck : ${truckList}"
+                th:value="${truck.getId()}"
+                th:text="${truck.getTruckNumber()}"></option>
+    </select>
+    <input type="submit" value="Посчитать"></form>
+
+
+<!--<div th:each="truck, ${truckList}">-->
+
+<!--<div th:each="truck : ${truckList}">-->
+<!--    <a th:href="@{/trucks/{id}(id= ${truck.getId()})}">-->
+<!--        <span th:text="${truck.getTruckNumber()}"></span>-->
+<!--    </a>-->
+<!--</div>-->
+
+
+<!--<div th:each="truck2 :${truckList}">-->
+<!--    <form name="hz" th:method="delete" th:action="@{/trucks/{id}(id= ${truck2.getId()})}">-->
+<!--        <select >-->
+<!--            <option th:text="${truck2.getTruckNumber()}"-->
+<!--                    th:value="${truck2.getId()}"></option>-->
+
+<!--        </select>-->
+<!--        <input type="button" th:method="delete" value="Удалить бля">-->
+<!--    </form>-->
+
+<!--</div>-->
+<!--    <form name="deleteTruck" th:method="delete" th:action="@{/trucks/{id}(id = ${truck.getId()})}">-->
+<!--        <select name="truck" th:object="truck">-->
+<!--            <option value="">&#45;&#45;</option>-->
+<!--            <option th:each="truck : ${truckList}"-->
+<!--                    th:text="${truck.getTruckNumber()}"-->
+<!--                    th:value="${truck.getId()}"></option>-->
+<!--        </select>-->
+<!--        <input type="submit" value="Удалить бля">-->
+<!--    </form>-->
+
+<!--</div>-->
+
+
 <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
     <input type="submit" value="Создать новый ТС">
 </form>

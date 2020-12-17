@@ -5,6 +5,10 @@
     <title>Создайте новое ТС</title>
 </head>
 <body>
+<form th:object="${greetingsMessage}">
+    <h2 th:text="${greetingsMessage}"></h2>
+</form>
+<br>
 <h3>Введите данные транспортного средства</h3>
 
 <div>
@@ -35,6 +39,6 @@
         <input type="submit" value="Назад к списку ТС"></form>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
         <input type="submit" value="Назад главное меню"></form>
-
+</div>
 </body>
 </html>
