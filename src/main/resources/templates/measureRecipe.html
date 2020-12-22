@@ -5,9 +5,25 @@
     <title>Калькуляция сделана</title>
 </head>
 <body>
+<div th:align="center">
+    <form id="recipe" th:object="${measure}">
+        <hr>
+        <label for="measureId">Номер квитанции(ID)</label>
+        <p id="measureId" th:text="*{id}"></p>
+        <br>
+        <label for="date">Дата измерения</label>
+        <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
+        <br>
+        <label for="frontW">Вес на оси тягача</label>
+        <p id="frontW" th:text="*{frontWeight}"></p>
+        <label for="rearW">Вес на оси прицепа</label>
+        <p id="rearW" th:text="*{rearWeight}"></p>
+        <label for="completeW">Общий вес</label>
+        <p id="completeW" th:text="*{completeWeight}"></p>
+        <label for="cargo">Вес груза</label>
+        <p id="cargo" th:text="*{cargoWeight}"></p>
+    </form>
 
-
-
-
+</div>
 </body>
 </html>

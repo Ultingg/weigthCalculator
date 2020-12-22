@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @Table("measure")
@@ -37,7 +38,7 @@ public class Measure {
         this.rearWeight = rearWeight;
         this.completeWeight = completeWeight;
         this.cargoWeight = cargoWeight;
-        this.dateOfMeasure = LocalDateTime.now();
+        this.dateOfMeasure = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         this.overloaded = isOverloaded(frontWeight, rearWeight, completeWeight);
         this.frontBar = frontBar;
         this.rearBar = rearBar;

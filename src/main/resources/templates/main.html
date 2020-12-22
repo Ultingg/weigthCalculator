@@ -6,21 +6,22 @@
 </head>
 
 <body>
-<form th:object="${greetingsMessage}">
-    <h2 th:text="${greetingsMessage}"></h2>
-</form>
-<br>
-<form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
-    <input type="submit" value="Создать новый ТС">
-</form>
-<br>
-<form name="ToTruckList" th:action="@{/trucks/list}" th:method="get">
-    <input type="submit" value="Список ТС">
-</form>
-<br>
-<form name="ToMeasureList" th:action="@{/measure}" th:method="get">
-    <input type="submit" value="Список измерений">
-</form>
-
+<div th:align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
+    <br>
+    <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
+        <input type="submit" value="Создать новый ТС">
+    </form>
+    <br>
+    <form name="ToTruckList" th:action="@{/trucks/list}" th:method="get">
+        <input type="submit" value="Список ТС">
+    </form>
+    <br>
+    <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Список измерений">
+    </form>
+</div>
 </body>
 </html>

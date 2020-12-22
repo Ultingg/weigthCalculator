@@ -31,7 +31,7 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
 
     Measure getById(Long id);
 
-    Measure getByDateOfMeasure(LocalDateTime dateOfMeasure);
+    Measure getByDateOfMeasure(Timestamp dateOfMeasure);
 
     @Query("SELECT * FROM measure")
     List<Measure> getAll();

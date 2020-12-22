@@ -5,29 +5,30 @@
     <title>Расчет</title>
 </head>
 <body>
-<form th:object="${greetingsMessage}">
-    <h2 th:text="${greetingsMessage}"></h2>
-</form>
-<h3>Внесите данные для подсчета</h3>
+<div th:align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
 
+    <h3>Внесите данные для подсчета</h3>
+</div>
 
-<form name="calculation" th:action="@{/trucks/measure/created}" th:method="post">
-    <select name="truck" th:object="${truckList}">
-        <option value="">--</option>
-        <option th:each="truck : ${truckList}"
-                th:value="${truck}"
-                th:text="${truck.getTruckNumber()}"></option>
-    </select>
-    <br>
-    <label for="frontBar">Манометр Тягача: </label>
-    <input id="frontBar" type="text" th:field="${measure.frontBar}">
-    <br>
-    <label for="rearBar">Манометр прицепа</label>
-    <input id="rearBar" type="text" th:field="${measure.rearBar}">
+<div th:align="center">
+    <form name="calculation" action="#" th:action="@{/trucks/measure/created}" th:method="post">
+        <select name="truckId" th:object="${truckList}">
+            <option value="">--</option>
+            <option th:each="truck : ${truckList}"
+                    th:value="${truck.id}"
+                    th:text="${truck.truckNumber}"></option>
+        </select>
+        <br>
+        <label for="front">Манометр Тягача: </label>
+        <input id="front" type="text" th:field="${measure.frontBar}">
+        <br>
+        <label for="rear">Манометр прицепа</label>
+        <input id="rear" type="text" th:field="${measure.rearBar}">
 
-
-
-    <input type="submit" value="Посчитать"></form>
-
+        <input type="submit" value="Посчитать"></form>
+</div>
 </body>
 </html>

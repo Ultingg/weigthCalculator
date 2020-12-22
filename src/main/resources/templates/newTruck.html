@@ -5,40 +5,42 @@
     <title>Создайте новое ТС</title>
 </head>
 <body>
-<form th:object="${greetingsMessage}">
-    <h2 th:text="${greetingsMessage}"></h2>
-</form>
-<br>
-<h3>Введите данные транспортного средства</h3>
-
-<div>
-    <form name="truckDetails" th:action="@{/trucks/creation}" th:method="post" th:object="${truck}">
-        <input id="truckNumber" type="text" name="truckNumber" th:field="*{truckNumber}" placeholder="Рег. номер ТС"
-               size="30">
-        <label for="truckNumber">Введите рег. номер ТС</label>
-        <br>
-        <input id="frontPrice" type="text" name="frontPrice" th:field="*{frontPrice}"
-               placeholder="Цена деления ведущей оси, кг" size="30">
-        <label for="frontPrice">Введите цену деления ведущей оси</label>
-        <br>
-        <input id="rearPrice" type="text" name="rearPrice" th:field="*{rearPrice}"
-               placeholder="Цена деления оси прицепа, кг" size="30">
-        <label for="rearPrice">Введите цену деления оси прицепа</label>
-        <br>
-        <input id="firstWheelWeight" type="text" name="firstWheelWeight" th:field="*{firstWheelWeight}"
-               placeholder="Нагрузка на рулевое колесо, кг" size="30">
-        <label for="firstWheelWeight">Введите нагрузку на рулевое колесо</label>
-        <br>
-        <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}"
-               placeholder="Вес порожнего ТС, кг" size="30">
-        <label for="truckWeight">Введите вес порожнего ТС</label>
-        <br>
-        <p><input type="submit" value="Создать"></p>
+<div th:align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
     </form>
-    <form name="backToList" th:action="@{/trucks/list}" th:method="get">
-        <input type="submit" value="Назад к списку ТС"></form>
-    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
+    <br>
+    <h3>Введите данные транспортного средства</h3>
+
+    <div>
+        <form name="truckDetails" th:action="@{/trucks/creation}" th:method="post" th:object="${truck}">
+            <input id="truckNumber" type="text" name="truckNumber" th:field="*{truckNumber}" placeholder="Рег. номер ТС"
+                   size="30">
+            <label for="truckNumber">Введите рег. номер ТС</label>
+            <br>
+            <input id="frontPrice" type="text" name="frontPrice" th:field="*{frontPrice}"
+                   placeholder="Цена деления ведущей оси, кг" size="30">
+            <label for="frontPrice">Введите цену деления ведущей оси</label>
+            <br>
+            <input id="rearPrice" type="text" name="rearPrice" th:field="*{rearPrice}"
+                   placeholder="Цена деления оси прицепа, кг" size="30">
+            <label for="rearPrice">Введите цену деления оси прицепа</label>
+            <br>
+            <input id="firstWheelWeight" type="text" name="firstWheelWeight" th:field="*{firstWheelWeight}"
+                   placeholder="Нагрузка на рулевое колесо, кг" size="30">
+            <label for="firstWheelWeight">Введите нагрузку на рулевое колесо</label>
+            <br>
+            <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}"
+                   placeholder="Вес порожнего ТС, кг" size="30">
+            <label for="truckWeight">Введите вес порожнего ТС</label>
+            <br>
+            <p><input type="submit" value="Создать"></p>
+        </form>
+        <form name="backToList" th:action="@{/trucks/list}" th:method="get">
+            <input type="submit" value="Назад к списку ТС"></form>
+        <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+            <input type="submit" value="Назад главное меню"></form>
+    </div>
 </div>
 </body>
 </html>

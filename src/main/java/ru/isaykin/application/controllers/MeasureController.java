@@ -99,20 +99,21 @@ public class MeasureController {
     }
 
     @PostMapping("trucks/measure/created")
-    public String measureRecipe(@ModelAttribute("measure") Measure measure,
-                                @ModelAttribute("truck") Truck truck,
+    public String measureRecipe(@ModelAttribute("measure") Measure newMeasure,
                                 Model model) {
-        Measure newMeasure = measureService.create(truck, measure.getFrontBar(), measure.getRearBar());
-        model.addAttribute("newMeasure", newMeasure);
+        Truck checkingTruck = truckService.getTruck(newMeasure.getTruckId());//костыль бля
+       Measure measure = measureService.create(checkingTruck, newMeasure.getFrontBar(), newMeasure.getRearBar());
+        model.addAttribute("measure", measure);
         return "measureRecipe";
 
     }
 
     @GetMapping("trucks/measure/new")
-    public String calculation (@ModelAttribute("measure") Measure measure,  Model model) {
+    public String calculation(Model model) {
         List<Truck> trucks = truckService.getAll2();
         model.addAttribute("truckList", trucks);
-
+        Measure measure = new Measure();
+        model.addAttribute("measure", measure);
         return "calculation";
     }
 
