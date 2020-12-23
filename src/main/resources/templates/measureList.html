@@ -18,7 +18,7 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Id ТС</th>
+                <th>ТС</th>
                 <th>Дата</th>
                 <th>Тягач(бар)</th>
                 <th>Тягач(кг)</th>
@@ -32,7 +32,7 @@
             <tbody>
             <tr th:each="measure, iterStat : ${measureList}">
                 <td th:text="*{measure.getId()}">Id</td>
-                <td th:text="*{measure.getTruckId()}">Id ТС</td>
+                <td th:text="*{truckList.get(measure.getTruckId())}">ТС</td>
                 <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
                 <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
                 <td th:text="*{measure.getRearWeight()}">Тягач(кг)</td>

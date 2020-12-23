@@ -8,20 +8,22 @@
 <div th:align="center">
     <form id="recipe" th:object="${measure}">
         <hr>
-        <label for="measureId">Номер квитанции(ID)</label>
+        <label for="measureId"><b>Номер квитанции(ID)</b></label>
         <p id="measureId" th:text="*{id}"></p>
         <br>
-        <label for="date">Дата измерения</label>
+        <label for="date" style="font-style: initial"><b>Дата измерения</b></label>
         <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
         <br>
-        <label for="frontW">Вес на оси тягача</label>
+        <label for="frontW" style="font-style: italic"><b>Вес на оси тягача</b></label>
         <p id="frontW" th:text="*{frontWeight}"></p>
-        <label for="rearW">Вес на оси прицепа</label>
+        <label for="rearW" style="font-style: revert"><b>Вес на оси прицепа</b></label>
         <p id="rearW" th:text="*{rearWeight}"></p>
-        <label for="completeW">Общий вес</label>
+        <label for="completeW" style="font-style: unset"><b>Общий вес</b></label>
         <p id="completeW" th:text="*{completeWeight}"></p>
-        <label for="cargo">Вес груза</label>
+        <label for="cargo" style="font-style: inherit"><b>Вес груза</b></label>
         <p id="cargo" th:text="*{cargoWeight}"></p>
+        <label for="overloaded" style="font-style: oblique"><b>Перегрузка</b></label>
+        <p id="overloaded" th:text="*{overloaded} ?'Перегрузка':'В норме' "></p>
     </form>
 
 </div>

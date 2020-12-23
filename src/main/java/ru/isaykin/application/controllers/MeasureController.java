@@ -1,5 +1,6 @@
 package ru.isaykin.application.controllers;
 
+import org.apache.tomcat.util.descriptor.tld.TldRuleSet;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,7 +103,7 @@ public class MeasureController {
     public String measureRecipe(@ModelAttribute("measure") Measure newMeasure,
                                 Model model) {
         Truck checkingTruck = truckService.getTruck(newMeasure.getTruckId());//костыль бля
-       Measure measure = measureService.create(checkingTruck, newMeasure.getFrontBar(), newMeasure.getRearBar());
+        Measure measure = measureService.create(checkingTruck, newMeasure.getFrontBar(), newMeasure.getRearBar());
         model.addAttribute("measure", measure);
         return "measureRecipe";
 
