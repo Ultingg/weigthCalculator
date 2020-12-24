@@ -1,7 +1,6 @@
 package ru.isaykin.application.controllers;
 
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,9 +11,8 @@ import ru.isaykin.application.services.TruckService;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.*;
 
-
+@SuppressWarnings("SpringMVCViewInspection")
 @Controller
 @RequestMapping("/trucks")
 public class TruckController {
@@ -39,8 +37,9 @@ public class TruckController {
     public String creatingTruck(@ModelAttribute("truck")
                                 @Valid Truck truck,
                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "newTruck";}
+        if (bindingResult.hasErrors()) {
+            return "newTruck";
+        }
         truckService.addTruck(truck);
         return "redirect:/trucks/list";
     }
@@ -68,8 +67,9 @@ public class TruckController {
                                   @Valid Truck truck,
                                   BindingResult bindingResult,
                                   @PathVariable Long id) {
-        if(bindingResult.hasErrors()){
-            return "truckCard";}
+        if (bindingResult.hasErrors()) {
+            return "truckCard";
+        }
 
         truckService.updateById(id, truck);
         return "redirect:/trucks/{id}";

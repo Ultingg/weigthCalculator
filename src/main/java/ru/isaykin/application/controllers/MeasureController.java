@@ -1,6 +1,5 @@
 package ru.isaykin.application.controllers;
 
-import org.apache.tomcat.util.descriptor.tld.TldRuleSet;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +29,7 @@ public class MeasureController {
 
     @ModelAttribute("measureList")
     public List<Measure> getMeasureListUtil() {
-        List<Measure> list = measureService.getAll();
-        return list;
+        return measureService.getAll();
     }
 
     @ModelAttribute("truckList")

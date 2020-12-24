@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import ru.isaykin.application.model.Measure;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
+@SuppressWarnings("SpringDataRepositoryMethodParametersInspection")
 @Repository
 public interface MeasureRepository extends CrudRepository<Measure, Long> {
 
@@ -31,6 +31,7 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
 
     Measure getById(Long id);
 
+    @SuppressWarnings("SpringDataRepositoryMethodParametersInspection")
     Measure getByDateOfMeasure(Timestamp dateOfMeasure);
 
     @Query("SELECT * FROM measure")

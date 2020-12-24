@@ -26,7 +26,8 @@
         <label for="firstWheelWeight">Нагрузка на первое колесо: </label>
         <input id="firstWheelWeight" type="text" th:field="*{firstWheelWeight}"/>
         <label> кг</label>
-        <div style="color: crimson" th:errors="*{firstWheelWeight}" th:if="${#fields.hasErrors('firstWheelWeight')}">FrontPrice
+        <div style="color: crimson" th:errors="*{firstWheelWeight}" th:if="${#fields.hasErrors('firstWheelWeight')}">
+            FrontPrice
             Error
         </div>
 

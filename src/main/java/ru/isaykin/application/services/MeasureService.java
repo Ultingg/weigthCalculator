@@ -2,12 +2,10 @@ package ru.isaykin.application.services;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.DateUtils;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,7 +33,7 @@ public class MeasureService {
                 , createdMeasure.getRearWeight()
                 , truck.getId()
                 , createdMeasure.isOverloaded());
-        Timestamp timestamp = timeInvertor(createdMeasure.getDateOfMeasure());
+        Timestamp timestamp = timeConvertor(createdMeasure.getDateOfMeasure());
         return measureRepository.getByDateOfMeasure(timestamp);
     }
 
@@ -44,7 +42,7 @@ public class MeasureService {
     }
 
     public Measure getByDateOfMeasure(LocalDateTime dateOfMeasure) {
-        Timestamp timestamp = timeInvertor(dateOfMeasure);
+        Timestamp timestamp = timeConvertor(dateOfMeasure);
         return measureRepository.getByDateOfMeasure(timestamp);
     }
 
@@ -72,12 +70,12 @@ public class MeasureService {
     public List<Measure> getListOfOverloads(boolean overload) {
         return measureRepository.getListOfOverloadedMeasures(overload);
     }
-    private Timestamp timeInvertor(LocalDateTime date) {
-        Timestamp timestamp = Timestamp.valueOf(date);
-        return timestamp;
-            }
 
 
+
+    private Timestamp timeConvertor(LocalDateTime date) {
+        return Timestamp.valueOf(date);
+    }
 
 
 }

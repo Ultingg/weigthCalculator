@@ -6,7 +6,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -33,8 +32,6 @@ public class Truck {
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double truckWeight;
 
-    public Truck() {
-    }
 
     public Truck(String truckNumber, double truckWeight,
                  double firstWheelWeight, double frontPrice,

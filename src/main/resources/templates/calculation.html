@@ -15,7 +15,7 @@
 
 <div th:align="center">
     <form name="calculation" action="#" th:action="@{/trucks/measure/created}" th:method="post">
-        <select name="truckId" >
+        <select name="truckId">
             <option th:each="truck : ${truckList}"
                     th:value="${truck.id}"
                     th:text="${truck.truckNumber}"></option>

@@ -33,13 +33,17 @@
             <td th:text="${truck.getFrontPrice()}"></td>
             <td th:text="${truck.getRearPrice()}"></td>
             <td th:text="${truck.getTruckWeight()}"></td>
-            <td><form th:action="@{/trucks/{id}(id=*{truck.id})}" th:method="delete">
-                <input type="submit" value="Удалить">
-            </form> </td>
-            <td><form th:action="@{/trucks/{id}(id=*{id})}" th:method="get" th:object="${truck}">
+            <td>
+                <form th:action="@{/trucks/{id}(id=*{truck.id})}" th:method="delete">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/trucks/{id}(id=*{id})}" th:method="get" th:object="${truck}">
 
-                <input type="submit" value="Редактировать">
-            </form> </td>
+                    <input type="submit" value="Редактировать">
+                </form>
+            </td>
         </tr>
         </tbody>
 

@@ -59,7 +59,7 @@
                 <td th:text="${measure.getCompleteWeight()}">Полная масса</td>
                 <td th:text="${measure.isOverloaded()} ?'Перегрузка':'В норме' ">Перегрузка</td>
                 <td>
-                    <form   th:action="@{trucks/measure/delete/{id}(id=${measure.id})}" th:method="delete">
+                    <form th:action="@{trucks/measure/delete/{id}(id=${measure.id})}" th:method="delete">
                         <button type="submit" value="Удалить">Удалить</button>
                     </form>
                 </td>
