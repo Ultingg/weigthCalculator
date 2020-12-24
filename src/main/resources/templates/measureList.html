@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>Список измерений</title>
 </head>
@@ -11,40 +12,6 @@
         <h2 th:text="${greetingsMessage}"></h2>
     </form>
     <br>
-    <h2>Список измерений</h2>
-
-    <form>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>ТС</th>
-                <th>Дата</th>
-                <th>Тягач(бар)</th>
-                <th>Тягач(кг)</th>
-                <th>Прицеп(бар)</th>
-                <th>Прицеп(кг)</th>
-                <th>Вес груза</th>
-                <th>Полная масса</th>
-                <th>Перегрузка</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="measure, iterStat : ${measureList}">
-                <td th:text="*{measure.getId()}">Id</td>
-                <td th:text="*{truckList.get(measure.getTruckId())}">ТС</td>
-                <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
-                <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
-                <td th:text="*{measure.getRearWeight()}">Тягач(кг)</td>
-                <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
-                <td th:text="*{measure.getRearWeight()}">Прицеп(кг)</td>
-                <td th:text="${measure.getCargoWeight()}">Вес груза</td>
-                <td th:text="${measure.getCompleteWeight()}">Полная масса</td>
-                <td th:text="${measure.isOverloaded()} ?'Перегрузка':'В норме' ">Перегрузка</td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
         <input type="submit" value="Назад главное меню"></form>
 
@@ -59,5 +26,49 @@
         </select>
         <input type="submit" value="Фильтровать" style="width:100px; height: 30px;font-style: italic"></form>
 </div>
+<br>
+<div id="measureTable" th:align="center">
+    <h2>Список измерений</h2>
+    <form>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>ТС</th>
+                <th>Дата</th>
+                <th>Тягач(бар)</th>
+                <th>Тягач(кг)</th>
+                <th>Прицеп(бар)</th>
+                <th>Прицеп(кг)</th>
+                <th>Вес груза</th>
+                <th>Полная масса</th>
+                <th>Перегрузка</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="measure, iterStat : ${measureList}">
+                <td th:text="*{measure.id}">Id</td>
+                <td th:text="${measure.truckId}">ТС</td>
+                <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
+                <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
+                <td th:text="*{measure.getFrontWeight()}">Тягач(кг)</td>
+                <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
+                <td th:text="*{measure.getRearWeight()}">Прицеп(кг)</td>
+                <td th:text="${measure.getCargoWeight()}">Вес груза</td>
+                <td th:text="${measure.getCompleteWeight()}">Полная масса</td>
+                <td th:text="${measure.isOverloaded()} ?'Перегрузка':'В норме' ">Перегрузка</td>
+                <td>
+                    <form   th:action="@{trucks/measure/delete/{id}(id=${measure.id})}" th:method="delete">
+                        <button type="submit" value="Удалить">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
 </body>
 </html>

@@ -28,25 +28,59 @@ public class MeasureController {
         this.measureService = measureService;
     }
 
+    @ModelAttribute("measureList")
+    public List<Measure> getMeasureListUtil() {
+        List<Measure> list = measureService.getAll();
+        return list;
+    }
+
+    @ModelAttribute("truckList")
+    public List<Truck> getTruckListUtil() {
+        return truckService.getAll2();
+    }
+
+
     @GetMapping("measure")
     public String measurePanel(Model model) {
-        List<Measure> measuresList = measureService.getAll();
-        List<Truck> trucks = truckService.getAll2();
-        model.addAttribute("measureList", measuresList);
-        model.addAttribute("truckList", trucks);
         return "measureList";
     }
 
     @GetMapping("measure/listById")
     public String getMeasuresByTruckId(@RequestParam(name = "truck") Long id, Model model) {
-        List<Truck> trucks = truckService.getAll2();
         List<Measure> measureList = measureService.getListOfMeasuresByTruckId(id);
         model.addAttribute("measureList", measureList);
-        model.addAttribute("truckList", trucks);
 
         return "measureListId";
     }
 
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
+    }
+
+    @PostMapping("trucks/measure/created")
+    public String measureRecipe(@ModelAttribute("measure") Measure newMeasure,
+                                Model model) {
+        Truck checkingTruck = truckService.getTruck(newMeasure.getTruckId());//костыль бля
+        Measure measure = measureService.create(checkingTruck, newMeasure.getFrontBar(), newMeasure.getRearBar());
+        model.addAttribute("measure", measure);
+        return "measureRecipe";
+    }
+
+    @GetMapping("trucks/measure/new")
+    public String calculation(Model model) {
+        Measure measure = new Measure();
+        model.addAttribute("measure", measure);
+        return "calculation";
+    }
+
+    @RequestMapping(value = "trucks/measure/delete/{id}", method = RequestMethod.DELETE)
+    public String deleteMeasureByIdPage(@PathVariable Long id, Model model) {
+        Measure deletedMeasure = measureService.getById(id);
+        measureService.deleteById(id);
+        model.addAttribute("measure", deletedMeasure);
+        return "deleteMeasure";
+    }
 
     @PostMapping("trucks/{id}/measure")
     public ResponseEntity<?> createMeasure(@RequestParam(name = "front") double frontBar,
@@ -88,34 +122,11 @@ public class MeasureController {
         return responseEntity;
     }
 
+
     @GetMapping("trucks/measure")
     public ResponseEntity<?> getAll() {
         List<Measure> measureList = measureService.getAll();
         return new ResponseEntity<>(measureList, OK);
-    }
-
-    @ModelAttribute("greetingsMessage")
-    public String showGreetingMessage() {
-        return "Калькулятор весовых нагрузок";
-    }
-
-    @PostMapping("trucks/measure/created")
-    public String measureRecipe(@ModelAttribute("measure") Measure newMeasure,
-                                Model model) {
-        Truck checkingTruck = truckService.getTruck(newMeasure.getTruckId());//костыль бля
-        Measure measure = measureService.create(checkingTruck, newMeasure.getFrontBar(), newMeasure.getRearBar());
-        model.addAttribute("measure", measure);
-        return "measureRecipe";
-
-    }
-
-    @GetMapping("trucks/measure/new")
-    public String calculation(Model model) {
-        List<Truck> trucks = truckService.getAll2();
-        model.addAttribute("truckList", trucks);
-        Measure measure = new Measure();
-        model.addAttribute("measure", measure);
-        return "calculation";
     }
 
 

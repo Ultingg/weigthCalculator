@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
-    <title>Калькуляция сделана</title>
+    <title>Квитанция удалена</title>
 </head>
 <body>
 <div th:align="center">
     <form id="recipe" th:object="${measure}">
-        <hr>
+        <p style="height: 10px">Квитанция удалена</p>
+        <br>
         <label for="measureId"><b>Номер квитанции(ID)</b></label>
         <p id="measureId" th:text="*{id}"></p>
         <br>
@@ -33,5 +35,6 @@
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
         <input type="submit" value="Назад главное меню"></form>
 </div>
+
 </body>
 </html>

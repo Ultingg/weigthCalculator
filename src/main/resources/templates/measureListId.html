@@ -33,7 +33,7 @@
                 <td th:text="*{measure.getId()}">Id</td>
                 <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
                 <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
-                <td th:text="*{measure.getRearWeight()}">Тягач(кг)</td>
+                <td th:text="*{measure.getFrontWeight()}">Тягач(кг)</td>
                 <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
                 <td th:text="*{measure.getRearWeight()}">Прицеп(кг)</td>
                 <td th:text="${measure.getCargoWeight()}">Вес груза</td>

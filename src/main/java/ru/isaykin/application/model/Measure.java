@@ -24,6 +24,7 @@ public class Measure {
     private double completeWeight;
     private double cargoWeight;
     private LocalDateTime dateOfMeasure;
+
     private double frontBar;
     private double rearBar;
     @Nullable
@@ -44,6 +45,7 @@ public class Measure {
         this.rearBar = rearBar;
 
     }
+
 
     public void calcWeights(Truck truck, double frontBar, double rearBar) {
         frontWeight = (frontBar * 10 * truck.getFrontPrice()) - truck.getFirstWheelWeight();

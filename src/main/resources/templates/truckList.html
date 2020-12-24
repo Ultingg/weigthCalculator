@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
 <div align="center">
     <form th:object="${greetingsMessage}">
         <h2 th:text="${greetingsMessage}"></h2>
@@ -16,6 +15,7 @@
     <h2>Полный список транспортных средств</h2>
 
     <table border="1">
+
         <thead>
         <tr>
             <th>Id</th>
@@ -23,6 +23,7 @@
             <th>Тягач, 0,1 бар/кг</th>
             <th>Прицеп, 0,1 бар/кг</th>
             <th>Масса ТС, кг</th>
+
         </tr>
         </thead>
         <tbody>
@@ -32,10 +33,18 @@
             <td th:text="${truck.getFrontPrice()}"></td>
             <td th:text="${truck.getRearPrice()}"></td>
             <td th:text="${truck.getTruckWeight()}"></td>
+            <td><form th:action="@{/trucks/{id}(id=*{truck.id})}" th:method="delete">
+                <input type="submit" value="Удалить">
+            </form> </td>
+            <td><form th:action="@{/trucks/{id}(id=*{id})}" th:method="get" th:object="${truck}">
+
+                <input type="submit" value="Редактировать">
+            </form> </td>
         </tr>
         </tbody>
 
     </table>
+
 </div>
 <br>
 
