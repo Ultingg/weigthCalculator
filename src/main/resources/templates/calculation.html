@@ -14,19 +14,21 @@
 </div>
 
 <div th:align="center">
-    <form name="calculation" action="#" th:action="@{/trucks/measure/created}" th:method="post">
+    <form name="calculation" action="#" th:action="@{/trucks/measure/created}" th:method="post" th:object="${measure}">
         <select name="truckId">
             <option th:each="truck : ${truckList}"
                     th:value="${truck.id}"
                     th:text="${truck.truckNumber}"></option>
         </select>
         <br>
-        <label for="front">Манометр Тягача: </label>
-        <input id="front" type="text" th:field="${measure.frontBar}">
+        <label for="frontBar">Манометр Тягача: </label>
+        <input id="frontBar" type="text" th:field="${measure.frontBar}">
+        <div th:errors="*{frontBar}" th:if="${#fields.hasErrors('frontBar')}" style="color: crimson">Error front Bar</div>
         <br>
-        <label for="rear">Манометр прицепа</label>
-        <input id="rear" type="text" th:field="${measure.rearBar}">
-
+        <label for="rearBar">Манометр прицепа</label>
+        <input id="rearBar" type="text" th:field="${measure.rearBar}">
+        <div  th:errors="*{rearBar}" th:if="${#fields.hasErrors('rearBar')}" style="color: crimson">Error front Bar</div>
+        <br>
         <input type="submit" value="Посчитать"></form>
 </div>
 </body>

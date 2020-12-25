@@ -32,7 +32,10 @@ public class MeasureService {
                 , rearBar
                 , createdMeasure.getRearWeight()
                 , truck.getId()
-                , createdMeasure.isOverloaded());
+                , createdMeasure.isOverloaded()
+                , createdMeasure.isFrontOverloaded()
+                , createdMeasure.isRearOverloaded()
+                , createdMeasure.isCompleteOverloaded());
         Timestamp timestamp = timeConvertor(createdMeasure.getDateOfMeasure());
         return measureRepository.getByDateOfMeasure(timestamp);
     }
@@ -70,7 +73,6 @@ public class MeasureService {
     public List<Measure> getListOfOverloads(boolean overload) {
         return measureRepository.getListOfOverloadedMeasures(overload);
     }
-
 
 
     private Timestamp timeConvertor(LocalDateTime date) {

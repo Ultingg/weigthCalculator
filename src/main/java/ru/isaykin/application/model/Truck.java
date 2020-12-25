@@ -32,7 +32,8 @@ public class Truck {
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double truckWeight;
 
-
+    public Truck() {
+            }
     public Truck(String truckNumber, double truckWeight,
                  double firstWheelWeight, double frontPrice,
                  double rearPrice) {

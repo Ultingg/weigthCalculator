@@ -14,6 +14,9 @@
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
         <input type="submit" value="Назад главное меню"></form>
+    <br>
+    <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
+        <input type="submit" value="Посчитать"></form>
 
     <h3>Отфильтровать измерения по номеру ТС</h3>
 
@@ -27,6 +30,7 @@
         <input type="submit" value="Фильтровать" style="width:100px; height: 30px;font-style: italic"></form>
 </div>
 <br>
+<hr>
 <div id="measureTable" th:align="center">
     <h2>Список измерений</h2>
     <form>
@@ -49,14 +53,29 @@
             <tbody>
             <tr th:each="measure, iterStat : ${measureList}">
                 <td th:text="*{measure.id}">Id</td>
-                <td th:text="${measure.truckId}">ТС</td>
+                <td th:text="*{measure.truckId}"> ТС</td>
                 <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
                 <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
-                <td th:text="*{measure.getFrontWeight()}">Тягач(кг)</td>
+                <td th:if="*{measure.isFrontOverloaded()}" style="color: crimson"
+                    th:text="*{measure.getFrontWeight()}">Тягач(кг)
+                </td>
+                <td th:if="*{!measure.isFrontOverloaded()}"
+                    th:text="*{measure.getFrontWeight()}">Тягач(кг)
+                </td>
                 <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
-                <td th:text="*{measure.getRearWeight()}">Прицеп(кг)</td>
+                <td th:if="*{measure.isRearOverloaded()}" style="color: crimson"
+                    th:text="*{measure.getRearWeight()}">Прицеп(кг)
+                </td>
+                <td th:if="*{!measure.isRearOverloaded()}"
+                    th:text="*{measure.getRearWeight()}">Прицеп(кг)
+                </td>
                 <td th:text="${measure.getCargoWeight()}">Вес груза</td>
-                <td th:text="${measure.getCompleteWeight()}">Полная масса</td>
+                <td th:if="*{measure.isCompleteOverloaded()}" style="color: crimson"
+                    th:text="${measure.getCompleteWeight()}">Полная масса
+                </td>
+                <td th:if="*{!measure.isCompleteOverloaded()}"
+                    th:text="${measure.getCompleteWeight()}">Полная масса
+                </td>
                 <td th:text="${measure.isOverloaded()} ?'Перегрузка':'В норме' ">Перегрузка</td>
                 <td>
                     <form th:action="@{trucks/measure/delete/{id}(id=${measure.id})}" th:method="delete">

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.Nullable;
 
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -24,11 +25,19 @@ public class Measure {
     private double completeWeight;
     private double cargoWeight;
     private LocalDateTime dateOfMeasure;
-
+    @Min(value = 1, message = "Давление не может быть меньше чем 1 бар")
     private double frontBar;
+    @Min(value = 1, message = "Давление не может быть меньше чем 1 бар")
     private double rearBar;
     @Nullable
     private boolean overloaded;
+    @Nullable
+    private boolean frontOverloaded;
+    @Nullable
+    private boolean rearOverloaded;
+    @Nullable
+    private boolean completeOverloaded;
+
 
     public Measure() {
     }
@@ -40,10 +49,12 @@ public class Measure {
         this.completeWeight = completeWeight;
         this.cargoWeight = cargoWeight;
         this.dateOfMeasure = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-        this.overloaded = isOverloaded(frontWeight, rearWeight, completeWeight);
+        this.overloaded = calcOverloaded(frontWeight, rearWeight, completeWeight);
         this.frontBar = frontBar;
         this.rearBar = rearBar;
-
+        this.frontOverloaded = calcFrontOverloaded();
+        this.rearOverloaded = calcRearOverloaded();
+        this.completeOverloaded = calcCompleteOverloaded();
     }
 
 
@@ -59,18 +70,27 @@ public class Measure {
 
     }
 
-    public boolean isOverloaded(double frontWeight, double rearWeight, double completeWeight) {
+    private boolean calcOverloaded(double frontWeight, double rearWeight, double completeWeight) {
         double completeWeightLimit = 44000;
         double frontWeightLimit = 15461;
         double rearWeightLimit = 23192;
         return frontWeight > frontWeightLimit || rearWeight > rearWeightLimit || completeWeight > completeWeightLimit;
     }
 
-//    public String toString() {
-//        return String.format(
-//                " Квитанция взвешивания \n рег. номер ТС: %s \n Дата взвешивания: %tF \n" +
-//                        " Полная масса: %.2f \n Масса груза:  %.2f\n Нагрузка на ведущую ось: %.2f \n" +
-//                        " Нагрузка на заднюю ось прицепа: %.2f\n",
-//                truckNumber, dateOfMeasure, completeWeight, cargoWeight, frontWeight, rearWeight);
-//    }
+    private boolean calcFrontOverloaded() {
+        double frontWeightLimit = 15461;
+        return this.frontWeight > frontWeightLimit;
+    }
+
+    private boolean calcRearOverloaded() {
+        double rearWeightLimit = 23192;
+        return this.rearWeight > rearWeightLimit;
+    }
+    private boolean calcCompleteOverloaded() {
+        double completeWeightLimit = 44000;
+        return this.completeWeight > completeWeightLimit;
+    }
+
+
+
 }

@@ -15,9 +15,10 @@ import java.util.List;
 public interface MeasureRepository extends CrudRepository<Measure, Long> {
 
     @Query("INSERT INTO measure (cargo_weight, complete_weight, date_of_measure," +
-            "front_bar, front_weight, rear_bar, rear_weight, overloaded, truck_id)" +
+            "front_bar, front_weight, rear_bar, rear_weight, overloaded, truck_id," +
+            " front_overloaded, rear_overloaded, complete_overloaded)" +
             " VALUES(:cargoWeight, :completeWeight, :dateOfMeasure, :frontBar, :frontWeight," +
-            ":rearBar, :rearWeight, :overloaded, :truckId)")
+            ":rearBar, :rearWeight, :overloaded, :truckId, :frontOverloaded, :rearOverloaded, :completeOverloaded)")
     @Modifying
     void create(@Param("cargoWeight") double cargoWeight,
                 @Param("completeWeight") double completeWeight,
@@ -27,7 +28,10 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
                 @Param("rearBar") double reaBar,
                 @Param("rearWeight") double rearWeight,
                 @Param("truckId") Long truckId,
-                @Param("overloaded") boolean overloaded);
+                @Param("overloaded") boolean overloaded,
+                @Param("frontOverloaded") boolean frontOverloaded,
+                @Param("rearOverloaded") boolean rearOverloaded,
+                @Param("completeOverloaded") boolean completeOverloaded);
 
     Measure getById(Long id);
 

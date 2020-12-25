@@ -25,7 +25,7 @@
         <label for="cargo" style="font-style: inherit"><b>Вес груза</b></label>
         <p id="cargo" th:text="*{cargoWeight}"></p>
         <label for="overloaded" style="font-style: oblique"><b>Перегрузка</b></label>
-        <p id="overloaded" th:text="*{overloaded} ?'Перегрузка':'В норме' "></p>
+        <p id="overloaded" th:text="*{isOverloaded()} ?'Перегрузка':'В норме' "></p>
     </form>
     <br>
     <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
