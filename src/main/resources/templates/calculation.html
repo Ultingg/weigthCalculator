@@ -21,15 +21,30 @@
                     th:text="${truck.truckNumber}"></option>
         </select>
         <br>
+        <br>
         <label for="frontBar">Манометр Тягача: </label>
         <input id="frontBar" type="text" th:field="${measure.frontBar}">
-        <div th:errors="*{frontBar}" th:if="${#fields.hasErrors('frontBar')}" style="color: crimson">Error front Bar</div>
+        <br>
+        <div th:errors="*{frontBar}" th:if="${#fields.hasErrors('frontBar')}" style="color: crimson">Error front Bar
+        </div>
         <br>
         <label for="rearBar">Манометр прицепа</label>
         <input id="rearBar" type="text" th:field="${measure.rearBar}">
-        <div  th:errors="*{rearBar}" th:if="${#fields.hasErrors('rearBar')}" style="color: crimson">Error front Bar</div>
         <br>
-        <input type="submit" value="Посчитать"></form>
+        <div th:errors="*{rearBar}" th:if="${#fields.hasErrors('rearBar')}" style="color: crimson">Error front Bar</div>
+
+        <br>
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="backToList" th:action="@{/trucks/list}" th:method="get">
+        <input type="submit" value="Назад к списку ТС" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Список измерений" style="width:180px; height: 30px;font-style: italic">
+    </form>
 </div>
 </body>
 </html>

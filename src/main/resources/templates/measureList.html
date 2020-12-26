@@ -13,21 +13,40 @@
     </form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
     <br>
     <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
-        <input type="submit" value="Посчитать"></form>
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
 
     <h3>Отфильтровать измерения по номеру ТС</h3>
 
     <form name="listById" th:action="@{/measure/listById}" th:method="get">
-        <select name="truck" th:object="${truckList}">
+        <select name="truckId" th:object="${truckList}">
             <option value="">--</option>
             <option th:each="truck : ${truckList}"
                     th:value="${truck.getId()}"
                     th:text="${truck.getTruckNumber()}"></option>
         </select>
-        <input type="submit" value="Фильтровать" style="width:100px; height: 30px;font-style: italic"></form>
+        <input type="submit" value="Отфильтровать" style="width:180px; height: 30px;font-style: italic"></form>
+
+    <p>Отфильтровать ТС по перегрузке</p>
+    <form th:if="${marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/{id}(id=${marker.id})}" th:method="get">
+        <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/}" th:method="get">
+        <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <br>
+    <form th:if="${marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/{id}(id=${marker.id})}" th:method="get">
+        <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/}" th:method="get">
+        <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <br>
+    <form th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Сбросить фильтры" style="width:180px; height: 30px;font-style: italic">
+    </form>
 </div>
 <br>
 <hr>

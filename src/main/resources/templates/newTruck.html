@@ -16,7 +16,7 @@
         <form name="truckDetails" th:action="@{/trucks/creation}" th:method="post" th:object="${truck}">
             <input id="truckNumber" type="text" name="truckNumber" th:field="*{truckNumber}" placeholder="Рег. номер ТС"
                    size="30">
-            <label for="truckNumber">Введите рег. номер ТС</label>
+            <label for="truckNumber">Введите рег. номер ТС </label>
             <div style="color: crimson" th:errors="*{truckNumber}" th:if="${#fields.hasErrors('truckNumber')}">
                 TruckNumber Error
             </div>
@@ -49,12 +49,14 @@
                 TruckWeight Error
             </div>
             <br>
-            <p><input type="submit" value="Создать"></p>
+            <p><input type="submit" value="Создать" style="width:180px; height: 30px;font-style: italic"></p>
         </form>
-        <form name="backToList" th:action="@{/trucks/list}" th:method="get">
-            <input type="submit" value="Назад к списку ТС"></form>
+
+        <form name="backToList" th:action="@{/trucks/list}" th:method="get" >
+            <input type="submit" value="Назад к списку ТС" style="width:180px; height: 30px;font-style: italic"></form>
+        <br>
         <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-            <input type="submit" value="Назад главное меню"></form>
+            <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
     </div>
 </div>
 </body>

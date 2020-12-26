@@ -54,17 +54,16 @@
 
 <div align="center">
     <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
-        <input type="submit" value="Посчитать"></form>
-
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
 
     <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
-
-
-        <input type="submit" value="Создать новый ТС">
+        <input type="submit" value="Создать новый ТС" style="width:180px; height: 30px;font-style: italic">
     </form>
-    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
 
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
 </div>
 </body>
 </html>

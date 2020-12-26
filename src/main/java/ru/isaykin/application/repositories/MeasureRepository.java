@@ -41,19 +41,13 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
     @Query("SELECT * FROM measure")
     List<Measure> getAll();
 
-    @Query("SELECT t.truck_number, m.date_of_measure, m.cargo_weight, m.front_weight, m.rear_weight, m.complete_weight, m.overloaded" +
-            "FROM truck  as t" +
-            " JOIN measure as m  " +
-            " ON t.id = m.truck_id" +
-            " where m.overloaded = :overloaded")
-    @Modifying
-    List<Measure> getListOfOverloadedMeasures(@Param("overloaded") boolean overloaded);
 
     @Query("SELECT m.id, t.truck_number, m.date_of_measure, m.cargo_weight, m.front_bar, m.front_weight, m.rear_bar, m.rear_weight, m.complete_weight, m.overloaded " +
             "FROM truck  t " +
             "JOIN measure  m  " +
             "ON t.id = m.truck_id" +
             " where t.id   = :truckId")
-    List<Measure> getListOfMeasuresByTruckId(@Param("truckId") Long id);
+    List<Measure> getListOfMeasuresByTruckId(@Param("truckId") Long id);//УДАЛИТЬ!!
 
+    List<Measure> getMeasureByOverloaded(boolean overloaded);
 }

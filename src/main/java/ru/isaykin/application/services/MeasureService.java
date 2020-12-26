@@ -1,5 +1,6 @@
 package ru.isaykin.application.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.isaykin.application.model.Measure;
@@ -8,11 +9,11 @@ import ru.isaykin.application.repositories.MeasureRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @Service
-@Component
 public class MeasureService {
 
     private final MeasureRepository measureRepository;
@@ -67,17 +68,42 @@ public class MeasureService {
 
 
     public List<Measure> getListOfMeasuresByTruckId(Long id) {
-        return measureRepository.getListOfMeasuresByTruckId(id);
+        List<Measure> measureList = measureRepository.getAll();
+        List<Measure> measureListById = new ArrayList<>();
+        for(Measure measure : measureList)
+            if(measure.getTruckId().equals(id)) measureListById.add(measure);
+            return measureListById;
     }
 
-    public List<Measure> getListOfOverloads(boolean overload) {
-        return measureRepository.getListOfOverloadedMeasures(overload);
-    }
 
+    public List<Measure> getListOfOverloaded() {
+        return measureRepository.getMeasureByOverloaded(true);
+    }
+    public List<Measure> getListOfOverloadedAndByTruckId(Long id) {
+        List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(true);
+        List<Measure> sortedById = new ArrayList<>();
+        for(Measure measure : listOfOverloaded) {
+
+            if(measure.getTruckId().equals(id)) sortedById.add(measure);
+        }
+        return sortedById;
+    }
+    public List<Measure> getListOfNotOverloaded() {
+        return measureRepository.getMeasureByOverloaded(false);
+    }
+    public List<Measure> getListOfNotOverloadedAndByTruckId(Long id) {
+        List<Measure> listOfNotOverloaded = measureRepository.getMeasureByOverloaded(false);
+        List<Measure> sortedById = new ArrayList<>();
+        for(Measure measure : listOfNotOverloaded) {
+            if(measure.getTruckId().equals(id)) sortedById.add(measure);
+        }
+        return sortedById;
+    }
 
     private Timestamp timeConvertor(LocalDateTime date) {
         return Timestamp.valueOf(date);
     }
+
 
 
 }

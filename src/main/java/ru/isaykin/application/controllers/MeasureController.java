@@ -1,10 +1,11 @@
 package ru.isaykin.application.controllers;
 
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.isaykin.application.model.MarkerOfFilter;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.MeasureService;
@@ -13,11 +14,8 @@ import ru.isaykin.application.services.TruckService;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
-
 //TODO: exceptionHandler for internalErrors when there is no Truck for measure and so on
-
+@Slf4j
 @Controller
 public class MeasureController {
 
@@ -28,7 +26,10 @@ public class MeasureController {
         this.truckService = truckService;
         this.measureService = measureService;
     }
-
+    @ModelAttribute("marker")
+    public MarkerOfFilter getMarker() {
+        return new MarkerOfFilter(false);
+    }
     @ModelAttribute("measureList")
     public List<Measure> getMeasureListUtil() {
         return measureService.getAll();
@@ -46,10 +47,12 @@ public class MeasureController {
     }
 
     @GetMapping("measure/listById")
-    public String getMeasuresByTruckId(@RequestParam(name = "truck") Long id, Model model) {
+    public String getMeasuresByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
         List<Measure> measureList = measureService.getListOfMeasuresByTruckId(id);
+        MarkerOfFilter markerOfFilter = new MarkerOfFilter(true,id);
+        model.addAttribute("marker", markerOfFilter);
         model.addAttribute("measureList", measureList);
-        return "measureListId";
+        return "measureList";
     }
 
     @ModelAttribute("greetingsMessage")
@@ -65,8 +68,10 @@ public class MeasureController {
         if(bindingResult.hasErrors()) {
             return "calculation";
         }
-       // Truck checkingTruck = truckService.getTruck(newMeasure.getTruckId());//костыль бля
-        Measure measure = measureService.create(truckService.getTruck(newMeasure.getTruckId()), newMeasure.getFrontBar(), newMeasure.getRearBar());
+        Measure measure = measureService.create(
+                truckService.getTruck(newMeasure.getTruckId())
+                , newMeasure.getFrontBar()
+                , newMeasure.getRearBar());
         model.addAttribute("measure", measure);
         return "measureRecipe";
     }
@@ -82,6 +87,39 @@ public class MeasureController {
         measureService.deleteById(id);
         model.addAttribute("measure", deletedMeasure);
         return "deleteMeasure";
+    }
+
+    @GetMapping("measure/listOfOverloaded")
+    public String getListOfOverloaded(Model model){
+        MarkerOfFilter marker = new MarkerOfFilter(false);
+        model.addAttribute("marker", marker);
+       model.addAttribute("measureList", measureService.getListOfOverloaded());
+        return "measureList";
+    }
+
+    @GetMapping("measure/listOfOverloaded/{id}")
+    public String getListOfOverloadedAndByTruckId(@PathVariable("id") Long id, Model model) {
+        List<Measure> listOfOverloadedAndById = measureService.getListOfOverloadedAndByTruckId(id);
+        MarkerOfFilter marker = new MarkerOfFilter(true, id);
+        model.addAttribute("measureList", listOfOverloadedAndById);
+        model.addAttribute("marker", marker);
+        return "measureList";
+    }
+    @GetMapping("measure/listOfNotOverloaded")
+    public String getListOfNotOverloaded(Model model){
+        MarkerOfFilter marker = new MarkerOfFilter(false);
+        model.addAttribute("measureList", measureService.getListOfNotOverloaded());
+        model.addAttribute("marker", marker);
+        return "measureList";
+    }
+
+    @GetMapping("measure/listOfNotOverloaded/{id}")
+    public String getListOfNotOverloadedAndByTruckId( @PathVariable("id") Long id, Model model) {
+        List<Measure> listOfOverloadedAndById = measureService.getListOfNotOverloadedAndByTruckId(id);
+        MarkerOfFilter marker = new MarkerOfFilter(true, id);
+        model.addAttribute("measureList", listOfOverloadedAndById);
+        model.addAttribute("marker", marker);
+        return "measureList";
     }
 
 }

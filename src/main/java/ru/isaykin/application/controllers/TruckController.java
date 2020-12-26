@@ -1,6 +1,7 @@
 package ru.isaykin.application.controllers;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import java.util.List;
 
 
 @SuppressWarnings("SpringMVCViewInspection")
+@Slf4j
 @Controller
 @RequestMapping("/trucks")
 public class TruckController {
