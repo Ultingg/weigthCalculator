@@ -74,9 +74,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="measure, iterStat : ${measureList}">
+            <tr th:each="measure, iterStat : ${measureDTOList}">
                 <td th:text="*{measure.id}">Id</td>
-                <td th:text="*{measure.truckId}"> ТС</td>
+                <td th:text="*{measure.truckNumber}"> ТС</td>
                 <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
                 <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
                 <td th:if="*{measure.isFrontOverloaded()}" style="color: crimson"

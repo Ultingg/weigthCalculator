@@ -48,7 +48,7 @@ public class TruckController {
     }
 
     @GetMapping("list")
-    public String getListOfTrucks(Model model) {
+    public String getListOfTrucks() {
         return "truckList";
     }
 

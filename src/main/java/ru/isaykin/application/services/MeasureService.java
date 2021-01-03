@@ -3,8 +3,10 @@ package ru.isaykin.application.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.isaykin.application.model.Measure;
+import ru.isaykin.application.model.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
+import ru.isaykin.application.repositories.TruckRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -16,10 +18,13 @@ import java.util.List;
 public class MeasureService {
 
     private final MeasureRepository measureRepository;
+    private final TruckRepository truckRepository;
 
-    public MeasureService(MeasureRepository measureRepository) {
+    public MeasureService(MeasureRepository measureRepository, TruckRepository truckRepository) {
         this.measureRepository = measureRepository;
+        this.truckRepository = truckRepository;
     }
+
 
     public Measure create(Truck truck, double frontBar, double rearBar) {
         Measure createdMeasure = new Measure();
@@ -36,7 +41,7 @@ public class MeasureService {
                 , createdMeasure.isFrontOverloaded()
                 , createdMeasure.isRearOverloaded()
                 , createdMeasure.isCompleteOverloaded());
-        Timestamp timestamp = timeConvertor(createdMeasure.getDateOfMeasure());
+        Timestamp timestamp = timeConverter(createdMeasure.getDateOfMeasure());
         return measureRepository.getByDateOfMeasure(timestamp);
     }
 
@@ -44,66 +49,76 @@ public class MeasureService {
         return measureRepository.getById(id);
     }
 
-    public Measure getByDateOfMeasure(LocalDateTime dateOfMeasure) {
-        Timestamp timestamp = timeConvertor(dateOfMeasure);
-        return measureRepository.getByDateOfMeasure(timestamp);
+
+    public void deleteById(Long id) {
+        measureRepository.deleteById(id);
     }
 
-    public boolean deleteById(Long id) {
-        Measure measureToDelete = measureRepository.getById(id);
-        boolean response;
-        if (measureToDelete == null) {
-            response = false;
-        } else {
-            response = true;
-            measureRepository.deleteById(id);
-        }
-        return response;
-    }
-
-    public List<Measure> getAll() {
-        return measureRepository.getAll();
-    }
-
-
-    public List<Measure> getListOfMeasuresByTruckId(Long id) {
+    public List<MeasureDTO> getListOfAllMeasuresDTO() {
         List<Measure> measureList = measureRepository.getAll();
-        List<Measure> measureListById = new ArrayList<>();
-        for (Measure measure : measureList)
-            if (measure.getTruckId().equals(id)) measureListById.add(measure);
-        return measureListById;
+        List<Truck> truckList = truckRepository.getAll();
+        return getCustomizeListOfMeasureDTO(measureList, truckList);
     }
 
-
-    public List<Measure> getListOfOverloaded() {
-        return measureRepository.getMeasureByOverloaded(true);
+    public List<MeasureDTO> getListOfNotOverloadedMeasureDTO() {
+        List<Measure> measureList = measureRepository.getMeasureByOverloaded(false);
+        List<Truck> truckList = truckRepository.getAll();
+        return getCustomizeListOfMeasureDTO(measureList, truckList);
     }
 
-    public List<Measure> getListOfOverloadedAndByTruckId(Long id) {
+    public List<MeasureDTO> getListOfNotOverloadedAndByTruckIdDTO(Long id) {
+        List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(false);
+        Truck truck = truckRepository.getById(id);
+        return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
+    }
+
+    public List<MeasureDTO> getListOfOverloadedMeasureDTO() {
+        List<Measure> measureList = measureRepository.getMeasureByOverloaded(true);
+        List<Truck> truckList = truckRepository.getAll();
+        return getCustomizeListOfMeasureDTO(measureList, truckList);
+    }
+
+    public List<MeasureDTO> getListOfOverloadedAndByTruckIdDTO(Long id) {
         List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(true);
-        List<Measure> sortedById = new ArrayList<>();
-        for (Measure measure : listOfOverloaded) {
-
-            if (measure.getTruckId().equals(id)) sortedById.add(measure);
-        }
-        return sortedById;
+        Truck truck = truckRepository.getById(id);
+        return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
     }
 
-    public List<Measure> getListOfNotOverloaded() {
-        return measureRepository.getMeasureByOverloaded(false);
+    public List<MeasureDTO> getListOfMeasureDTOByTruckId(Long id) {
+        List<Measure> measureList = measureRepository.getAll();
+        Truck truck = truckRepository.getById(id);
+        return getCustomizeListOfMeasureDTOWithCurrentTruck(measureList, truck);
     }
 
-    public List<Measure> getListOfNotOverloadedAndByTruckId(Long id) {
-        List<Measure> listOfNotOverloaded = measureRepository.getMeasureByOverloaded(false);
-        List<Measure> sortedById = new ArrayList<>();
-        for (Measure measure : listOfNotOverloaded) {
-            if (measure.getTruckId().equals(id)) sortedById.add(measure);
-        }
-        return sortedById;
-    }
-
-    private Timestamp timeConvertor(LocalDateTime date) {
+    private Timestamp timeConverter(LocalDateTime date) {
         return Timestamp.valueOf(date);
+    }
+
+    private List<MeasureDTO> getCustomizeListOfMeasureDTO(List<Measure> measureList, List<Truck> truckList) {
+        List<MeasureDTO> resultList = new ArrayList<>();
+        Truck truck = new Truck();
+        for (Measure measure : measureList) {
+            for (Truck truckN : truckList) {
+                if (truckN.getId().equals(measure.getTruckId())) {
+                    truck = truckN;
+                    break;
+                }
+            }
+            MeasureDTO measureDTO = new MeasureDTO(measure, truck);
+            resultList.add(measureDTO);
+        }
+        return resultList;
+    }
+
+    private List<MeasureDTO> getCustomizeListOfMeasureDTOWithCurrentTruck(List<Measure> measureList, Truck truck) {
+        List<MeasureDTO> resultList = new ArrayList<>();
+        for (Measure measure : measureList) {
+            if (measure.getTruckId().equals(truck.getId())) {
+                MeasureDTO measureDTO = new MeasureDTO(measure, truck);
+                resultList.add(measureDTO);
+            }
+        }
+        return resultList;
     }
 
 
