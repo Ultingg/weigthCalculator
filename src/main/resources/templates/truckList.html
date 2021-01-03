@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список ТС</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
+    <br>
+
+    <h2>Полный список транспортных средств</h2>
+
+    <table border="1">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Рег. номер</th>
+            <th>Тягач, 0,1 бар/кг</th>
+            <th>Прицеп, 0,1 бар/кг</th>
+            <th>Масса ТС, кг</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="truck, iterStat : ${truckList}">
+            <td th:text="${truck.getId()}"></td>
+            <td th:text="${truck.getTruckNumber()}"></td>
+            <td th:text="${truck.getFrontPrice()}"></td>
+            <td th:text="${truck.getRearPrice()}"></td>
+            <td th:text="${truck.getTruckWeight()}"></td>
+            <td>
+                <form th:action="@{/trucks/{id}(id=*{truck.id})}" th:method="delete">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/trucks/{id}(id=*{id})}" th:method="get" th:object="${truck}">
+
+                    <input type="submit" value="Редактировать">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<br>
+
+<div align="center">
+    <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+
+    <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
+        <input type="submit" value="Создать новый ТС" style="width:180px; height: 30px;font-style: italic">
+    </form>
+
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+</div>
+</body>
+</html>

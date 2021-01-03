@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>Квитанция удалена</title>
+</head>
+<body>
+<div th:align="center">
+    <form id="recipe" th:object="${measure}">
+        <p style="height: 10px">Квитанция удалена</p>
+        <br>
+        <label for="measureId"><b>Номер квитанции(ID)</b></label>
+        <p id="measureId" th:text="*{id}"></p>
+        <br>
+        <label for="date" style="font-style: initial"><b>Дата измерения</b></label>
+        <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
+        <br>
+        <label for="frontW" style="font-style: italic"><b>Вес на оси тягача</b></label>
+        <p id="frontW" th:text="*{frontWeight}"></p>
+        <label for="rearW" style="font-style: revert"><b>Вес на оси прицепа</b></label>
+        <p id="rearW" th:text="*{rearWeight}"></p>
+        <label for="completeW" style="font-style: unset"><b>Общий вес</b></label>
+        <p id="completeW" th:text="*{completeWeight}"></p>
+        <label for="cargo" style="font-style: inherit"><b>Вес груза</b></label>
+        <p id="cargo" th:text="*{cargoWeight}"></p>
+        <label for="overloaded" style="font-style: oblique"><b>Перегрузка</b></label>
+        <p id="overloaded" th:text="*{isOverloaded()} ?'Перегрузка':'В норме' "></p>
+    </form>
+    <br>
+    <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Список измерений">
+    </form>
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню"></form>
+</div>
+
+</body>
+</html>

@@ -1,11 +1,13 @@
 package ru.isaykin.application.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.isaykin.application.logic.model.Truck;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.TruckRepository;
 
-import java.util.Optional;
+import java.util.List;
 
+@Slf4j
 @Service
 public class TruckService {
 
@@ -16,20 +18,33 @@ public class TruckService {
         this.truckRepository = truckRepository;
     }
 
-    public Iterable<Truck> getAll() {
-        return truckRepository.findAll();
+    public List<Truck> getAll2() {
+        return truckRepository.getAll();
     }
 
-//    public Truck addTruck(Truck truck) {
-//        truckRepository.insert(truck.getFirstWheelWeight()
-//                , truck.getFrontPrice()
-//                , truck.getRearPrice()
-//                , truck.getTruckNumber()
-//                , truck.getTruckWeight());
-//        return truckRepository.getByTruckNumber(truck.getTruckNumber());
-//    }
+    public void addTruck(Truck truck) {
+        truckRepository.create(truck.getFirstWheelWeight()
+                , truck.getFrontPrice()
+                , truck.getRearPrice()
+                , truck.getTruckNumber()
+                , truck.getTruckWeight());
+    }
+
     public Truck getTruck(Long id) {
-       return truckRepository.getById(id);
+        return truckRepository.getById(id);
+
     }
 
+    public void deleteById(Long id) {
+        truckRepository.deleteById(id);
+    }
+
+    public void updateById(Long id, Truck updatedTruck) {
+        Truck truckToUpdate = truckRepository.getById(id);
+        if (truckToUpdate == null) {
+        } else {
+            updatedTruck.setId(id);
+            truckRepository.save(updatedTruck);
+        }
+    }
 }

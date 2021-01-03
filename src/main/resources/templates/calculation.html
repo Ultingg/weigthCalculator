@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет</title>
+</head>
+<body>
+<div th:align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
+
+    <h3>Внесите данные для подсчета</h3>
+</div>
+
+<div th:align="center">
+    <form name="calculation" action="#" th:action="@{/trucks/measure/created}" th:method="post" th:object="${measure}">
+        <select name="truckId">
+            <option th:each="truck : ${truckList}"
+                    th:value="${truck.id}"
+                    th:text="${truck.truckNumber}"></option>
+        </select>
+        <br>
+        <br>
+        <label for="frontBar">Манометр Тягача: </label>
+        <input id="frontBar" type="text" th:field="${measure.frontBar}">
+        <br>
+        <div th:errors="*{frontBar}" th:if="${#fields.hasErrors('frontBar')}" style="color: crimson">Error front Bar
+        </div>
+        <br>
+        <label for="rearBar">Манометр прицепа</label>
+        <input id="rearBar" type="text" th:field="${measure.rearBar}">
+        <br>
+        <div th:errors="*{rearBar}" th:if="${#fields.hasErrors('rearBar')}" style="color: crimson">Error front Bar</div>
+
+        <br>
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="backToList" th:action="@{/trucks/list}" th:method="get">
+        <input type="submit" value="Назад к списку ТС" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Список измерений" style="width:180px; height: 30px;font-style: italic">
+    </form>
+</div>
+</body>
+</html>

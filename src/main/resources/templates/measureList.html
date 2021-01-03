@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>Список измерений</title>
+</head>
+<body>
+
+<div th:align="center">
+    <form th:object="${greetingsMessage}">
+        <h2 th:text="${greetingsMessage}"></h2>
+    </form>
+    <br>
+    <form name="backToMainMEnu" th:action="@{/}" th:method="get">
+        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+    <br>
+    <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
+        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+
+    <h3>Отфильтровать измерения по номеру ТС</h3>
+
+    <form name="listById" th:action="@{/measure/listById}" th:method="get">
+        <select name="truckId" th:object="${truckList}">
+            <option value="">--</option>
+            <option th:each="truck : ${truckList}"
+                    th:value="${truck.getId()}"
+                    th:text="${truck.getTruckNumber()}"></option>
+        </select>
+        <input type="submit" value="Отфильтровать" style="width:180px; height: 30px;font-style: italic"></form>
+
+    <p>Отфильтровать ТС по перегрузке</p>
+    <form th:if="${marker.isFiltered()}" name="listOverloaded"
+          th:action="@{/measure/listOfOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
+        <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/} "
+          th:method="get" th:object="${marker}">
+        <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <br>
+    <form th:if="${marker.isFiltered()}" name="listOverloaded"
+          th:action="@{/measure/listOfNotOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
+        <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/}"
+          th:method="get" th:object="${marker}">
+        <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
+    </form>
+    <br>
+    <form th:action="@{/measure}" th:method="get">
+        <input type="submit" value="Сбросить фильтры" style="width:180px; height: 30px;font-style: italic">
+    </form>
+</div>
+<br>
+<hr>
+<div id="measureTable" th:align="center">
+    <h2>Список измерений</h2>
+    <form>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>ТС</th>
+                <th>Дата</th>
+                <th>Тягач(бар)</th>
+                <th>Тягач(кг)</th>
+                <th>Прицеп(бар)</th>
+                <th>Прицеп(кг)</th>
+                <th>Вес груза</th>
+                <th>Полная масса</th>
+                <th>Перегрузка</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="measure, iterStat : ${measureList}">
+                <td th:text="*{measure.id}">Id</td>
+                <td th:text="*{measure.truckId}"> ТС</td>
+                <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
+                <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
+                <td th:if="*{measure.isFrontOverloaded()}" style="color: crimson"
+                    th:text="*{measure.getFrontWeight()}">Тягач(кг)
+                </td>
+                <td th:if="*{!measure.isFrontOverloaded()}"
+                    th:text="*{measure.getFrontWeight()}">Тягач(кг)
+                </td>
+                <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
+                <td th:if="*{measure.isRearOverloaded()}" style="color: crimson"
+                    th:text="*{measure.getRearWeight()}">Прицеп(кг)
+                </td>
+                <td th:if="*{!measure.isRearOverloaded()}"
+                    th:text="*{measure.getRearWeight()}">Прицеп(кг)
+                </td>
+                <td th:text="${measure.getCargoWeight()}">Вес груза</td>
+                <td th:if="*{measure.isCompleteOverloaded()}" style="color: crimson"
+                    th:text="${measure.getCompleteWeight()}">Полная масса
+                </td>
+                <td th:if="*{!measure.isCompleteOverloaded()}"
+                    th:text="${measure.getCompleteWeight()}">Полная масса
+                </td>
+                <td th:text="${measure.isOverloaded()} ?'Перегрузка':'В норме' ">Перегрузка</td>
+                <td>
+                    <form th:action="@{trucks/measure/delete/{id}(id=${measure.id})}" th:method="delete">
+                        <button type="submit" value="Удалить">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+</body>
+</html>
