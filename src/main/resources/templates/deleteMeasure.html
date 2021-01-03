@@ -13,6 +13,9 @@
         <label for="measureId"><b>Номер квитанции(ID)</b></label>
         <p id="measureId" th:text="*{id}"></p>
         <br>
+        <label for="truck"><b>Номер ТС</b></label>
+        <p id="truck" th:text="${truck.truckNumber}"></p>
+        <br>
         <label for="date" style="font-style: initial"><b>Дата измерения</b></label>
         <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
         <br>

@@ -91,6 +91,7 @@ public class MeasureController {
         Measure deletedMeasure = measureService.getById(id);
         measureService.deleteById(id);
         model.addAttribute("measure", deletedMeasure);
+        model.addAttribute("truck", truckService.getTruck(deletedMeasure.getTruckId()));
         return "deleteMeasure";
     }
 
