@@ -42,6 +42,7 @@ public class TruckController {
         if (bindingResult.hasErrors()) {
             return "newTruck";
         }
+
         truckService.addTruck(truck);
         return "redirect:/trucks/list";
     }

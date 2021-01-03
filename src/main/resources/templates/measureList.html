@@ -30,17 +30,21 @@
         <input type="submit" value="Отфильтровать" style="width:180px; height: 30px;font-style: italic"></form>
 
     <p>Отфильтровать ТС по перегрузке</p>
-    <form th:if="${marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/{id}(id=${marker.id})}" th:method="get">
+    <form th:if="${marker.isFiltered()}" name="listOverloaded"
+          th:action="@{/measure/listOfOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
         <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
     </form>
-    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/}" th:method="get">
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/} "
+          th:method="get" th:object="${marker}">
         <input type="submit" value="Перегруз" style="width:180px; height: 30px;font-style: italic">
     </form>
     <br>
-    <form th:if="${marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/{id}(id=${marker.id})}" th:method="get">
+    <form th:if="${marker.isFiltered()}" name="listOverloaded"
+          th:action="@{/measure/listOfNotOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
         <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
     </form>
-    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/}" th:method="get">
+    <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/}"
+          th:method="get" th:object="${marker}">
         <input type="submit" value="В норме" style="width:180px; height: 30px;font-style: italic">
     </form>
     <br>

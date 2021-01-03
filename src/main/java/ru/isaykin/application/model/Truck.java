@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.format.annotation.NumberFormat;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Set;
 
 @Data
 @Slf4j
@@ -24,7 +24,8 @@ public class Truck {
     @NotEmpty(message = "Рег. номер не может быть пустым")
     @Size(max = 18, min = 6, message = "Длина рег. номера от 6 до 18 символов")
     private String truckNumber;
-    @Min(value = 0, message = "Значение должно быть больше чем ноль")
+    @DecimalMin(value = "0.1", message = "Значение должно быть больше чем ноль")
+    @NumberFormat
     private double frontPrice;
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double rearPrice;
@@ -32,9 +33,11 @@ public class Truck {
     private double firstWheelWeight;
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double truckWeight;
+//    private Set<Measure> set;
 
     public Truck() {
-            }
+    }
+
     public Truck(String truckNumber, double truckWeight,
                  double firstWheelWeight, double frontPrice,
                  double rearPrice) {
@@ -43,6 +46,7 @@ public class Truck {
         this.rearPrice = rearPrice;
         this.firstWheelWeight = firstWheelWeight;
         this.truckWeight = truckWeight;
+//        this.set = measure;
     }
 
     public String toString() {

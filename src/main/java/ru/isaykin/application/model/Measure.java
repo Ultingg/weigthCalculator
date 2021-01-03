@@ -88,11 +88,11 @@ public class Measure {
         double rearWeightLimit = 23192;
         return this.rearWeight > rearWeightLimit;
     }
+
     private boolean calcCompleteOverloaded() {
         double completeWeightLimit = 44000;
         return this.completeWeight > completeWeightLimit;
     }
-
 
 
 }

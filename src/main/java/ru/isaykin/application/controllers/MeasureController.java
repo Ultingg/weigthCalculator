@@ -26,10 +26,12 @@ public class MeasureController {
         this.truckService = truckService;
         this.measureService = measureService;
     }
+
     @ModelAttribute("marker")
     public MarkerOfFilter getMarker() {
         return new MarkerOfFilter(false);
     }
+
     @ModelAttribute("measureList")
     public List<Measure> getMeasureListUtil() {
         return measureService.getAll();
@@ -49,7 +51,7 @@ public class MeasureController {
     @GetMapping("measure/listById")
     public String getMeasuresByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
         List<Measure> measureList = measureService.getListOfMeasuresByTruckId(id);
-        MarkerOfFilter markerOfFilter = new MarkerOfFilter(true,id);
+        MarkerOfFilter markerOfFilter = new MarkerOfFilter(true, id);
         model.addAttribute("marker", markerOfFilter);
         model.addAttribute("measureList", measureList);
         return "measureList";
@@ -65,7 +67,7 @@ public class MeasureController {
                                 @Valid Measure newMeasure,
                                 BindingResult bindingResult,
                                 Model model) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "calculation";
         }
         Measure measure = measureService.create(
@@ -90,35 +92,32 @@ public class MeasureController {
     }
 
     @GetMapping("measure/listOfOverloaded")
-    public String getListOfOverloaded(Model model){
-        MarkerOfFilter marker = new MarkerOfFilter(false);
-        model.addAttribute("marker", marker);
-       model.addAttribute("measureList", measureService.getListOfOverloaded());
+    public String getListOfOverloaded(@ModelAttribute("marker") MarkerOfFilter marker, Model model) {
+        model.addAttribute("measureList", measureService.getListOfOverloaded());
         return "measureList";
     }
 
     @GetMapping("measure/listOfOverloaded/{id}")
-    public String getListOfOverloadedAndByTruckId(@PathVariable("id") Long id, Model model) {
+    public String getListOfOverloadedAndByTruckId(@ModelAttribute("marker") MarkerOfFilter marker, @PathVariable("id") Long id, Model model) {
         List<Measure> listOfOverloadedAndById = measureService.getListOfOverloadedAndByTruckId(id);
-        MarkerOfFilter marker = new MarkerOfFilter(true, id);
+        marker.setFiltered(true);
+        marker.setId(id);
         model.addAttribute("measureList", listOfOverloadedAndById);
-        model.addAttribute("marker", marker);
         return "measureList";
     }
+
     @GetMapping("measure/listOfNotOverloaded")
-    public String getListOfNotOverloaded(Model model){
-        MarkerOfFilter marker = new MarkerOfFilter(false);
+    public String getListOfNotOverloaded(@ModelAttribute("marker") MarkerOfFilter marker, Model model) {
         model.addAttribute("measureList", measureService.getListOfNotOverloaded());
-        model.addAttribute("marker", marker);
         return "measureList";
     }
 
     @GetMapping("measure/listOfNotOverloaded/{id}")
-    public String getListOfNotOverloadedAndByTruckId( @PathVariable("id") Long id, Model model) {
+    public String getListOfNotOverloadedAndByTruckId(@ModelAttribute("marker") MarkerOfFilter marker, @PathVariable("id") Long id, Model model) {
         List<Measure> listOfOverloadedAndById = measureService.getListOfNotOverloadedAndByTruckId(id);
-        MarkerOfFilter marker = new MarkerOfFilter(true, id);
+        marker.setFiltered(true);
+        marker.setId(id);
         model.addAttribute("measureList", listOfOverloadedAndById);
-        model.addAttribute("marker", marker);
         return "measureList";
     }
 

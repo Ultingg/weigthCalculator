@@ -11,7 +11,9 @@ public class MarkerOfFilter {
     private boolean filtered;
     private Long id;
 
-    public MarkerOfFilter() { }
+    public MarkerOfFilter() {
+    }
+
     public MarkerOfFilter(boolean filtered) {
         this.filtered = filtered;
     }

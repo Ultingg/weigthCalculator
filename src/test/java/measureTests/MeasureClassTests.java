@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MeasureClassTests {
@@ -12,17 +15,18 @@ public class MeasureClassTests {
     private Truck truck;
 
     @BeforeEach
-    private void SetUp(){
-        this.truck = new Truck("TestTruck", 16500, 5400,400,710);
+    private void SetUp() {
+
+        Set<Measure> measures = new HashSet();
+        this.truck = new Truck("TestTruck", 16500, 5400, 400, 710);
 
     }
-
 
 
     @Test
     public void OverloadedTest() {
         Measure measureToTest = new Measure();
-        measureToTest.calcWeights(truck, 5.25,3.2);
+        measureToTest.calcWeights(truck, 5.25, 3.2);
         System.out.println("полный вес: " + measureToTest.getCompleteWeight());
         System.out.println("вес на ведущую ось: " + measureToTest.getFrontWeight());
         System.out.println("вес на заднюю ось: " + measureToTest.getRearWeight());

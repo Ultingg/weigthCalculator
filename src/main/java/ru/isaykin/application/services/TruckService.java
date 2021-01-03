@@ -6,6 +6,7 @@ import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.TruckRepository;
 
 import java.util.List;
+
 @Slf4j
 @Service
 public class TruckService {
@@ -31,10 +32,11 @@ public class TruckService {
 
     public Truck getTruck(Long id) {
         return truckRepository.getById(id);
+
     }
 
     public void deleteById(Long id) {
-       truckRepository.getById(id);
+        truckRepository.deleteById(id);
     }
 
     public void updateById(Long id, Truck updatedTruck) {
