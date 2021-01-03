@@ -33,11 +33,6 @@ public class MeasureController {
         return new MarkerOfFilter(false);
     }
 
-//    @ModelAttribute("measureList")
-//    public List<Measure> getMeasureListUtil() {
-//        return measureService.getAll();
-//    }
-
     @ModelAttribute("truckList")
     public List<Truck> getTruckListUtil() {
         return truckService.getAll2();
@@ -76,11 +71,13 @@ public class MeasureController {
         if (bindingResult.hasErrors()) {
             return "calculation";
         }
+        Truck truck = truckService.getTruck(newMeasure.getTruckId());
         Measure measure = measureService.create(
-                truckService.getTruck(newMeasure.getTruckId())
+                truck
                 , newMeasure.getFrontBar()
                 , newMeasure.getRearBar());
         model.addAttribute("measure", measure);
+        model.addAttribute("truck", truck );
         return "measureRecipe";
     }
 

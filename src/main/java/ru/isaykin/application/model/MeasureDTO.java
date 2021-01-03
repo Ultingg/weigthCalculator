@@ -26,7 +26,6 @@ public class MeasureDTO extends Measure {
         setCompleteOverloaded(measure.isCompleteOverloaded());
         setOverloaded(measure.isOverloaded());
         setTruckId(measure.getTruckId());
-
     }
 
 }
