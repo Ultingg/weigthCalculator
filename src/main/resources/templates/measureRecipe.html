@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>Калькуляция сделана</title>
 </head>
 <body>
@@ -31,11 +32,11 @@
     </form>
     <br>
     <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
-        <input type="submit" value="Список измерений">
+        <input class="btnSubmit" type="submit" value="Список измерений">
     </form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
 </div>
 </body>
 </html>

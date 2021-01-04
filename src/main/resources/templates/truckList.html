@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Список ТС</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
 </head>
 
@@ -23,6 +24,7 @@
             <th>Тягач, 0,1 бар/кг</th>
             <th>Прицеп, 0,1 бар/кг</th>
             <th>Масса ТС, кг</th>
+            <th>Действие</th>
 
         </tr>
         </thead>
@@ -35,15 +37,15 @@
             <td th:text="${truck.getTruckWeight()}"></td>
             <td>
                 <form th:action="@{/trucks/{id}(id=*{truck.id})}" th:method="delete">
-                    <input type="submit" value="Удалить">
+                    <input class="btnDelete" type="submit" value="Удалить">
                 </form>
-            </td>
-            <td>
+                <hr>
                 <form th:action="@{/trucks/{id}(id=*{id})}" th:method="get" th:object="${truck}">
 
-                    <input type="submit" value="Редактировать">
+                    <input class="btnSubmit.edit" type="submit" value="Редактировать">
                 </form>
             </td>
+
         </tr>
         </tbody>
 
@@ -54,16 +56,16 @@
 
 <div align="center">
     <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
-        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+        <input class="btnSubmit" type="submit" value="Посчитать"></form>
     <br>
 
     <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
-        <input type="submit" value="Создать новый ТС" style="width:180px; height: 30px;font-style: italic">
+        <input class="btnSubmit" type="submit" value="Создать новый ТС">
     </form>
 
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
 </div>
 </body>
 </html>

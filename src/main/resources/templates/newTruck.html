@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>Создайте новое ТС</title>
 </head>
 <body>
@@ -21,12 +22,14 @@
                 TruckNumber Error
             </div>
             <br>
+            <br>
             <input id="frontPrice" type="text" name="frontPrice" th:field="*{frontPrice}"
                    placeholder="Цена деления ведущей оси, кг" size="30">
             <label for="frontPrice">Введите цену деления ведущей оси</label>
             <div style="color: crimson" th:errors="*{frontPrice}" th:if="${#fields.hasErrors('frontPrice')}">FrontPrice
                 Error
             </div>
+            <br>
             <br>
             <input id="rearPrice" type="text" name="rearPrice" th:field="*{rearPrice}"
                    placeholder="Цена деления оси прицепа, кг" size="30">
@@ -35,12 +38,14 @@
                 Error
             </div>
             <br>
+            <br>
             <input id="firstWheelWeight" type="text" name="firstWheelWeight" th:field="*{firstWheelWeight}"
                    placeholder="Нагрузка на рулевое колесо, кг" size="30">
             <label for="firstWheelWeight">Введите нагрузку на рулевое колесо</label>
             <div style="color: crimson" th:errors="*{firstWheelWeight}"
                  th:if="${#fields.hasErrors('firstWheelWeight')}">FirstWheelWeight Error
             </div>
+            <br>
             <br>
             <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}"
                    placeholder="Вес порожнего ТС, кг" size="30">
@@ -49,14 +54,15 @@
                 TruckWeight Error
             </div>
             <br>
-            <p><input type="submit" value="Создать" style="width:180px; height: 30px;font-style: italic"></p>
+            <br>
+            <p><input class="btnSubmit" type="submit" value="Создать"></p>
         </form>
 
         <form name="backToList" th:action="@{/trucks/list}" th:method="get">
-            <input type="submit" value="Назад к списку ТС" style="width:180px; height: 30px;font-style: italic"></form>
+            <input class="btnSubmit" type="submit" value="Назад к списку ТС"></form>
         <br>
         <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-            <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+            <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
     </div>
 </div>
 </body>
