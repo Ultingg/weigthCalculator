@@ -11,7 +11,7 @@ body {
 input {
 	width: 160px;
 	height: 20px;
-    border-radius: 12px;
+    border-radius: 1px;
     font-style: italic;
 	border: 1px solid gray;
     background-color: beige;
@@ -20,16 +20,17 @@ select
 {
 	width: 160px;
 	height: 20px;
-	border-radius: 12px;
+	border-radius: 1px;
 	font-style: italic;
 	border: 1px solid gray;
 	background-color: beige;
 }
 .btnSubmit {
+	padding: 10px;
 	width: 180px;
 	height: 30px;
 	font-size: 16px;
-	border-radius: 12px;
+	border-radius: 1px;
 	font-style: italic;
 	border: 1px solid gray;
 	background-color: #7bd170; //beige
@@ -41,7 +42,7 @@ select
 	padding: 2px;
 	width: 100px;
 	height: 20px;
-	border-radius: 12px;
+	border-radius: 1px;
 	font-style: italic;
 	border: 1px solid gray;
 	background-color: #d76c6c; //beige

@@ -2,6 +2,7 @@ package ru.isaykin.application.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Slf4j
+@Builder
 @Table("truck")
 @AllArgsConstructor
 
