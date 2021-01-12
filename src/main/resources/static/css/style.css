@@ -11,7 +11,7 @@ body {
 input {
 	width: 160px;
 	height: 20px;
-    border-radius: 1px;
+    border-radius: 5px;
     font-style: italic;
 	border: 1px solid gray;
     background-color: beige;
@@ -20,7 +20,7 @@ select
 {
 	width: 160px;
 	height: 20px;
-	border-radius: 1px;
+	border-radius: 5px;
 	font-style: italic;
 	border: 1px solid gray;
 	background-color: beige;
@@ -42,7 +42,7 @@ select
 	padding: 2px;
 	width: 100px;
 	height: 20px;
-	border-radius: 1px;
+	border-radius: 5px;
 	font-style: italic;
 	border: 1px solid gray;
 	background-color: #d76c6c; //beige
