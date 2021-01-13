@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>Квитанция удалена</title>
 </head>
@@ -12,6 +12,9 @@
         <br>
         <label for="measureId"><b>Номер квитанции(ID)</b></label>
         <p id="measureId" th:text="*{id}"></p>
+        <br>
+        <label for="truck"><b>Номер ТС</b></label>
+        <p id="truck" th:text="${truck.truckNumber}"></p>
         <br>
         <label for="date" style="font-style: initial"><b>Дата измерения</b></label>
         <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
@@ -29,11 +32,11 @@
     </form>
     <br>
     <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
-        <input type="submit" value="Список измерений">
+        <input class="btnSubmit" type="submit" value="Список измерений">
     </form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
 </div>
 
 </body>

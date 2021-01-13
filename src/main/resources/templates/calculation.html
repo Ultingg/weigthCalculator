@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>Расчет</title>
 </head>
 <body>
@@ -34,16 +35,16 @@
         <div th:errors="*{rearBar}" th:if="${#fields.hasErrors('rearBar')}" style="color: crimson">Error front Bar</div>
 
         <br>
-        <input type="submit" value="Посчитать" style="width:180px; height: 30px;font-style: italic"></form>
+        <input class="btnSubmit" type="submit" value="Посчитать"></form>
     <br>
     <form name="backToList" th:action="@{/trucks/list}" th:method="get">
-        <input type="submit" value="Назад к списку ТС" style="width:180px; height: 30px;font-style: italic"></form>
+        <input class="btnSubmit" type="submit" value="Назад к списку ТС"></form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню" style="width:180px; height: 30px;font-style: italic"></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
     <br>
     <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
-        <input type="submit" value="Список измерений" style="width:180px; height: 30px;font-style: italic">
+        <input class="btnSubmit" type="submit" value="Список измерений">
     </form>
 </div>
 </body>

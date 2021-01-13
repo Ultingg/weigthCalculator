@@ -10,6 +10,7 @@ import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
 import javax.validation.Valid;
+import java.io.*;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class TruckController {
     }
 
     @GetMapping("list")
-    public String getListOfTrucks(Model model) {
+    public String getListOfTrucks() {
         return "truckList";
     }
 
@@ -82,4 +83,6 @@ public class TruckController {
     public String showGreetingMessage() {
         return "Калькулятор весовых нагрузок";
     }
+
+
 }

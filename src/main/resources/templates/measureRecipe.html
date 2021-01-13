@@ -2,14 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>Калькуляция сделана</title>
 </head>
 <body>
 <div th:align="center">
+
     <form id="recipe" th:object="${measure}">
         <hr>
         <label for="measureId"><b>Номер квитанции(ID)</b></label>
         <p id="measureId" th:text="*{id}"></p>
+        <br>
+        <label for="truck"><b>Номер ТС</b></label>
+        <p id="truck" th:text="${truck.truckNumber}"></p>
         <br>
         <label for="date" style="font-style: initial"><b>Дата измерения</b></label>
         <p id="date" th:text="*{#temporals.format(dateOfMeasure, 'dd-MM-yyyy HH:mm')}"></p>
@@ -27,11 +32,11 @@
     </form>
     <br>
     <form name="ToMeasureList" th:action="@{/measure}" th:method="get">
-        <input type="submit" value="Список измерений">
+        <input class="btnSubmit" type="submit" value="Список измерений">
     </form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input type="submit" value="Назад главное меню"></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
 </div>
 </body>
 </html>
