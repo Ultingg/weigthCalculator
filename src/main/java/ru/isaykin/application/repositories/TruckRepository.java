@@ -12,7 +12,11 @@ import java.util.List;
 @Repository
 public interface TruckRepository extends CrudRepository<Truck, Long> {
 
-    Truck getById(Long id);
+    @Query("SELECT truck.ID AS ID, truck.REAR_PRICE AS REAR_PRICE, " +
+            "truck.FRONT_PRICE AS FRONT_PRICE, truck.TRUCK_WEIGHT AS TRUCK_WEIGHT, " +
+            "truck.TRUCK_NUMBER AS TRUCK_NUMBER, truck.FIRST_WHEEL_WEIGHT AS FIRST_WHEEL_WEIGHT " +
+            "FROM truck WHERE truck.ID =:id;")
+    Truck getById(@Param("id")Long id);
 
     @Query("SELECT * FROM truck")
     List<Truck> getAll();
