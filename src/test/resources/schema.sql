@@ -1,7 +1,7 @@
 CREATE USER sa PASSWORD '';
 ALTER USER sa ADMIN true;
 CREATE SCHEMA test AUTHORIZATION sa;
-DROP TABLE IF EXISTS truck CASCADE;
+DROP TABLE IF EXISTS truck;
 CREATE TABLE IF NOT EXISTS truck (
                                      id BIGINT AUTO_INCREMENT NOT NULL ,
                                      truck_number VARCHAR(255) NOT NULL UNIQUE ,

@@ -14,6 +14,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Data
 @Slf4j
@@ -38,7 +39,6 @@ public class Truck {
     private double firstWheelWeight;
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double truckWeight;
-//    private Set<Measure> set;
 
     public Truck() {
     }
@@ -59,4 +59,19 @@ public class Truck {
     }
 
 
+    public boolean equals(Truck truck) {
+        if(truck == this) return true;
+        if(!(truck instanceof Truck)){
+            return false;
+        }
+        Truck truck1 = (Truck) truck;
+        return Objects.equals(truckNumber, truck1.getTruckNumber()) &&
+                truckWeight == truck1.getTruckWeight() &&
+                firstWheelWeight == truck1.getFirstWheelWeight() &&
+                frontPrice == truck1.getFrontPrice() &&
+                rearPrice == truck1.getRearPrice();
+    }
+    public int hashCode() {
+        return Objects.hash(truckNumber);
+    }
 }
