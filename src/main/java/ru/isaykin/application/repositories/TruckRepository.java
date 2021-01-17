@@ -12,11 +12,7 @@ import java.util.List;
 @Repository
 public interface TruckRepository extends CrudRepository<Truck, Long> {
 
-    @Query("SELECT truck.ID AS ID, truck.REAR_PRICE AS REAR_PRICE, " +
-            "truck.FRONT_PRICE AS FRONT_PRICE, truck.TRUCK_WEIGHT AS TRUCK_WEIGHT, " +
-            "truck.TRUCK_NUMBER AS TRUCK_NUMBER, truck.FIRST_WHEEL_WEIGHT AS FIRST_WHEEL_WEIGHT " +
-            "FROM truck WHERE truck.ID =:id;")
-    Truck getById(@Param("id")Long id);
+    Truck getById(Long id);
 
     @Query("SELECT * FROM truck")
     List<Truck> getAll();
@@ -24,7 +20,7 @@ public interface TruckRepository extends CrudRepository<Truck, Long> {
     @Modifying
     @Query("INSERT INTO truck (first_wheel_weight, front_price, rear_price, truck_number, truck_weight) VALUES (:firstWheelWeight, :frontPrice, :rearPrice, :truckNumber, :truckWeight)")
     void create(@Param("firstWheelWeight") double firstWheelWeight,
-                @Param("frontPrice") double firstPrice,
+                @Param("frontPrice") double frontPrice,
                 @Param("rearPrice") double rearPrice,
                 @Param("truckNumber") String truckNumber,
                 @Param("truckWeight") double truckWeight);

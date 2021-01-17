@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Min;
@@ -15,7 +14,6 @@ import java.time.temporal.ChronoUnit;
 @Data
 @Slf4j
 @Builder
-@Table("measure")
 @AllArgsConstructor
 public class Measure {
 
@@ -95,6 +93,5 @@ public class Measure {
         double completeWeightLimit = 44000;
         return this.completeWeight > completeWeightLimit;
     }
-
 
 }

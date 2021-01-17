@@ -4,24 +4,19 @@ package ru.isaykin.application.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Data
 @Slf4j
 @Builder
-@Table("truck")
 @AllArgsConstructor
-
 public class Truck {
 
 
@@ -51,27 +46,6 @@ public class Truck {
         this.rearPrice = rearPrice;
         this.firstWheelWeight = firstWheelWeight;
         this.truckWeight = truckWeight;
-//        this.set = measure;
     }
 
-    public String toString() {
-        return truckNumber;
-    }
-
-
-    public boolean equals(Truck truck) {
-        if(truck == this) return true;
-        if(!(truck instanceof Truck)){
-            return false;
-        }
-        Truck truck1 = (Truck) truck;
-        return Objects.equals(truckNumber, truck1.getTruckNumber()) &&
-                truckWeight == truck1.getTruckWeight() &&
-                firstWheelWeight == truck1.getFirstWheelWeight() &&
-                frontPrice == truck1.getFrontPrice() &&
-                rearPrice == truck1.getRearPrice();
-    }
-    public int hashCode() {
-        return Objects.hash(truckNumber);
-    }
 }
