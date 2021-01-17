@@ -22,7 +22,7 @@ public class TruckService {
         this.measureRepository = measureRepository;
     }
 
-    public List<Truck> getAll2() {
+    public List<Truck> getAll() {
         return truckRepository.getAll();
     }
 

@@ -35,7 +35,7 @@ public class MeasureController {
 
     @ModelAttribute("truckList")
     public List<Truck> getTruckListUtil() {
-        return truckService.getAll2();
+        return truckService.getAll();
     }
 
     @ModelAttribute("measureDTOList")

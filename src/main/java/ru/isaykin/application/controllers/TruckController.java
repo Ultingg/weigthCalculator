@@ -10,7 +10,6 @@ import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
 import javax.validation.Valid;
-import java.io.*;
 import java.util.List;
 
 
@@ -28,7 +27,7 @@ public class TruckController {
 
     @ModelAttribute("truckList")
     public List<Truck> getTruckListUtil() {
-        return truckService.getAll2();
+        return truckService.getAll();
     }
 
     @GetMapping("new")

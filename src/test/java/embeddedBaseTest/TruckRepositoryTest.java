@@ -1,4 +1,4 @@
-package EmbeddedBaseTest;
+package embeddedBaseTest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +88,12 @@ public class TruckRepositoryTest {
                 ,"P345TO98/AT878578", "Checking if TruckNumber was updated correctly.");
     }
 
+    @Test
+    public void exceptions() { //TODO: тесты nullPointer и в сервисах провести рефакторинг
+
+        Truck trucky =truckRepository.getById(10L);
+        System.out.println(trucky.getTruckNumber());
+    }
 
 
 }

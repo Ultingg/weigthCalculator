@@ -22,16 +22,22 @@ public class Truck {
 
     @Id
     private Long id;
+
     @NotEmpty(message = "Рег. номер не может быть пустым")
     @Size(max = 18, min = 6, message = "Длина рег. номера от 6 до 18 символов")
     private String truckNumber;
-    @DecimalMin(value = "0.1", message = "Значение должно быть больше чем ноль")
+
     @NumberFormat
+    @DecimalMin(value = "0.1", message = "Значение должно быть больше чем ноль")
     private double frontPrice;
-    @Min(value = 0, message = "Значение должно быть больше чем ноль")
+
+    @NumberFormat
+    @DecimalMin(value = "0.1", message = "Значение должно быть больше чем ноль")
     private double rearPrice;
+
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double firstWheelWeight;
+
     @Min(value = 0, message = "Значение должно быть больше чем ноль")
     private double truckWeight;
 

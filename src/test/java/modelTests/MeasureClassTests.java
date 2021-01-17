@@ -1,4 +1,4 @@
-package measureTests;
+package modelTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,16 +16,21 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+
+//@SpringBootTest(classes = Application.class)
 public class MeasureClassTests {
 
     private Truck truck;
     private Validator validator;
+
+
     @BeforeEach
-    private void SetUp() {
+    private void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
         Set<Measure> measures = new HashSet();
-        this.truck = new Truck("TestTruck", 16500, 5400, 400, 710);
+        truck = new Truck("TestTruck", 16500, 5400, 400, 710);
         truck.setId(1L);
     }
 
@@ -65,16 +70,27 @@ public class MeasureClassTests {
     }
 
     @Test
-    public void MeasureValidationError() {
+    public void MeasureValidationError_valid_NoErrors() {
 
         Measure measure = new Measure( );
 
-        measure.setFrontBar(-1);
-        measure.setRearBar(0);
-        System.out.println("Did it!");
-        System.out.println(measure.getFrontBar());
+        measure.setFrontBar(1);
+        measure.setRearBar(1);
+
         Set<ConstraintViolation<Measure>> violations = validator.validate(measure);
-        assertFalse(violations.isEmpty());
+        assertFalse(!violations.isEmpty(),"Chekcing if there are no validation errors");
+
+    }
+
+    @Test
+    public void MeasureValidationError_noValid_Errors() {
+        Measure measure = new Measure( );
+
+        measure.setFrontBar(0);
+        measure.setRearBar(0);
+
+        Set<ConstraintViolation<Measure>> violations = validator.validate(measure);
+        assertFalse(violations.isEmpty(),"Chekcing if there are some validation errors");
 
     }
 }
