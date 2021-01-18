@@ -13,10 +13,10 @@
     </form>
     <br>
     <form name="backToMainMEnu" th:action="@{/}" th:method="get">
-        <input class="btnSubmit" type="submit" value="Назад главное меню" ></form>
+        <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
     <br>
     <form name="listById" th:action="@{/trucks/measure/new}" th:method="get">
-        <input class="btnSubmit" type="submit" value="Посчитать" ></form>
+        <input class="btnSubmit" type="submit" value="Посчитать"></form>
 
     <h3>Отфильтровать измерения по номеру ТС</h3>
 
@@ -27,29 +27,29 @@
                     th:value="${truck.getId()}"
                     th:text="${truck.getTruckNumber()}"></option>
         </select>
-        <input class="btnSubmit" type="submit" value="Отфильтровать" ></form>
+        <input class="btnSubmit" type="submit" value="Отфильтровать"></form>
 
     <p>Отфильтровать ТС по перегрузке</p>
     <form th:if="${marker.isFiltered()}" name="listOverloaded"
           th:action="@{/measure/listOfOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
-        <input class="btnSubmit" type="submit" value="Перегруз" >
+        <input class="btnSubmit" type="submit" value="Перегруз">
     </form>
     <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfOverloaded/} "
           th:method="get" th:object="${marker}">
-        <input class="btnSubmit" type="submit" value="Перегруз" >
+        <input class="btnSubmit" type="submit" value="Перегруз">
     </form>
     <br>
     <form th:if="${marker.isFiltered()}" name="listOverloaded"
           th:action="@{/measure/listOfNotOverloaded/{id}(id=${marker.id})}" th:method="get" th:object="${marker}">
-        <input class="btnSubmit" type="submit" value="В норме" >
+        <input class="btnSubmit" type="submit" value="В норме">
     </form>
     <form th:if="${!marker.isFiltered()}" name="listOverloaded" th:action="@{/measure/listOfNotOverloaded/}"
           th:method="get" th:object="${marker}">
-        <input class="btnSubmit" type="submit" value="В норме" >
+        <input class="btnSubmit" type="submit" value="В норме">
     </form>
     <br>
     <form th:action="@{/measure}" th:method="get">
-        <input class="btnSubmit" type="submit" value="Сбросить фильтры" >
+        <input class="btnSubmit" type="submit" value="Сбросить фильтры">
     </form>
 </div>
 <br>

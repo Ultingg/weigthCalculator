@@ -16,9 +16,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
-//@SpringBootTest(classes = Application.class)
 public class MeasureClassTests {
 
     private Truck truck;
@@ -50,13 +47,13 @@ public class MeasureClassTests {
     @Test
     public void calcWeights_Valid_Success() {
         Measure actual = new Measure();
-        actual.calcWeights(truck, 5,3);
+        actual.calcWeights(truck, 5, 3);
 
         Measure excpected = new Measure();
-        excpected.setCompleteWeight(10*(5*400+3*710));
-        excpected.setFrontWeight((5*400)*10-5400);
-        excpected.setRearWeight(3*710*10);
-        excpected.setCargoWeight((5*400+3*710)*10-16500);
+        excpected.setCompleteWeight(10 * (5 * 400 + 3 * 710));
+        excpected.setFrontWeight((5 * 400) * 10 - 5400);
+        excpected.setRearWeight(3 * 710 * 10);
+        excpected.setCargoWeight((5 * 400 + 3 * 710) * 10 - 16500);
         excpected.setCompleteOverloaded(false);
         excpected.setFrontOverloaded(false);
         excpected.setRearOverloaded(false);
@@ -66,31 +63,30 @@ public class MeasureClassTests {
         excpected.setFrontBar(5);
         excpected.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 
-        assertEquals(excpected,actual);
+        assertEquals(excpected, actual);
     }
 
     @Test
     public void MeasureValidationError_valid_NoErrors() {
 
-        Measure measure = new Measure( );
+        Measure measure = new Measure();
 
         measure.setFrontBar(1);
         measure.setRearBar(1);
 
         Set<ConstraintViolation<Measure>> violations = validator.validate(measure);
-        assertFalse(!violations.isEmpty(),"Chekcing if there are no validation errors");
-
+        assertTrue(violations.isEmpty(), "Chekcing if there are no validation errors");
     }
 
     @Test
     public void MeasureValidationError_noValid_Errors() {
-        Measure measure = new Measure( );
+        Measure measure = new Measure();
 
         measure.setFrontBar(0);
         measure.setRearBar(0);
 
         Set<ConstraintViolation<Measure>> violations = validator.validate(measure);
-        assertFalse(violations.isEmpty(),"Chekcing if there are some validation errors");
+        assertFalse(violations.isEmpty(), "Chekcing if there are some validation errors");
 
     }
 }

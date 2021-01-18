@@ -41,8 +41,8 @@ public class TruckService {
 
     public void deleteById(Long id) {
         List<Measure> measureList = measureRepository.getAll();
-        for(Measure measure :measureList) {
-            if(measure.getTruckId().equals(id)) measureRepository.deleteById(measure.getId());
+        for (Measure measure : measureList) {
+            if (measure.getTruckId().equals(id)) measureRepository.deleteById(measure.getId());
         }
         truckRepository.deleteById(id);
 

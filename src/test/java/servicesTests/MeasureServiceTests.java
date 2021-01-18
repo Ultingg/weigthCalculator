@@ -327,15 +327,15 @@ public class MeasureServiceTests {
                     .build();
             when(measureRepository.getByDateOfMeasure(timestamp)).thenReturn(expected);
 
-            Measure actual = measureService.create(truck, frontBar, rearBar);
+            Measure actual = measureService.addMeasure(truck, frontBar, rearBar);
 
             assertEquals(expected, actual, "Creating Measure in Measure Service and returns it by timestamp");
-            verify(measureRepository,times(1)).getByDateOfMeasure(timestamp);
-            verify(measureRepository,times(1)).getByDateOfMeasure(any(Timestamp.class));
-            verify(measureRepository,times(1)).create(24800,41300,timestamp,5,14600,
-                    3,21300,1L,false,false,false,false);
-            verify(measureRepository,times(1)).create(anyDouble(),anyDouble(),any(Timestamp.class),anyDouble(),anyDouble(),
-                    anyDouble(),anyDouble(),anyLong(),anyBoolean(),anyBoolean(),anyBoolean(),anyBoolean());
+            verify(measureRepository, times(1)).getByDateOfMeasure(timestamp);
+            verify(measureRepository, times(1)).getByDateOfMeasure(any(Timestamp.class));
+            verify(measureRepository, times(1)).create(24800, 41300, timestamp, 5, 14600,
+                    3, 21300, 1L, false, false, false, false);
+            verify(measureRepository, times(1)).create(anyDouble(), anyDouble(), any(Timestamp.class), anyDouble(), anyDouble(),
+                    anyDouble(), anyDouble(), anyLong(), anyBoolean(), anyBoolean(), anyBoolean(), anyBoolean());
 
 
         }

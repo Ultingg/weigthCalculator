@@ -72,12 +72,12 @@ public class MeasureController {
             return "calculation";
         }
         Truck truck = truckService.getTruck(newMeasure.getTruckId());
-        Measure measure = measureService.create(
+        Measure measure = measureService.addMeasure(
                 truck
                 , newMeasure.getFrontBar()
                 , newMeasure.getRearBar());
         model.addAttribute("measure", measure);
-        model.addAttribute("truck", truck );
+        model.addAttribute("truck", truck);
         return "measureRecipe";
     }
 

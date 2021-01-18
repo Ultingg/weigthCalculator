@@ -15,7 +15,7 @@
         <br>
 
         <table>
-            <td style="text-align: right" >
+            <td style="text-align: right">
                 <label for="truckNumber">Рег. номер ТС</label>
                 <input id="truckNumber" type="text" th:field="*{truckNumber}"/>
                 <div style="color: crimson" th:errors="*{truckNumber}" th:if="${#fields.hasErrors('truckNumber')}">

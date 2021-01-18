@@ -26,7 +26,7 @@ public class MeasureService {
     }
 
 
-    public Measure create(Truck truck, double frontBar, double rearBar) {
+    public Measure addMeasure(Truck truck, double frontBar, double rearBar) {
         Measure createdMeasure = new Measure();
         createdMeasure.calcWeights(truck, frontBar, rearBar);
         measureRepository.create(createdMeasure.getCargoWeight()

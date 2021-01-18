@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
-@Sql(value = {"/measureTable-clean-test.sql", "/truckTable-clean-test.sql"},executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = {"/measureTable-clean-test.sql", "/truckTable-clean-test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @TestPropertySource(locations = "/application-test.properties")
 public class MeasureRepositoryTest {
 
@@ -45,22 +45,22 @@ public class MeasureRepositoryTest {
 
     @Test
     public void createMeasureAndInsertIntoTable() {
-        measureRepository.create(22000,38000,
+        measureRepository.create(22000, 38000,
                 Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)),
-                4.5,18000,4,20000,1L,
-                false,false,false,false);
+                4.5, 18000, 4, 20000, 1L,
+                false, false, false, false);
 
-        assertEquals(measureRepository.getAll().size(),1,"Checking if truck was added to table and size if correct(1).");
+        assertEquals(measureRepository.getAll().size(), 1, "Checking if truck was added to table and size if correct(1).");
 
     }
 
     @Test
     public void getById() {
         Measure expected = new Measure();
-        expected.setCompleteWeight(10*(5*400+3*710));
-        expected.setFrontWeight((5*400)*10-5400);
-        expected.setRearWeight(3*710*10);
-        expected.setCargoWeight((5*400+3*710)*10-16500);
+        expected.setCompleteWeight(10 * (5 * 400 + 3 * 710));
+        expected.setFrontWeight((5 * 400) * 10 - 5400);
+        expected.setRearWeight(3 * 710 * 10);
+        expected.setCargoWeight((5 * 400 + 3 * 710) * 10 - 16500);
         expected.setCompleteOverloaded(false);
         expected.setFrontOverloaded(false);
         expected.setRearOverloaded(false);
@@ -74,16 +74,16 @@ public class MeasureRepositoryTest {
 
         Measure actual = measureRepository.getById(1L);
 
-        assertEquals(actual,expected,"Checkin if measure was added to table in database.");
+        assertEquals(actual, expected, "Checkin if measure was added to table in database.");
     }
 
     @Test
     public void deleteById() {
         Measure expected = new Measure();
-        expected.setCompleteWeight(10*(5*400+3*710));
-        expected.setFrontWeight((5*400)*10-5400);
-        expected.setRearWeight(3*710*10);
-        expected.setCargoWeight((5*400+3*710)*10-16500);
+        expected.setCompleteWeight(10 * (5 * 400 + 3 * 710));
+        expected.setFrontWeight((5 * 400) * 10 - 5400);
+        expected.setRearWeight(3 * 710 * 10);
+        expected.setCargoWeight((5 * 400 + 3 * 710) * 10 - 16500);
         expected.setCompleteOverloaded(false);
         expected.setFrontOverloaded(false);
         expected.setRearOverloaded(false);
@@ -95,19 +95,19 @@ public class MeasureRepositoryTest {
         measureRepository.save(expected);
         expected.setId(1L);
 
-        assertEquals(measureRepository.getAll().size(),1,"Checking if truck was added to table and size if correct(1).");
+        assertEquals(measureRepository.getAll().size(), 1, "Checking if truck was added to table and size if correct(1).");
 
         measureRepository.deleteById(1L);
-        assertEquals(measureRepository.getAll().size(),0,"Checking if truck was deleted from table and size if correct(0).");
+        assertEquals(measureRepository.getAll().size(), 0, "Checking if truck was deleted from table and size if correct(0).");
     }
 
     @Test
     public void getByDateOfMeasure() {
         Measure expected = new Measure();
-        expected.setCompleteWeight(10*(5*400+3*710));
-        expected.setFrontWeight((5*400)*10-5400);
-        expected.setRearWeight(3*710*10);
-        expected.setCargoWeight((5*400+3*710)*10-16500);
+        expected.setCompleteWeight(10 * (5 * 400 + 3 * 710));
+        expected.setFrontWeight((5 * 400) * 10 - 5400);
+        expected.setRearWeight(3 * 710 * 10);
+        expected.setCargoWeight((5 * 400 + 3 * 710) * 10 - 16500);
         expected.setCompleteOverloaded(false);
         expected.setFrontOverloaded(false);
         expected.setRearOverloaded(false);
@@ -123,8 +123,6 @@ public class MeasureRepositoryTest {
 
         assertEquals(expected, actual);
     }
-
-
 
 
 }
