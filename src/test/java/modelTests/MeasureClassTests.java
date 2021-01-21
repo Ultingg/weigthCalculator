@@ -36,9 +36,6 @@ public class MeasureClassTests {
     public void OverloadedTest() {
         Measure measureToTest = new Measure();
         measureToTest.calcWeights(truck, 5.25, 3.2);
-        System.out.println("полный вес: " + measureToTest.getCompleteWeight());
-        System.out.println("вес на ведущую ось: " + measureToTest.getFrontWeight());
-        System.out.println("вес на заднюю ось: " + measureToTest.getRearWeight());
 
         boolean actual = measureToTest.isOverloaded();
         assertTrue(actual);
@@ -46,9 +43,6 @@ public class MeasureClassTests {
 
     @Test
     public void calcWeights_Valid_Success() {
-        Measure actual = new Measure();
-        actual.calcWeights(truck, 5, 3);
-
         Measure excpected = new Measure();
         excpected.setCompleteWeight(10 * (5 * 400 + 3 * 710));
         excpected.setFrontWeight((5 * 400) * 10 - 5400);
@@ -63,12 +57,14 @@ public class MeasureClassTests {
         excpected.setFrontBar(5);
         excpected.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 
+        Measure actual = new Measure();
+        actual.calcWeights(truck, 5, 3);
+
         assertEquals(excpected, actual);
     }
 
     @Test
     public void MeasureValidationError_valid_NoErrors() {
-
         Measure measure = new Measure();
 
         measure.setFrontBar(1);

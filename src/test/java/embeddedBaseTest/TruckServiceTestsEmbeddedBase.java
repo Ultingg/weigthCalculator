@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
+@TestPropertySource(locations = "/application-test.properties")
 @Sql(value="/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/truckTable-clean-test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-@TestPropertySource(locations = "/application-test.properties")
 public class TruckServiceTestsEmbeddedBase {
 
     @Autowired

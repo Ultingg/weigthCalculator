@@ -30,6 +30,12 @@ public class TruckController {
         return truckService.getAll();
     }
 
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
+    }
+
+
     @GetMapping("new")
     public String newTruck(@ModelAttribute("truck") Truck truck) {
         return "newTruck";
@@ -78,10 +84,6 @@ public class TruckController {
         return "redirect:/trucks/{id}";
     }
 
-    @ModelAttribute("greetingsMessage")
-    public String showGreetingMessage() {
-        return "Калькулятор весовых нагрузок";
-    }
 
 
 }
