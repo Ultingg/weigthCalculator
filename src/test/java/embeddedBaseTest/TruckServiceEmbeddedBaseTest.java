@@ -3,12 +3,14 @@ package embeddedBaseTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.isaykin.application.Application;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
@@ -21,12 +23,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
 @TestPropertySource(locations = "/application-test.properties")
-@Sql(value="/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/truckTable-clean-test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class TruckServiceTestsEmbeddedBase {
+public class TruckServiceEmbeddedBaseTest {
 
     @Autowired
     private TruckRepository truckRepository;
@@ -47,7 +50,7 @@ public class TruckServiceTestsEmbeddedBase {
 
         List<Measure> measureList = measureRepository.getAll();
 
-        assertTrue(measureList.isEmpty(),"Checking if all measures of Truck with id = 1 are deleted.");
+        assertTrue(measureList.isEmpty(), "Checking if all measures of Truck with id = 1 are deleted.");
         assertNull(truckRepository.getById(1L), "Checking if truck was deleted.");
     }
 
@@ -60,7 +63,7 @@ public class TruckServiceTestsEmbeddedBase {
                 .frontPrice(330)
                 .rearPrice(550)
                 .build();
-        truckService.updateById(2L,newTruck);
+        truckService.updateById(2L, newTruck);
         newTruck.setId(2L);
 
         Truck actual = truckService.getTruck(2L);
@@ -89,7 +92,7 @@ public class TruckServiceTestsEmbeddedBase {
     public void getAll_valid_getAll() {
         List<Truck> truckList = truckService.getAll();
 
-        assertEquals(truckList.size(),4, "Checking if there are 4 trucks in table.");
+        assertEquals(truckList.size(), 4, "Checking if there are 4 trucks in table.");
     }
 
     @Test

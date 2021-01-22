@@ -2,12 +2,14 @@ package embeddedBaseTest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.isaykin.application.Application;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
@@ -15,20 +17,20 @@ import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
 import ru.isaykin.application.services.MeasureService;
 
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ActiveProfiles("test")
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
-@Sql(value="/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = {"/truckTable-clean-test.sql","/measureTable-clean-test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = "/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"/truckTable-clean-test.sql", "/measureTable-clean-test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @TestPropertySource(locations = "/application-test.properties")
-public class MeasureServiceTestEmbeddedBase {
+public class MeasureServiceEmbeddedBaseTest {
 
     @Autowired
     private TruckRepository truckRepository;
@@ -48,7 +50,7 @@ public class MeasureServiceTestEmbeddedBase {
         Measure expected = Measure.builder()
                 .completeWeight(41500)
                 .cargoWeight(25000)
-                .dateOfMeasure(LocalDateTime.of(2020,1, 1,8,0,0))
+                .dateOfMeasure(LocalDateTime.of(2020, 1, 1, 8, 0, 0))
                 .frontBar(5.2)
                 .frontWeight(14800)
                 .rearBar(3.45)
@@ -91,9 +93,9 @@ public class MeasureServiceTestEmbeddedBase {
                 .completeOverloaded(false)
                 .id(5L)
                 .build();
-       Measure actual = measureService.addMeasure(newTruck,5,3.5);
+        Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
 
-       assertEquals(expected, actual, "Checking if correct measure was added to table.");
+        assertEquals(expected, actual, "Checking if correct measure was added to table.");
     }
 
     @Test
@@ -101,7 +103,7 @@ public class MeasureServiceTestEmbeddedBase {
         measureService.deleteById(1L);
         List<Measure> measureList = measureRepository.getAll();
 
-        assertEquals(measureList.size(),3, "Checking if measure was deleted from table.");
+        assertEquals(measureList.size(), 3, "Checking if measure was deleted from table.");
     }
 
 

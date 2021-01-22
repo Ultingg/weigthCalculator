@@ -2,13 +2,14 @@ package ControllerTests;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import ru.isaykin.application.Application;
@@ -16,12 +17,12 @@ import ru.isaykin.application.controllers.TruckController;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
@@ -82,19 +83,11 @@ public class TruckControllerTest {
     }
 
     @Test
-    public void deleteTruck_validId_deleteTruck() throws Exception{
+    public void deleteTruck_validId_deleteTruck() throws Exception {
 
         mockMvc.perform(delete("/trucks/{id}", "1"))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/trucks/list"));
-    }
-
-    @Test
-    public void updateTruck_validId_updateTruck() throws Exception {
-
-        mockMvc.perform(put("/truck/{id}","1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("redirect:/trucks/1"));
     }
 
 

@@ -15,49 +15,61 @@
 
     <div>
         <form name="truckDetails" th:action="@{/trucks/creation}" th:method="post" th:object="${truck}">
-            <input id="truckNumber" type="text" name="truckNumber" th:field="*{truckNumber}" placeholder="Рег. номер ТС"
-                   size="30">
-            <label for="truckNumber">Введите рег. номер ТС </label>
-            <div style="color: crimson" th:errors="*{truckNumber}" th:if="${#fields.hasErrors('truckNumber')}">
-                TruckNumber Error
-            </div>
-            <br>
-            <br>
-            <input id="frontPrice" type="text" name="frontPrice" th:field="*{frontPrice}"
-                   placeholder="Цена деления ведущей оси, кг" size="30">
-            <label for="frontPrice">Введите цену деления ведущей оси</label>
-            <div style="color: crimson" th:errors="*{frontPrice}" th:if="${#fields.hasErrors('frontPrice')}">FrontPrice
-                Error
-            </div>
-            <br>
-            <br>
-            <input id="rearPrice" type="text" name="rearPrice" th:field="*{rearPrice}"
-                   placeholder="Цена деления оси прицепа, кг" size="30">
-            <label for="rearPrice">Введите цену деления оси прицепа</label>
-            <div style="color: crimson" th:errors="*{rearPrice}" th:if="${#fields.hasErrors('rearPrice')}">RearPrice
-                Error
-            </div>
-            <br>
-            <br>
-            <input id="firstWheelWeight" type="text" name="firstWheelWeight" th:field="*{firstWheelWeight}"
-                   placeholder="Нагрузка на рулевое колесо, кг" size="30">
-            <label for="firstWheelWeight">Введите нагрузку на рулевое колесо</label>
-            <div style="color: crimson" th:errors="*{firstWheelWeight}"
-                 th:if="${#fields.hasErrors('firstWheelWeight')}">FirstWheelWeight Error
-            </div>
-            <br>
-            <br>
-            <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}"
-                   placeholder="Вес порожнего ТС, кг" size="30">
-            <label for="truckWeight">Введите вес порожнего ТС</label>
-            <div style="color: crimson" th:errors="*{truckWeight}" th:if="${#fields.hasErrors('truckWeight')}">
-                TruckWeight Error
-            </div>
+            <table>
+                <td style="text-align: right">
+                    <label for="truckNumber">Введите рег. номер ТС:</label>
+                    <input id="truckNumber" type="text" name="truckNumber" th:field="*{truckNumber}"
+                           placeholder="Рег. номер ТС"
+                           size="30">
+
+                    <div style="color: crimson" th:errors="*{truckNumber}" th:if="${#fields.hasErrors('truckNumber')}">
+                        TruckNumber Error
+                    </div>
+                    <br>
+                    <br>
+                    <label for="truckWeight">Введите вес порожнего ТС, кг:</label>
+                    <input id="truckWeight" type="text" name="truckWeight" th:field="*{truckWeight}"
+                           placeholder="Вес порожнего ТС, кг" size="30">
+
+                    <div style="color: crimson" th:errors="*{truckWeight}" th:if="${#fields.hasErrors('truckWeight')}">
+                        TruckWeight Error
+                    </div>
+                    <br>
+                    <br>
+                    <label for="firstWheelWeight">Введите нагрузку на рулевое колесо, кг:</label>
+                    <input id="firstWheelWeight" type="text" name="firstWheelWeight" th:field="*{firstWheelWeight}"
+                           placeholder="Нагрузка на рулевое колесо, кг" size="30">
+
+                    <div style="color: crimson" th:errors="*{firstWheelWeight}"
+                         th:if="${#fields.hasErrors('firstWheelWeight')}">FirstWheelWeight Error
+                    </div>
+                    <br>
+                    <br>
+                    <label for="frontPrice">Введите цену деления оси Тягача, кг/0,1 бар:</label>
+                    <input id="frontPrice" type="text" name="frontPrice" th:field="*{frontPrice}"
+                           placeholder="Цена деления ведущей оси, кг" size="30">
+
+                    <div style="color: crimson" th:errors="*{frontPrice}" th:if="${#fields.hasErrors('frontPrice')}">
+                        FrontPrice
+                        Error
+                    </div>
+                    <br>
+                    <br>
+                    <label for="rearPrice">Введите цену деления оси прицепа, кг/0,1 бар:</label>
+                    <input id="rearPrice" type="text" name="rearPrice" th:field="*{rearPrice}"
+                           placeholder="Цена деления оси прицепа, кг" size="30">
+
+                    <div style="color: crimson" th:errors="*{rearPrice}" th:if="${#fields.hasErrors('rearPrice')}">
+                        RearPrice
+                        Error
+                    </div>
+
+                </td>
+            </table>
             <br>
             <br>
             <p><input class="btnSubmit" type="submit" value="Создать"></p>
         </form>
-
         <form name="backToList" th:action="@{/trucks/list}" th:method="get">
             <input class="btnSubmit" type="submit" value="Назад к списку ТС"></form>
         <br>
