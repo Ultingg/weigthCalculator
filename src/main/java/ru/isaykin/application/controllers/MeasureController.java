@@ -1,6 +1,7 @@
 package ru.isaykin.application.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.List;
 
 //TODO: exceptionHandler for internalErrors when there is no Truck for measure and so on
 @Slf4j
+@Component
 @Controller
 public class MeasureController {
 
@@ -51,6 +53,7 @@ public class MeasureController {
 
     @GetMapping("measure/listById")
     public String getMeasuresByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
+        if(id == null) return "measureList";
         List<MeasureDTO> measureList = measureService.getListOfMeasureDTOByTruckId(id);
         MarkerOfFilter markerOfFilter = new MarkerOfFilter(true, id);
         model.addAttribute("marker", markerOfFilter);

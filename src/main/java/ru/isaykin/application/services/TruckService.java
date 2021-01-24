@@ -11,7 +11,9 @@ import java.util.List;
 
 @Slf4j
 @Service
+
 public class TruckService {
+
 
     private final TruckRepository truckRepository;
     private final MeasureRepository measureRepository;

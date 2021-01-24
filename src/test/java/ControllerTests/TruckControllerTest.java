@@ -27,16 +27,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
-//@TestPropertySource(locations = "/application-test.properties")
-@Sql(value = "/data-insert-truck.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "/truckTable-clean-test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = "/dataInsertTruckAndMeasure.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "/truckTableCleanTest.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TruckControllerTest {
 
     @Autowired
     private TruckController truckController;
-
-    @Autowired
-    private TruckService truckService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -50,9 +46,6 @@ public class TruckControllerTest {
     public void getTruckList_200OKTruckList() throws Exception {
         mockMvc.perform(get("/trucks/list")).andExpect(status().isOk())
                 .andExpect(view().name("truckList"));
-//        .andExpect(forwardedUrl("/truckList.html"));
-//                .andDo(MockMvcResultHandlers.print())
-//                .andReturn();
 
     }
 

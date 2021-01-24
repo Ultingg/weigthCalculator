@@ -1,6 +1,7 @@
 package ru.isaykin.application.model;
 
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
