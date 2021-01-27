@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.isaykin.application.model.MarkerOfFilter;
 import ru.isaykin.application.model.Measure;
-import ru.isaykin.application.model.MeasureDTO;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.MeasureService;
 import ru.isaykin.application.services.TruckService;
@@ -52,8 +52,8 @@ public class MeasureController {
     }
 
     @GetMapping("measure/listById")
-    public String getMeasuresByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
-        if(id == null) return "measureList";
+    public String getListOfMeasureByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
+        if (id == null) return "measureList";
         List<MeasureDTO> measureList = measureService.getListOfMeasureDTOByTruckId(id);
         MarkerOfFilter markerOfFilter = new MarkerOfFilter(true, id);
         model.addAttribute("marker", markerOfFilter);

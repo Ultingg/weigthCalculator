@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import ru.isaykin.application.model.Measure;
-import ru.isaykin.application.model.MeasureDTO;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
@@ -146,7 +146,6 @@ public class MeasureServiceTests {
             measureDTO.setRearOverloaded(false);
             measureDTO.setOverloaded(false);
             measureDTO.setId(1L);
-            measureDTO.setTruckId(1L);
             MeasureDTO measureDTO2 = new MeasureDTO();
             measureDTO2.setTruckNumber("B789YE98");
             measureDTO2.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -161,7 +160,6 @@ public class MeasureServiceTests {
             measureDTO2.setRearOverloaded(false);
             measureDTO2.setOverloaded(true);
             measureDTO2.setId(2L);
-            measureDTO2.setTruckId(2L);
             MeasureDTO measureDTO3 = new MeasureDTO();
             measureDTO3.setTruckNumber("A324HO47");
             measureDTO3.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -176,7 +174,6 @@ public class MeasureServiceTests {
             measureDTO3.setRearOverloaded(false);
             measureDTO3.setOverloaded(true);
             measureDTO3.setId(3L);
-            measureDTO3.setTruckId(1L);
             MeasureDTO measureDTO4 = new MeasureDTO();
             measureDTO4.setTruckNumber("B789YE98");
             measureDTO4.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -191,7 +188,6 @@ public class MeasureServiceTests {
             measureDTO4.setRearOverloaded(false);
             measureDTO4.setOverloaded(false);
             measureDTO4.setId(4L);
-            measureDTO4.setTruckId(2L);
             measureDTOList = Arrays.asList(measureDTO, measureDTO2, measureDTO3, measureDTO4);
             measureDTOListOverloaded = Arrays.asList(measureDTO2, measureDTO3);
             measureDTOListNotOverloaded = Arrays.asList(measureDTO, measureDTO4);

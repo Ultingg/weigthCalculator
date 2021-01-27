@@ -80,21 +80,24 @@
                 <td th:text="*{measure.truckNumber}"> ТС</td>
                 <td th:text="${#temporals.format(measure.getDateOfMeasure(), 'dd-MM-yyyy HH:mm')}">Дата</td>
                 <td th:text="*{measure.getFrontBar()}">Тягач(бар)</td>
-                <td th:if="*{measure.isFrontOverloaded()}" style="color: #be0505; background-color: moccasin; font-weight: bold"
+                <td th:if="*{measure.isFrontOverloaded()}"
+                    style="color: #be0505; background-color: moccasin; font-weight: bold"
                     th:text="*{measure.getFrontWeight()}">Тягач(кг)
                 </td>
                 <td th:if="*{!measure.isFrontOverloaded()}"
                     th:text="*{measure.getFrontWeight()}">Тягач(кг)
                 </td>
                 <td th:text="*{measure.getRearBar()}">Прицеп(бар)</td>
-                <td th:if="*{measure.isRearOverloaded()}" style="color: #be0505; background-color: moccasin; font-weight: bold"
+                <td th:if="*{measure.isRearOverloaded()}"
+                    style="color: #be0505; background-color: moccasin; font-weight: bold"
                     th:text="*{measure.getRearWeight()}">Прицеп(кг)
                 </td>
                 <td th:if="*{!measure.isRearOverloaded()}"
                     th:text="*{measure.getRearWeight()}">Прицеп(кг)
                 </td>
                 <td th:text="${measure.getCargoWeight()}">Вес груза</td>
-                <td th:if="*{measure.isCompleteOverloaded()}" style="color: #be0505; background-color: moccasin; font-weight: bold"
+                <td th:if="*{measure.isCompleteOverloaded()}"
+                    style="color: #be0505; background-color: moccasin; font-weight: bold"
                     th:text="${measure.getCompleteWeight()}">Полная масса
                 </td>
                 <td th:if="*{!measure.isCompleteOverloaded()}"
@@ -112,7 +115,7 @@
 
         <a>Предельная допустимая нагрузка на ведущую сдвоенную ось тягача - <strong>15 461 кг</strong></a>
         <br>
-        <a>Предельная допустимая нагрузка на  строенную ось прицепа - <strong>23 192 кг</strong></a>
+        <a>Предельная допустимая нагрузка на строенную ось прицепа - <strong>23 192 кг</strong></a>
         <br>
         <a>Предельная допустимая общая масса шести осного ТС - <strong>44 000 кг</strong></a>
         <br>

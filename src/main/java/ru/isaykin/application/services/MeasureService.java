@@ -2,8 +2,9 @@ package ru.isaykin.application.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.isaykin.application.mappers.MeasureMapper;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.Measure;
-import ru.isaykin.application.model.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
@@ -104,7 +105,9 @@ public class MeasureService {
                     break;
                 }
             }
-            MeasureDTO measureDTO = new MeasureDTO(measure, truck);
+            MeasureDTO measureDTO =
+                    MeasureMapper.INSTANCE.fromMeasure(measure, truck);
+//                    new MeasureDTO(measure, truck);
             resultList.add(measureDTO);
         }
         return resultList;
@@ -114,7 +117,8 @@ public class MeasureService {
         List<MeasureDTO> resultList = new ArrayList<>();
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(truck.getId())) {
-                MeasureDTO measureDTO = new MeasureDTO(measure, truck);
+                MeasureDTO measureDTO =
+                    MeasureMapper.INSTANCE.fromMeasure(measure, truck);
                 resultList.add(measureDTO);
             }
         }

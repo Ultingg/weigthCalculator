@@ -13,9 +13,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import ru.isaykin.application.Application;
+import ru.isaykin.application.controllers.MeasureController;
 import ru.isaykin.application.controllers.TruckController;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.Truck;
-import ru.isaykin.application.services.TruckService;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -37,6 +40,10 @@ public class TruckControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private MeasureController measureController;
+
+
     @Test
     public void contextLoad() {
         assertNotNull(truckController);
@@ -46,6 +53,14 @@ public class TruckControllerTest {
     public void getTruckList_200OKTruckList() throws Exception {
         mockMvc.perform(get("/trucks/list")).andExpect(status().isOk())
                 .andExpect(view().name("truckList"));
+
+    }
+
+
+    @Test
+    public void proverka() {
+        List<MeasureDTO> list = measureController.getMeasureDTOListUtil();
+        System.out.println(list.size());
 
     }
 

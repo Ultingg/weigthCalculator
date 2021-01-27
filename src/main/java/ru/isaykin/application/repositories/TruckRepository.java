@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ru.isaykin.application.model.Truck;
 
 import java.util.List;
+
 @Component
 @Repository
 public interface TruckRepository extends CrudRepository<Truck, Long> {
