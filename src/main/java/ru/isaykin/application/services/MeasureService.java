@@ -2,8 +2,8 @@ package ru.isaykin.application.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.isaykin.application.mappers.MeasureMapper;
 import ru.isaykin.application.DTO.MeasureDTO;
+import ru.isaykin.application.mappers.MeasureMapper;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
@@ -118,7 +118,7 @@ public class MeasureService {
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(truck.getId())) {
                 MeasureDTO measureDTO =
-                    MeasureMapper.INSTANCE.fromMeasure(measure, truck);
+                        MeasureMapper.INSTANCE.fromMeasure(measure, truck);
                 resultList.add(measureDTO);
             }
         }

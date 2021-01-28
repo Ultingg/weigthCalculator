@@ -3,8 +3,9 @@ package servicesTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.DTO.MeasureDTO;
+import ru.isaykin.application.mappers.MeasureMapper;
+import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
@@ -86,12 +87,12 @@ public class MeasureServiceTests {
                     .frontBar(6)
                     .rearBar(2)
                     .frontWeight(18600)
-                    .rearWeight(1420)
+                    .rearWeight(14200)
                     .completeWeight(38200)
                     .completeOverloaded(false)
                     .frontOverloaded(true)
                     .rearOverloaded(false)
-                    .overloaded(false)
+                    .overloaded(true)
                     .id(3L)
                     .truckId(1L)
                     .build();
@@ -122,7 +123,7 @@ public class MeasureServiceTests {
                     .frontPrice(400)
                     .rearPrice(710)
                     .build();
-            Truck truck1 = Truck.builder()
+            Truck truck2 = Truck.builder()
                     .id(2L)
                     .truckNumber("B789YE98")
                     .truckWeight(16500)
@@ -130,64 +131,13 @@ public class MeasureServiceTests {
                     .frontPrice(400)
                     .rearPrice(500)
                     .build();
-            truckList = Arrays.asList(truck, truck1);
+            truckList = Arrays.asList(truck, truck2);
 
-            MeasureDTO measureDTO = new MeasureDTO();
-            measureDTO.setTruckNumber("A324HO47");
-            measureDTO.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            measureDTO.setCargoWeight(24800);
-            measureDTO.setFrontBar(5);
-            measureDTO.setRearBar(3);
-            measureDTO.setFrontWeight(14600);
-            measureDTO.setRearWeight(21300);
-            measureDTO.setCompleteWeight(41300);
-            measureDTO.setCompleteOverloaded(false);
-            measureDTO.setFrontOverloaded(false);
-            measureDTO.setRearOverloaded(false);
-            measureDTO.setOverloaded(false);
-            measureDTO.setId(1L);
-            MeasureDTO measureDTO2 = new MeasureDTO();
-            measureDTO2.setTruckNumber("B789YE98");
-            measureDTO2.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            measureDTO2.setCargoWeight(23500);
-            measureDTO2.setFrontBar(5);
-            measureDTO2.setRearBar(4);
-            measureDTO2.setFrontWeight(14000);
-            measureDTO2.setRearWeight(28000);
-            measureDTO2.setCompleteWeight(40000);
-            measureDTO2.setCompleteOverloaded(false);
-            measureDTO2.setFrontOverloaded(true);
-            measureDTO2.setRearOverloaded(false);
-            measureDTO2.setOverloaded(true);
-            measureDTO2.setId(2L);
-            MeasureDTO measureDTO3 = new MeasureDTO();
-            measureDTO3.setTruckNumber("A324HO47");
-            measureDTO3.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            measureDTO3.setCargoWeight(21700);
-            measureDTO3.setFrontBar(6);
-            measureDTO3.setRearBar(2);
-            measureDTO3.setFrontWeight(18600);
-            measureDTO3.setRearWeight(14200);
-            measureDTO3.setCompleteWeight(38200);
-            measureDTO3.setCompleteOverloaded(false);
-            measureDTO3.setFrontOverloaded(true);
-            measureDTO3.setRearOverloaded(false);
-            measureDTO3.setOverloaded(true);
-            measureDTO3.setId(3L);
-            MeasureDTO measureDTO4 = new MeasureDTO();
-            measureDTO4.setTruckNumber("B789YE98");
-            measureDTO4.setDateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-            measureDTO4.setCargoWeight(16500);
-            measureDTO4.setFrontBar(4.5);
-            measureDTO4.setRearBar(3);
-            measureDTO4.setFrontWeight(12000);
-            measureDTO4.setRearWeight(15000);
-            measureDTO4.setCompleteWeight(33000);
-            measureDTO4.setCompleteOverloaded(false);
-            measureDTO4.setFrontOverloaded(false);
-            measureDTO4.setRearOverloaded(false);
-            measureDTO4.setOverloaded(false);
-            measureDTO4.setId(4L);
+            MeasureDTO measureDTO = MeasureMapper.INSTANCE.fromMeasure(measure, truck);
+            MeasureDTO measureDTO2 = MeasureMapper.INSTANCE.fromMeasure(measure2, truck2);
+            MeasureDTO measureDTO3 = MeasureMapper.INSTANCE.fromMeasure(measure3, truck);
+            MeasureDTO measureDTO4 = MeasureMapper.INSTANCE.fromMeasure(measure4, truck2);
+
             measureDTOList = Arrays.asList(measureDTO, measureDTO2, measureDTO3, measureDTO4);
             measureDTOListOverloaded = Arrays.asList(measureDTO2, measureDTO3);
             measureDTOListNotOverloaded = Arrays.asList(measureDTO, measureDTO4);
@@ -207,6 +157,9 @@ public class MeasureServiceTests {
             List<MeasureDTO> expected = measureDTOList;
 
             List<MeasureDTO> actual = measureService.getListOfAllMeasuresDTO();
+
+            System.out.println(expected.equals(actual));
+
 
             assertEquals(expected, actual, "Get List of all MeasureDTO");
             verify(measureRepository, times(1)).getAll();
@@ -241,6 +194,9 @@ public class MeasureServiceTests {
 
             List<MeasureDTO> actual = measureService.getListOfNotOverloadedMeasureDTO();
 
+            System.out.println(expected.hashCode());
+            System.out.println(actual.hashCode());
+
             assertEquals(expected, actual, "Get List of Not Overloaded MeasureDTO");
             verify(measureRepository, times(1)).getMeasureByOverloaded(false);
             verify(measureRepository, times(1)).getMeasureByOverloaded(anyBoolean());
@@ -257,6 +213,9 @@ public class MeasureServiceTests {
             List<MeasureDTO> expected = measureDTOListOverloadedById;
 
             List<MeasureDTO> actual = measureService.getListOfOverloadedAndByTruckIdDTO(1L);
+            System.out.println(expected.hashCode());
+            System.out.println(actual.hashCode());
+
 
             assertEquals(expected, actual, "Get list of Overloaded MeasureDTO by TruckId(TruckNumber)");
             verify(truckRepository, times(1)).getById(1L);

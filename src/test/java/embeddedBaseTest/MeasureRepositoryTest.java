@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import ru.isaykin.application.Application;
@@ -21,7 +20,6 @@ import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
 @Sql(value = "/truckTableCleanTest.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)

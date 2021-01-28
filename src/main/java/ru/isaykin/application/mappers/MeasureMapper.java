@@ -3,15 +3,14 @@ package ru.isaykin.application.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import ru.isaykin.application.DTO.MesDT;
-import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.DTO.MeasureDTO;
+import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 
 @Mapper
 public interface MeasureMapper {
 
-    MeasureMapper INSTANCE  = Mappers.getMapper(MeasureMapper.class);
+    MeasureMapper INSTANCE = Mappers.getMapper(MeasureMapper.class);
 
 
     @Mapping(source = "measure.id", target = "id")

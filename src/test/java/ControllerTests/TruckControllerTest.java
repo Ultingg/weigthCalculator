@@ -13,9 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import ru.isaykin.application.Application;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.controllers.MeasureController;
 import ru.isaykin.application.controllers.TruckController;
-import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 
 import java.util.List;

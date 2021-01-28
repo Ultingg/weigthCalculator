@@ -64,7 +64,6 @@ public class MeasureControllerTest {
     }
 
 
-
     @Test
     public void contextLoad() {
         assertNotNull(measureController);

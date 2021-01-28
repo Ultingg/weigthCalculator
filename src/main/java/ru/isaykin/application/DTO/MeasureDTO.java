@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MeasureDTO  {
+public class MeasureDTO {
     private Long id;
     private String truckNumber;
     private double frontWeight;
@@ -28,7 +28,26 @@ public class MeasureDTO  {
     private boolean frontOverloaded;
     private boolean rearOverloaded;
     private boolean completeOverloaded;
-
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        MeasureDTO that = (MeasureDTO) o;
+//        return Double.compare(that.frontWeight, frontWeight) == 0 &&
+//                Double.compare(that.rearWeight, rearWeight) == 0 &&
+//                Double.compare(that.completeWeight, completeWeight) == 0 &&
+//                Double.compare(that.cargoWeight, cargoWeight) == 0 &&
+//                Double.compare(that.frontBar, frontBar) == 0 &&
+//                Double.compare(that.rearBar, rearBar) == 0 &&
+//                id.equals(that.id) &&
+//                dateOfMeasure.equals(that.dateOfMeasure);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, frontWeight, rearWeight, completeWeight, cargoWeight, dateOfMeasure, frontBar, rearBar);
+//    }
 
 
 //
