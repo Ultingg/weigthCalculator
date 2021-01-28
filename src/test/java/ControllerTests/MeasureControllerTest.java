@@ -30,9 +30,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -141,6 +141,7 @@ public class MeasureControllerTest {
 
         assertEquals("measureRecipe", expected);
     }
+
     @Test
     public void deleteMeasure_viewDeleteMeasure() throws Exception {
         mockMvc.perform(delete("/trucks/measure/delete/{id}", 1))
@@ -148,9 +149,6 @@ public class MeasureControllerTest {
                 .andExpect(model().attributeExists("marker", "truck"))
                 .andDo(print());
     }
-
-
-
 
 
 }

@@ -11,15 +11,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.isaykin.application.Application;
 import ru.isaykin.application.controllers.MeasureController;
 import ru.isaykin.application.model.MarkerOfFilter;
-import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
 import ru.isaykin.application.services.TruckService;
 
-import java.time.LocalDateTime;
-
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
