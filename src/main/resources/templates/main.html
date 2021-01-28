@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>Рассчет осевых нагрузок</title>
 </head>
 
@@ -12,7 +12,7 @@
         <h2 th:text="${greetingsMessage}"></h2>
     </form>
     <br>
-    <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get" >
+    <form name="CreatNewTruck" th:action="@{/trucks/new}" th:method="get">
         <input class="btnSubmit" type="submit" value="Создать новый ТС">
     </form>
     <br>

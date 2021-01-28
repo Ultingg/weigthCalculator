@@ -2,6 +2,7 @@ package ru.isaykin.application.controllers;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,12 +11,12 @@ import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.TruckService;
 
 import javax.validation.Valid;
-import java.io.*;
 import java.util.List;
 
 
 @SuppressWarnings("SpringMVCViewInspection")
 @Slf4j
+@Component
 @Controller
 @RequestMapping("/trucks")
 public class TruckController {
@@ -28,8 +29,14 @@ public class TruckController {
 
     @ModelAttribute("truckList")
     public List<Truck> getTruckListUtil() {
-        return truckService.getAll2();
+        return truckService.getAll();
     }
+
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
+    }
+
 
     @GetMapping("new")
     public String newTruck(@ModelAttribute("truck") Truck truck) {
@@ -77,11 +84,6 @@ public class TruckController {
 
         truckService.updateById(id, truck);
         return "redirect:/trucks/{id}";
-    }
-
-    @ModelAttribute("greetingsMessage")
-    public String showGreetingMessage() {
-        return "Калькулятор весовых нагрузок";
     }
 
 

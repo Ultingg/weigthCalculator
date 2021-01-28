@@ -4,11 +4,13 @@ import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.isaykin.application.model.Truck;
 
 import java.util.List;
 
+@Component
 @Repository
 public interface TruckRepository extends CrudRepository<Truck, Long> {
 
@@ -20,12 +22,13 @@ public interface TruckRepository extends CrudRepository<Truck, Long> {
     @Modifying
     @Query("INSERT INTO truck (first_wheel_weight, front_price, rear_price, truck_number, truck_weight) VALUES (:firstWheelWeight, :frontPrice, :rearPrice, :truckNumber, :truckWeight)")
     void create(@Param("firstWheelWeight") double firstWheelWeight,
-                @Param("frontPrice") double firstPrice,
+                @Param("frontPrice") double frontPrice,
                 @Param("rearPrice") double rearPrice,
                 @Param("truckNumber") String truckNumber,
                 @Param("truckWeight") double truckWeight);
 
-    Truck getByTruckNumber(String TruckNumber);
 
-    void deleteById(Long id);
+    @Modifying
+    @Query("DELETE FROM truck WHERE truck.id = :id;")
+    void deleteById(@Param("id") Long id);
 }

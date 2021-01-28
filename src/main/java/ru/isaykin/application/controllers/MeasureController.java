@@ -1,13 +1,14 @@
 package ru.isaykin.application.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.model.MarkerOfFilter;
 import ru.isaykin.application.model.Measure;
-import ru.isaykin.application.model.MeasureDTO;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.services.MeasureService;
 import ru.isaykin.application.services.TruckService;
@@ -17,6 +18,7 @@ import java.util.List;
 
 //TODO: exceptionHandler for internalErrors when there is no Truck for measure and so on
 @Slf4j
+@Component
 @Controller
 public class MeasureController {
 
@@ -35,7 +37,7 @@ public class MeasureController {
 
     @ModelAttribute("truckList")
     public List<Truck> getTruckListUtil() {
-        return truckService.getAll2();
+        return truckService.getAll();
     }
 
     @ModelAttribute("measureDTOList")
@@ -50,7 +52,8 @@ public class MeasureController {
     }
 
     @GetMapping("measure/listById")
-    public String getMeasuresByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
+    public String getListOfMeasureByTruckId(@RequestParam(name = "truckId") Long id, Model model) {
+        if (id == null) return "measureList";
         List<MeasureDTO> measureList = measureService.getListOfMeasureDTOByTruckId(id);
         MarkerOfFilter markerOfFilter = new MarkerOfFilter(true, id);
         model.addAttribute("marker", markerOfFilter);
@@ -72,12 +75,12 @@ public class MeasureController {
             return "calculation";
         }
         Truck truck = truckService.getTruck(newMeasure.getTruckId());
-        Measure measure = measureService.create(
+        Measure measure = measureService.addMeasure(
                 truck
                 , newMeasure.getFrontBar()
                 , newMeasure.getRearBar());
         model.addAttribute("measure", measure);
-        model.addAttribute("truck", truck );
+        model.addAttribute("truck", truck);
         return "measureRecipe";
     }
 
