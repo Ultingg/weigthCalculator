@@ -58,13 +58,6 @@ public class TruckControllerTest {
 
 
     @Test
-    public void proverka() {
-        List<MeasureDTO> list = measureController.getMeasureDTOListUtil();
-        System.out.println(list.size());
-
-    }
-
-    @Test
     public void creating_200OkNewTruckView() throws Exception {
         mockMvc.perform(post("/trucks/creation"))
                 .andExpect(view().name("newTruck"))
