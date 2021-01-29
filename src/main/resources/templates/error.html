@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>Ошибка</title>
 </head>
 <body>
 Shit happens....smile!
+<br>
+<br>
+<br>
+<form name="backToMainMEnu" th:action="@{/}" th:method="get">
+    <input class="btnSubmit" type="submit" value="Назад главное меню"></form>
+<br>
 </body>
 </html>

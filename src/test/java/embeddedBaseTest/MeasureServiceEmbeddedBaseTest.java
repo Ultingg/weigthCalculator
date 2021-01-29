@@ -36,6 +36,7 @@ public class MeasureServiceEmbeddedBaseTest {
     @Autowired
     private MeasureRepository measureRepository;
 
+    @Autowired
     private MeasureService measureService;
 
     @BeforeEach
@@ -65,6 +66,17 @@ public class MeasureServiceEmbeddedBaseTest {
 
         assertEquals(expected, actual, "Checking if correct measure was gotten from table.");
     }
+    @Test
+    public void deleteMeasureById_validId_MeasureDeleted() {
+        List<Measure>  measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE " +measureList.size());
+
+
+        measureService.deleteById(1L);
+          measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE after delete"+ measureList.size());
+        assertEquals(3, measureList.size(), "Checking if measure was deleted from table.");
+    }
 
     @Test
     public void addMeasure_validMeasure_measureAddedToTable() {
@@ -92,17 +104,15 @@ public class MeasureServiceEmbeddedBaseTest {
                 .id(5L)
                 .build();
         Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
+        List<Measure> measureList = measureService.getAll();
+
 
         assertEquals(expected, actual, "Checking if correct measure was added to table.");
+        assertEquals(5,measureList.size());
     }
 
-    @Test
-    public void deleteMeasureById_validId_MeasureDeleted() {
-        measureService.deleteById(1L);
-        List<Measure> measureList = measureRepository.getAll();
 
-        assertEquals(measureList.size(), 3, "Checking if measure was deleted from table.");
-    }
+
 
 
 }

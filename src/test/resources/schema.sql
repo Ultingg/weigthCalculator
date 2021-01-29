@@ -29,5 +29,5 @@ CREATE TABLE measure
     front_overloaded    bit(1),
     rear_overloaded     bit(1),
     complete_overloaded bit(1),
-        PRIMARY KEY (id)
+    PRIMARY KEY (id)
 );
