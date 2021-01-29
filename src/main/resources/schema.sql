@@ -1,8 +1,5 @@
-CREATE USER IF NOT EXISTS sa PASSWORD '';
-ALTER USER sa ADMIN true;
-CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION sa;
-DROP TABLE IF EXISTS truck;
-CREATE TABLE truck
+USE weight;
+ CREATE TABLE IF NOT EXISTS  truck
 (
     id                 BIGINT AUTO_INCREMENT NOT NULL,
     truck_number       VARCHAR(255)          NOT NULL UNIQUE,
@@ -12,7 +9,6 @@ CREATE TABLE truck
     truck_weight       DOUBLE                not null,
     PRIMARY KEY (id)
 );
-
 DROP TABLE IF EXISTS measure;
 CREATE TABLE measure
 (
@@ -29,5 +25,5 @@ CREATE TABLE measure
     front_overloaded    bit(1),
     rear_overloaded     bit(1),
     complete_overloaded bit(1),
-        PRIMARY KEY (id)
+    PRIMARY KEY (id)
 );
