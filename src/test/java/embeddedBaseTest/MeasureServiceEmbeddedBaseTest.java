@@ -36,6 +36,7 @@ public class MeasureServiceEmbeddedBaseTest {
     @Autowired
     private MeasureRepository measureRepository;
 
+    @Autowired
     private MeasureService measureService;
 
     @BeforeEach
@@ -92,8 +93,11 @@ public class MeasureServiceEmbeddedBaseTest {
                 .id(5L)
                 .build();
         Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
+        List<Measure> measureList = measureRepository.getAll();
+
 
         assertEquals(expected, actual, "Checking if correct measure was added to table.");
+        assertEquals(5,measureList.size());
     }
 
     @Test
