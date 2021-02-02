@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.DecimalMin;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
 @Data
 @Slf4j
 @Builder
+@Table("TRUCK")
 @AllArgsConstructor
 public class Truck {
 

@@ -43,8 +43,42 @@ public class MeasureServiceEmbeddedBaseTest {
     public void setUp() {
         measureService = new MeasureService(measureRepository, truckRepository);
     }
-
     @Test
+    public void addMeasure_validMeasure_measureAddedToTable() {
+        Truck newTruck = Truck.builder()
+                .truckNumber("PER-895/PET-547")
+                .truckWeight(15500)
+                .firstWheelWeight(5500)
+                .frontPrice(330)
+                .rearPrice(550)
+                .id(5L)
+                .build();
+        Measure expected = Measure.builder()
+                .truckId(5L)
+                .completeWeight(35750)
+                .cargoWeight(20250)
+                .dateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+                .frontBar(5)
+                .frontWeight(11000)
+                .rearBar(3.5)
+                .rearWeight(19250)
+                .overloaded(false)
+                .rearOverloaded(false)
+                .frontOverloaded(false)
+                .completeOverloaded(false)
+                .id(5L)
+                .build();
+        Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
+        System.out.println("РАЗМЕР: "+ measureService.getAll().size());
+        System.out.println(measureService.getById(2L).getId());
+        List<Measure> measureList = measureService.getAll();
+
+
+        assertEquals(expected, actual, "Checking if correct measure was added to table.");
+        assertEquals(5,measureList.size());
+    }
+
+//    @Test
     public void getById_validId_validMeasure() {
         Measure expected = Measure.builder()
                 .completeWeight(41500)
@@ -78,38 +112,7 @@ public class MeasureServiceEmbeddedBaseTest {
         assertEquals(3, measureList.size(), "Checking if measure was deleted from table.");
     }
 
-    @Test
-    public void addMeasure_validMeasure_measureAddedToTable() {
-        Truck newTruck = Truck.builder()
-                .truckNumber("PER-895/PET-547")
-                .truckWeight(15500)
-                .firstWheelWeight(5500)
-                .frontPrice(330)
-                .rearPrice(550)
-                .id(5L)
-                .build();
-        Measure expected = Measure.builder()
-                .truckId(5L)
-                .completeWeight(35750)
-                .cargoWeight(20250)
-                .dateOfMeasure(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
-                .frontBar(5)
-                .frontWeight(11000)
-                .rearBar(3.5)
-                .rearWeight(19250)
-                .overloaded(false)
-                .rearOverloaded(false)
-                .frontOverloaded(false)
-                .completeOverloaded(false)
-                .id(5L)
-                .build();
-        Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
-        List<Measure> measureList = measureService.getAll();
 
-
-        assertEquals(expected, actual, "Checking if correct measure was added to table.");
-        assertEquals(5,measureList.size());
-    }
 
 
 

@@ -194,9 +194,6 @@ public class MeasureServiceTests {
 
             List<MeasureDTO> actual = measureService.getListOfNotOverloadedMeasureDTO();
 
-            System.out.println(expected.hashCode());
-            System.out.println(actual.hashCode());
-
             assertEquals(expected, actual, "Get List of Not Overloaded MeasureDTO");
             verify(measureRepository, times(1)).getMeasureByOverloaded(false);
             verify(measureRepository, times(1)).getMeasureByOverloaded(anyBoolean());
@@ -213,9 +210,6 @@ public class MeasureServiceTests {
             List<MeasureDTO> expected = measureDTOListOverloadedById;
 
             List<MeasureDTO> actual = measureService.getListOfOverloadedAndByTruckIdDTO(1L);
-            System.out.println(expected.hashCode());
-            System.out.println(actual.hashCode());
-
 
             assertEquals(expected, actual, "Get list of Overloaded MeasureDTO by TruckId(TruckNumber)");
             verify(truckRepository, times(1)).getById(1L);

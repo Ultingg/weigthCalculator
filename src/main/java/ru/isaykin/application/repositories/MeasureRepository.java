@@ -44,11 +44,11 @@ public interface MeasureRepository extends CrudRepository<Measure, Long> {
     @Query("SELECT * FROM measure")
     List<Measure> getAll();
 
-//    @Modifying
-//    @Query("DELETE FROM measure WHERE measure.id = :id;")
-//    void deleteById(@Param("id") Long id);
+    @Modifying
+    @Query("DELETE FROM measure WHERE measure.id = :id;")
+    void deleteById(@Param("id") Long id);
 
-    void deleteById(Long id);
+//    void deleteById(Long id);
 
     List<Measure> getMeasureByOverloaded(boolean overloaded);
 }
