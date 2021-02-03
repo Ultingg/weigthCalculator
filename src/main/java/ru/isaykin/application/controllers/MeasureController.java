@@ -45,6 +45,10 @@ public class MeasureController {
         return measureService.getListOfAllMeasuresDTO();
     }
 
+    @ModelAttribute("greetingsMessage")
+    public String showGreetingMessage() {
+        return "Калькулятор весовых нагрузок";
+    }
 
     @GetMapping("measure")
     public String measurePanel() {
@@ -59,11 +63,6 @@ public class MeasureController {
         model.addAttribute("marker", markerOfFilter);
         model.addAttribute("measureDTOList", measureList);
         return "measureList";
-    }
-
-    @ModelAttribute("greetingsMessage")
-    public String showGreetingMessage() {
-        return "Калькулятор весовых нагрузок";
     }
 
     @PostMapping("trucks/measure/created")
