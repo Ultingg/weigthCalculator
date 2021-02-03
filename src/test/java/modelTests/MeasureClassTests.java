@@ -83,6 +83,14 @@ public class MeasureClassTests {
 
         Set<ConstraintViolation<Measure>> violations = validator.validate(measure);
         assertFalse(violations.isEmpty(), "Chekcing if there are some validation errors");
+    }
 
+    @Test
+    public void MeasureCalc_null_nullPointerException() {
+        Measure actual = new Measure();
+        Truck nullTruck = null;
+        assertThrows(NullPointerException.class,()->actual.calcWeights(nullTruck, 4,5), "Checking if there is NullPointerException when Truck is null");
+        assertThrows(NullPointerException.class,()->actual.calcWeights(truck, 0,5), "Checking if there is NullPointerException when frontBar is less then 1");
+        assertThrows(NullPointerException.class,()->actual.calcWeights(truck, 4,0),"Checking if there is NullPointerException when rearBar is less then 1");
     }
 }

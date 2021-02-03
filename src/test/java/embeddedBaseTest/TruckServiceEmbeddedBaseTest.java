@@ -11,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.isaykin.application.Application;
+import ru.isaykin.application.exceptions.NoTruckException;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
@@ -23,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
-//@ComponentScan(value = "ru.isaykin.application")
 @Sql(value = "/dataInsertTruckAndMeasure.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/truckTableCleanTest.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @TestPropertySource(locations = "/application-test.properties")
@@ -105,7 +105,16 @@ public class TruckServiceEmbeddedBaseTest {
                 .build();
         Truck actual = truckService.getTruck(1L);
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, "Checking if valid truck was gotten by id.");
+    }
+
+
+    @Test
+    public void getTruck_notValidId_NoTruckException() {
+        assertThrows(NoTruckException.class, ()->truckService.getTruck(10L),
+                "Checking if there is NoTruckException when it get not valid id.");
+        assertThrows(NoTruckException.class, ()->truckService.getTruck(null),
+                "Checking if there is NoTruckException when it get null.");
     }
 
 }

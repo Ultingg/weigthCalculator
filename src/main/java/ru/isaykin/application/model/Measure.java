@@ -63,6 +63,9 @@ public class Measure {
 
 
     public void calcWeights(Truck truck, double frontBar, double rearBar) {
+        if(frontBar <= 0.99 || rearBar <= 0.99 || truck == null) {
+            throw new NullPointerException();
+        }
         frontWeight = (frontBar * 10 * truck.getFrontPrice()) - truck.getFirstWheelWeight();
         rearWeight = rearBar * 10 * truck.getRearPrice();
         completeWeight = frontWeight + rearWeight + truck.getFirstWheelWeight();
