@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
-@ComponentScan(value = "ru.isaykin.application")
-@TestPropertySource(locations = "/application-test.properties")
+//@ComponentScan(value = "ru.isaykin.application")
 @Sql(value = "/dataInsertTruckAndMeasure.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/truckTableCleanTest.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@TestPropertySource(locations = "/application-test.properties")
 public class TruckServiceEmbeddedBaseTest {
 
     @Autowired

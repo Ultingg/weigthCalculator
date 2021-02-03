@@ -1,6 +1,7 @@
 package ru.isaykin.application.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-
+@Component
 public class TruckService {
 
 
@@ -38,7 +39,6 @@ public class TruckService {
 
     public Truck getTruck(Long id) {
         return truckRepository.getById(id);
-
     }
 
     public void deleteById(Long id) {
@@ -47,8 +47,6 @@ public class TruckService {
             if (measure.getTruckId().equals(id)) measureRepository.deleteById(measure.getId());
         }
         truckRepository.deleteById(id);
-
-
     }
 
     public void updateById(Long id, Truck updatedTruck) {

@@ -11,13 +11,17 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.isaykin.application.Application;
 import ru.isaykin.application.controllers.MeasureController;
 import ru.isaykin.application.model.MarkerOfFilter;
+import ru.isaykin.application.model.Measure;
+import ru.isaykin.application.model.Truck;
 import ru.isaykin.application.repositories.MeasureRepository;
 import ru.isaykin.application.repositories.TruckRepository;
 import ru.isaykin.application.services.TruckService;
 
+import java.time.LocalDateTime;
+
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -141,5 +145,20 @@ public class MeasureControllerMVCTest {
                 .andDo(print());
     }
 
-
+    @Test
+    public void deleteMeasure_viewDeleteMeasure() throws Exception {
+        Measure measureGlobal = Measure.builder().id(1L).cargoWeight(25000).completeWeight(41500)
+                .dateOfMeasure(LocalDateTime.parse("2020-01-01T08:00:00")).frontBar(5.2).frontWeight(14800)
+                .rearBar(3.45).rearWeight(20700).overloaded(false).truckId(1L).frontOverloaded(false)
+                .rearOverloaded(false).completeOverloaded(false).build();
+        Truck truck = Truck.builder()
+                .id(1L).firstWheelWeight(6000).frontPrice(400).rearPrice(600)
+                .truckWeight(16500).truckNumber("EGW-542/DNM-698").build();
+        when(truckRepository.getById(1L)).thenReturn(truck);
+        when(measureRepository.getById(1L)).thenReturn(measureGlobal);
+        mockMvc.perform(delete("/trucks/measure/delete/{id}", 1))
+                .andExpect(view().name("deleteMeasure"))
+                .andExpect(model().attributeExists("marker", "truck"))
+                .andDo(print());
+    }
 }

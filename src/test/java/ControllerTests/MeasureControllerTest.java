@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
@@ -38,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @SpringBootTest(classes = Application.class)
 @ComponentScan(value = "ru.isaykin.application")
+@TestPropertySource(locations = "/application-test.properties")
 @Sql(value = "/dataInsertTruckAndMeasure.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/truckTableCleanTest.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class MeasureControllerTest {
@@ -67,6 +69,7 @@ public class MeasureControllerTest {
     public void contextLoad() {
         assertNotNull(measureController);
     }
+
 
 
     @Test
@@ -142,13 +145,6 @@ public class MeasureControllerTest {
         assertEquals("measureRecipe", expected);
     }
 
-    @Test
-    public void deleteMeasure_viewDeleteMeasure() throws Exception {
-        mockMvc.perform(delete("/trucks/measure/delete/{id}", 1))
-                .andExpect(view().name("deleteMeasure"))
-                .andExpect(model().attributeExists("marker", "truck"))
-                .andDo(print());
-    }
 
 
 }

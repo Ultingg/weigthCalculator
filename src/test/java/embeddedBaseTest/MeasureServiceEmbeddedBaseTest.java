@@ -43,30 +43,6 @@ public class MeasureServiceEmbeddedBaseTest {
     public void setUp() {
         measureService = new MeasureService(measureRepository, truckRepository);
     }
-
-    @Test
-    public void getById_validId_validMeasure() {
-        Measure expected = Measure.builder()
-                .completeWeight(41500)
-                .cargoWeight(25000)
-                .dateOfMeasure(LocalDateTime.of(2020, 1, 1, 8, 0, 0))
-                .frontBar(5.2)
-                .frontWeight(14800)
-                .rearBar(3.45)
-                .rearWeight(20700)
-                .overloaded(false)
-                .truckId(1L)
-                .rearOverloaded(false)
-                .frontOverloaded(false)
-                .completeOverloaded(false)
-                .id(1L)
-                .build();
-
-        Measure actual = measureService.getById(1L);
-
-        assertEquals(expected, actual, "Checking if correct measure was gotten from table.");
-    }
-
     @Test
     public void addMeasure_validMeasure_measureAddedToTable() {
         Truck newTruck = Truck.builder()
@@ -93,20 +69,55 @@ public class MeasureServiceEmbeddedBaseTest {
                 .id(5L)
                 .build();
         Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
-        List<Measure> measureList = measureRepository.getAll();
+<
+      
+        List<Measure> measureList = measureService.getAll();
+
+
 
 
         assertEquals(expected, actual, "Checking if correct measure was added to table.");
         assertEquals(5,measureList.size());
     }
 
+//    @Test
+    public void getById_validId_validMeasure() {
+        Measure expected = Measure.builder()
+                .completeWeight(41500)
+                .cargoWeight(25000)
+                .dateOfMeasure(LocalDateTime.of(2020, 1, 1, 8, 0, 0))
+                .frontBar(5.2)
+                .frontWeight(14800)
+                .rearBar(3.45)
+                .rearWeight(20700)
+                .overloaded(false)
+                .truckId(1L)
+                .rearOverloaded(false)
+                .frontOverloaded(false)
+                .completeOverloaded(false)
+                .id(1L)
+                .build();
+
+        Measure actual = measureService.getById(1L);
+
+        assertEquals(expected, actual, "Checking if correct measure was gotten from table.");
+    }
     @Test
     public void deleteMeasureById_validId_MeasureDeleted() {
-        measureService.deleteById(1L);
-        List<Measure> measureList = measureRepository.getAll();
+        List<Measure>  measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE " +measureList.size());
 
-        assertEquals(measureList.size(), 3, "Checking if measure was deleted from table.");
+
+        measureService.deleteById(1L);
+          measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE after delete"+ measureList.size());
+        assertEquals(3, measureList.size(), "Checking if measure was deleted from table.");
     }
+
+
+
+
+
 
 
 }

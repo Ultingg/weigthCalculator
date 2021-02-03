@@ -28,7 +28,5 @@ public interface TruckRepository extends CrudRepository<Truck, Long> {
                 @Param("truckWeight") double truckWeight);
 
 
-    @Modifying
-    @Query("DELETE FROM truck WHERE truck.id = :id;")
-    void deleteById(@Param("id") Long id);
+    void deleteById(Long id);
 }

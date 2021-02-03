@@ -1,6 +1,7 @@
 package ru.isaykin.application.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.isaykin.application.DTO.MeasureDTO;
 import ru.isaykin.application.mappers.MeasureMapper;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Service
+@Component
 public class MeasureService {
 
     private final MeasureRepository measureRepository;
@@ -50,6 +52,9 @@ public class MeasureService {
         return measureRepository.getById(id);
     }
 
+    public List<Measure> getAll() {
+        return measureRepository.getAll();
+    }
 
     public void deleteById(Long id) {
         measureRepository.deleteById(id);
@@ -107,7 +112,6 @@ public class MeasureService {
             }
             MeasureDTO measureDTO =
                     MeasureMapper.INSTANCE.fromMeasure(measure, truck);
-//                    new MeasureDTO(measure, truck);
             resultList.add(measureDTO);
         }
         return resultList;

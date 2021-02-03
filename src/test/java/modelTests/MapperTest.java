@@ -6,6 +6,7 @@ import ru.isaykin.application.mappers.MeasureMapper;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,5 +30,6 @@ public class MapperTest {
         assertEquals(truck.getTruckNumber(), measureDTO.getTruckNumber());
         assertEquals(measure.getDateOfMeasure(), measureDTO.getDateOfMeasure());
     }
+
 
 }
