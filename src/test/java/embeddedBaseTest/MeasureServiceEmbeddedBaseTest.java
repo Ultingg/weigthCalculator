@@ -69,9 +69,11 @@ public class MeasureServiceEmbeddedBaseTest {
                 .id(5L)
                 .build();
         Measure actual = measureService.addMeasure(newTruck, 5, 3.5);
-        System.out.println("РАЗМЕР: "+ measureService.getAll().size());
-        System.out.println(measureService.getById(2L).getId());
+<
+      
         List<Measure> measureList = measureService.getAll();
+
+
 
 
         assertEquals(expected, actual, "Checking if correct measure was added to table.");
