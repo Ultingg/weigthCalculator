@@ -1,6 +1,5 @@
 package ru.isaykin.application.repositories;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
