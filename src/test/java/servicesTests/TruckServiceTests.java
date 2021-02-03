@@ -109,6 +109,7 @@ public class TruckServiceTests {
     @Test
     public void deleteTruck_validId_deleteTruckAndMeasures() {
         when(measureRepository.getAll()).thenReturn(measureList);
+        when(truckRepository.getById(1L)).thenReturn(truck);
 
         truckService.deleteById(1L);
 

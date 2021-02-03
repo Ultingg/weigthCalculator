@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.isaykin.application.DTO.MeasureDTO;
+import ru.isaykin.application.exceptions.NoMeasureException;
+import ru.isaykin.application.exceptions.NoTruckException;
 import ru.isaykin.application.mappers.MeasureMapper;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
@@ -49,7 +51,13 @@ public class MeasureService {
     }
 
     public Measure getById(Long id) {
-        return measureRepository.getById(id);
+
+
+
+        Measure measure = measureRepository.getById(id);
+        if (measure == null) throw new NoMeasureException("There is ni Measure with such id.");
+
+        return measure;
     }
 
     public List<Measure> getAll() {
@@ -57,6 +65,9 @@ public class MeasureService {
     }
 
     public void deleteById(Long id) {
+        Measure measure = measureRepository.getById(id);
+        if (measure == null) throw new NoMeasureException("There is ni Measure with such id.");
+
         measureRepository.deleteById(id);
     }
 
@@ -75,6 +86,7 @@ public class MeasureService {
     public List<MeasureDTO> getListOfNotOverloadedAndByTruckIdDTO(Long id) {
         List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(false);
         Truck truck = truckRepository.getById(id);
+        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
     }
 
@@ -87,12 +99,14 @@ public class MeasureService {
     public List<MeasureDTO> getListOfOverloadedAndByTruckIdDTO(Long id) {
         List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(true);
         Truck truck = truckRepository.getById(id);
+        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
     }
 
     public List<MeasureDTO> getListOfMeasureDTOByTruckId(Long id) {
         List<Measure> measureList = measureRepository.getAll();
         Truck truck = truckRepository.getById(id);
+        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(measureList, truck);
     }
 
@@ -118,6 +132,7 @@ public class MeasureService {
     }
 
     private List<MeasureDTO> getCustomizeListOfMeasureDTOWithCurrentTruck(List<Measure> measureList, Truck truck) {
+        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
         List<MeasureDTO> resultList = new ArrayList<>();
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(truck.getId())) {

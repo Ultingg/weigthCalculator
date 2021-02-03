@@ -40,14 +40,14 @@ public class TruckService {
 
     public Truck getTruck(Long id) {
         Truck result = truckRepository.getById(id);
-        if (result == null) throw new NoTruckException();
+        if (result == null) throw new NoTruckException("There is no Truck in database with such id");
 
 
         return result;
     }
 
     public void deleteById(Long id) {
-        if(truckRepository.getById(id) == null)  throw new NoTruckException();
+        if(truckRepository.getById(id) == null)  throw new NoTruckException("There is no Truck in database with such id");
         List<Measure> measureList = measureRepository.getAll();
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(id)) measureRepository.deleteById(measure.getId());
@@ -58,7 +58,7 @@ public class TruckService {
     public void updateById(Long id, Truck updatedTruck) {
         Truck truckToUpdate = truckRepository.getById(id);
         if (truckToUpdate == null) {
-            throw new NoTruckException();
+            throw new NoTruckException("There is no Truck in database with such id");
         } else {
             updatedTruck.setId(id);
             truckRepository.save(updatedTruck);
