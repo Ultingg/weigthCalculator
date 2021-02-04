@@ -6,7 +6,6 @@ import ru.isaykin.application.mappers.MeasureMapper;
 import ru.isaykin.application.model.Measure;
 import ru.isaykin.application.model.Truck;
 
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,9 +25,12 @@ public class MapperTest {
 
         MeasureDTO measureDTO = MeasureMapper.INSTANCE.fromMeasure(measure, truck);
 
-        assertEquals(measure.getCargoWeight(), measureDTO.getCargoWeight());
-        assertEquals(truck.getTruckNumber(), measureDTO.getTruckNumber());
-        assertEquals(measure.getDateOfMeasure(), measureDTO.getDateOfMeasure());
+        assertEquals(measure.getCargoWeight(), measureDTO.getCargoWeight(),
+                "Checking if measure's cargo weight is same as measureDTO's cargo weight.");
+        assertEquals(truck.getTruckNumber(), measureDTO.getTruckNumber(),
+                "Checking if truck's truck number is same as measureDTO's truck number.");
+        assertEquals(measure.getDateOfMeasure(), measureDTO.getDateOfMeasure(),
+                "Checking if measure's date of measure is same as measureDTO's date of measure.");
     }
 
 

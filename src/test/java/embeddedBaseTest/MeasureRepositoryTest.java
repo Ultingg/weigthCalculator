@@ -48,8 +48,8 @@ public class MeasureRepositoryTest {
                 4.5, 18000, 4, 20000, 1L,
                 false, false, false, false);
 
-        assertEquals(measureRepository.getAll().size(), 1, "Checking if truck was added to table and size if correct(1).");
-
+        assertEquals(measureRepository.getAll().size(), 1,
+                "Checking if measure was added to table and size if correct(1).");
     }
 
     @Test
@@ -72,7 +72,8 @@ public class MeasureRepositoryTest {
 
         Measure actual = measureRepository.getById(1L);
 
-        assertEquals(actual, expected, "Checkin if measure was added to table in database.");
+        assertEquals(actual, expected,
+                "Checkin if measure was added to table in database.");
     }
 
     @Test
@@ -93,10 +94,12 @@ public class MeasureRepositoryTest {
         measureRepository.save(expected);
         expected.setId(1L);
 
-        assertEquals(measureRepository.getAll().size(), 1, "Checking if truck was added to table and size if correct(1).");
+        assertEquals(measureRepository.getAll().size(), 1,
+                "Checking if measure was added to table and size if correct(1).");
 
         measureRepository.deleteById(1L);
-        assertEquals(measureRepository.getAll().size(), 0, "Checking if truck was deleted from table and size if correct(0).");
+        assertEquals(measureRepository.getAll().size(), 0,
+                "Checking if measure was deleted from table and size if correct(0).");
     }
 
     @Test
@@ -119,7 +122,8 @@ public class MeasureRepositoryTest {
 
         Measure actual = measureRepository.getByDateOfMeasure(Timestamp.valueOf(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)));
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual,
+                "Checking if correct measure was gotten from DB by dateOfMeasure.");
     }
 
 

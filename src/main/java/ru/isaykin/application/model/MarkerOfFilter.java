@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-// Using for checking if list if filtered by id
+/* Using for checking if list if filtered by id */
 
 @Data
 @Slf4j

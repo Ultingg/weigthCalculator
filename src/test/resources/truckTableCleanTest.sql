@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS truck;
 CREATE TABLE truck
 (

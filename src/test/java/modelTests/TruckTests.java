@@ -30,61 +30,70 @@ public class TruckTests {
     public void truckNumberValidation_noValid_foundError() {
         truck.setTruckNumber("0");
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void truckNumberValidation_emptyTruckNumber_foundError() {
         truck.setTruckNumber("");
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void truckAllFieldsValidation_valid_noError() {
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertTrue(violations.isEmpty(), "Checking if there are no validation errors");
+        assertTrue(violations.isEmpty(),
+                "Checking if there are no validation errors");
     }
 
     @Test
     public void frontPriceValidation_notValidFrontPrice_someError() {
         truck.setFrontPrice(0.0);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void frontPriceValidation_minusNotValidFrontPrice_someError() {
         truck.setFrontPrice(-1);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void frontRearValidation_notValidFrontPrice_someError() {
         truck.setRearPrice(0.0);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void frontRearValidation_minusNotValidFrontPrice_someError() {
         truck.setRearPrice(-1);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void frontFirstWheelWeightValidation_notValidFrontPrice_someError() {
         truck.setFirstWheelWeight(-1);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 
     @Test
     public void frontTruckWeightValidation_notValidFrontPrice_someError() {
         truck.setTruckWeight(-1);
         Set<ConstraintViolation<Truck>> violations = validator.validate(truck);
-        assertFalse(violations.isEmpty(), "Checking if there are some validation errors");
+        assertFalse(violations.isEmpty(),
+                "Checking if there are some validation errors");
     }
 }

@@ -85,13 +85,14 @@ public class MeasureControllerMVCTest {
 
     @Test
     public void getListOfMeasureByTruckId_validID_ListOfMeasureByTruckId() throws Exception {
+        Truck truck = new Truck();
+        when(truckRepository.getById(1L)).thenReturn(truck);
         MarkerOfFilter expected = new MarkerOfFilter();
         expected.setFiltered(true);
         expected.setId(1L);
 
         mockMvc.perform(get("/measure/listById")
                 .param("truckId", "1"))
-
                 .andExpect(view().name("measureList"))
                 .andExpect(model().attributeExists("marker", "truckList", "measureDTOList"))
                 .andExpect(model().attribute("marker", expected))
@@ -122,6 +123,8 @@ public class MeasureControllerMVCTest {
 
     @Test
     public void listOverloadedById_viewMeasureListByIdOverloaded() throws Exception {
+        Truck truck = new Truck();
+        when(truckRepository.getById(1L)).thenReturn(truck);
         MarkerOfFilter expected = new MarkerOfFilter();
         expected.setFiltered(true);
         expected.setId(1L);
@@ -135,6 +138,8 @@ public class MeasureControllerMVCTest {
 
     @Test
     public void listNotOverloadedById_viewMeasureListByIdNotOverloaded() throws Exception {
+        Truck truck = new Truck();
+        when(truckRepository.getById(1L)).thenReturn(truck);
         MarkerOfFilter expected = new MarkerOfFilter();
         expected.setFiltered(true);
         expected.setId(1L);

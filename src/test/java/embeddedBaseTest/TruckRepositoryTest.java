@@ -43,7 +43,8 @@ public class TruckRepositoryTest {
 
         assertEquals("G989AI/KA986", truckList.get(0).getTruckNumber()
                 , "Checking if truck was added to table of database.");
-        assertEquals(truckList.size(), 1, "Checking size of table of database, it must be 1.");
+        assertEquals(1, truckList.size(),
+                "Checking size of table of database, it must be 1.");
     }
 
     @Test
@@ -53,13 +54,13 @@ public class TruckRepositoryTest {
 
         assertEquals("G989AI/KA986", truckList.get(0).getTruckNumber()
                 , "Checking if truck was added to table of database.");
-        assertEquals(truckList.size(), 1
+        assertEquals(1, truckList.size()
                 , "Checking size of table of database, it must be 1.");
 
         truckRepository.deleteById(1L);
         truckList = truckRepository.getAll();
 
-        assertEquals(truckList.size(), 0
+        assertEquals(0, truckList.size()
                 , "Checkin if Tuck was deleted from table of database.");
     }
 
@@ -78,10 +79,10 @@ public class TruckRepositoryTest {
         Truck truckToCheck = truckRepository.getById(1L);
 
 
-        assertEquals(truckToCheck, truck
+        assertEquals(truck, truckToCheck
                 , "Checking if truck was updated correctly.");
-        assertEquals(truckToCheck.getTruckNumber()
-                , "P345TO98/AT878578", "Checking if TruckNumber was updated correctly.");
+        assertEquals("P345TO98/AT878578", truckToCheck.getTruckNumber()
+                , "Checking if TruckNumber was updated correctly.");
     }
 
 }
