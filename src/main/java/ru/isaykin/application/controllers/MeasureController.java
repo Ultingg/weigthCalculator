@@ -16,7 +16,6 @@ import ru.isaykin.application.services.TruckService;
 import javax.validation.Valid;
 import java.util.List;
 
-//TODO: exceptionHandler for internalErrors when there is no Truck for measure and so on
 @Slf4j
 @Component
 @Controller

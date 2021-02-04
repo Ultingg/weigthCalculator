@@ -30,10 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -69,7 +65,6 @@ public class MeasureControllerTest {
     public void contextLoad() {
         assertNotNull(measureController);
     }
-
 
 
     @Test
@@ -144,7 +139,6 @@ public class MeasureControllerTest {
 
         assertEquals("measureRecipe", expected);
     }
-
 
 
 }

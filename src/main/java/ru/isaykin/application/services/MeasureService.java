@@ -53,7 +53,6 @@ public class MeasureService {
     public Measure getById(Long id) {
 
 
-
         Measure measure = measureRepository.getById(id);
         if (measure == null) throw new NoMeasureException("There is ni Measure with such id.");
 
@@ -86,7 +85,7 @@ public class MeasureService {
     public List<MeasureDTO> getListOfNotOverloadedAndByTruckIdDTO(Long id) {
         List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(false);
         Truck truck = truckRepository.getById(id);
-        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
+        if (truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
     }
 
@@ -99,14 +98,14 @@ public class MeasureService {
     public List<MeasureDTO> getListOfOverloadedAndByTruckIdDTO(Long id) {
         List<Measure> listOfOverloaded = measureRepository.getMeasureByOverloaded(true);
         Truck truck = truckRepository.getById(id);
-        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
+        if (truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(listOfOverloaded, truck);
     }
 
     public List<MeasureDTO> getListOfMeasureDTOByTruckId(Long id) {
         List<Measure> measureList = measureRepository.getAll();
         Truck truck = truckRepository.getById(id);
-        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
+        if (truck == null) throw new NoTruckException("There is no Truck in database with such id");
         return getCustomizeListOfMeasureDTOWithCurrentTruck(measureList, truck);
     }
 
@@ -132,7 +131,7 @@ public class MeasureService {
     }
 
     private List<MeasureDTO> getCustomizeListOfMeasureDTOWithCurrentTruck(List<Measure> measureList, Truck truck) {
-        if(truck == null) throw new NoTruckException("There is no Truck in database with such id");
+        if (truck == null) throw new NoTruckException("There is no Truck in database with such id");
         List<MeasureDTO> resultList = new ArrayList<>();
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(truck.getId())) {

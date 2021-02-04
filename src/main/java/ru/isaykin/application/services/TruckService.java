@@ -47,7 +47,8 @@ public class TruckService {
     }
 
     public void deleteById(Long id) {
-        if(truckRepository.getById(id) == null)  throw new NoTruckException("There is no Truck in database with such id");
+        if (truckRepository.getById(id) == null)
+            throw new NoTruckException("There is no Truck in database with such id");
         List<Measure> measureList = measureRepository.getAll();
         for (Measure measure : measureList) {
             if (measure.getTruckId().equals(id)) measureRepository.deleteById(measure.getId());

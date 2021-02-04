@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -111,9 +110,9 @@ public class TruckServiceEmbeddedBaseTest {
 
     @Test
     public void getTruck_notValidId_NoTruckException() {
-        assertThrows(NoTruckException.class, ()->truckService.getTruck(10L),
+        assertThrows(NoTruckException.class, () -> truckService.getTruck(10L),
                 "Checking if there is NoTruckException when it get not valid id.");
-        assertThrows(NoTruckException.class, ()->truckService.getTruck(null),
+        assertThrows(NoTruckException.class, () -> truckService.getTruck(null),
                 "Checking if there is NoTruckException when it get null.");
     }
 

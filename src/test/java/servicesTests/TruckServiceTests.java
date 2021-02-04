@@ -80,7 +80,8 @@ public class TruckServiceTests {
 
         List<Truck> actual = truckService.getAll();
 
-        assertEquals(expected, actual, "Checking if list of trucks is the same");
+        assertEquals(expected, actual,
+                "Checking if list of trucks is the same");
     }
 
     @Test
@@ -90,16 +91,17 @@ public class TruckServiceTests {
 
         Truck actual = truckService.getTruck(1L);
 
-        assertEquals(expected, actual, " Checking if service get the right truck by id");
+        assertEquals(expected, actual,
+                " Checking if service get the right truck by id");
     }
 
     @Test
     public void getTruck_notValidId_NoTruckException() {
-        assertThrows(NoTruckException.class, ()->truckService.getTruck(10L),
+        assertThrows(NoTruckException.class, () -> truckService.getTruck(10L),
                 "Checking if there is NoTruckException when it get not valid id.");
         verify(truckRepository, times(1)).getById(10L);
         verify(truckRepository, times(1)).getById(anyLong());
-        assertThrows(NoTruckException.class, ()->truckService.getTruck(null),
+        assertThrows(NoTruckException.class, () -> truckService.getTruck(null),
                 "Checking if there is NoTruckException when it get null.");
         verify(truckRepository, times(1)).getById(null);
         verify(truckRepository, times(1)).getById(anyLong());
@@ -148,25 +150,28 @@ public class TruckServiceTests {
         Truck truckToUpdate = truck;
         when(truckRepository.getById(1L)).thenReturn(truckToUpdate);
 
-        assertThrows(NullPointerException.class,()->truckService.updateById(1L, nullTruck),
+        assertThrows(NullPointerException.class, () -> truckService.updateById(1L, nullTruck),
                 "Checking if it throws exception when there is nullTruck as updated truck to update real Truck in database.");
     }
+
     @Test
     public void updateTruckById_inValidIdAndValidTruck_NoTruckException() {
         Truck updatedTruck = truck;
         Truck truckToUpdate = null;
         when(truckRepository.getById(1L)).thenReturn(truckToUpdate);
 
-        assertThrows(NoTruckException.class,()->truckService.updateById(1L, updatedTruck),
+        assertThrows(NoTruckException.class, () -> truckService.updateById(1L, updatedTruck),
                 "Checking if it throws exception when there is no Truck with such id in database.");
     }
 
     @Test
     public void deleteTruckById_notValidId_NullPointerException() {
-        assertThrows(NoTruckException.class,()->truckService.deleteById(null));
+        assertThrows(NoTruckException.class, () -> truckService.deleteById(null),
+                "Checking if there is NoTruckException when argument is null.");
+        assertThrows(NoTruckException.class, () -> truckService.deleteById(10L),
+                "Checking if there is NoTruckException when argument is not existing.");
 
-        assertThrows(NoTruckException.class,()->truckService.deleteById(10L));
-        verify(truckRepository,times(1)).getById(10L);
-        verify(truckRepository,times(1)).getById(anyLong());
+        verify(truckRepository, times(1)).getById(10L);
+        verify(truckRepository, times(1)).getById(anyLong());
     }
 }

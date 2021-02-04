@@ -19,7 +19,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class MeasureServiceTests {
@@ -294,6 +295,8 @@ public class MeasureServiceTests {
 
     @Test
     public void deleteById_validId_CorrectTimesOfCall() {
+        Measure expected = new Measure();
+        when(measureRepository.getById(1L)).thenReturn(expected);
         measureService.deleteById(1L);
 
         verify(measureRepository, times(1)).deleteById(anyLong());
@@ -316,12 +319,12 @@ public class MeasureServiceTests {
 
     @Test
     public void getById_notExistingIdOrNull_NoMeasureException() {
-        assertThrows(NoMeasureException.class,()->measureService.getById(10L),
+        assertThrows(NoMeasureException.class, () -> measureService.getById(10L),
                 "Checking if it throws NoTruckException with not existing id.");
         verify(measureRepository, times(1)).getById(10L);
         verify(measureRepository, times(1)).getById(anyLong());
 
-        assertThrows(NoMeasureException.class,()->measureService.getById(null),
+        assertThrows(NoMeasureException.class, () -> measureService.getById(null),
                 "Checking if it throws NoTruckException with null id.");
         verify(measureRepository, times(1)).getById(null);
         verify(measureRepository, times(1)).getById(anyLong());
@@ -329,16 +332,17 @@ public class MeasureServiceTests {
 
     @Test
     public void deleteById_notExistingIdOrNull_NoMeasureException() {
-        assertThrows(NoMeasureException.class,()->measureService.deleteById(1L),
+        assertThrows(NoMeasureException.class, () -> measureService.deleteById(1L),
                 "Checking if it throws NoTruckException with not existing id.");
         verify(measureRepository, times(1)).getById(1L);
         verify(measureRepository, times(1)).getById(anyLong());
 
-        assertThrows(NoMeasureException.class,()->measureService.deleteById(null),
+        assertThrows(NoMeasureException.class, () -> measureService.deleteById(null),
                 "Checking if it throws NoTruckException with null id.");
         verify(measureRepository, times(1)).getById(null);
         verify(measureRepository, times(1)).getById(anyLong());
     }
+
     @Test
     public void getListOfMeasureDTOByTruckId_notExistingId_NoTruckException() {
         assertThrows(NoTruckException.class, () -> measureService.getListOfMeasureDTOByTruckId(1L),
@@ -347,17 +351,15 @@ public class MeasureServiceTests {
         verify(truckRepository, times(1)).getById(anyLong());
         verify(truckRepository, times(1)).getById(1L);
     }
+
     @Test
     public void getListOfMeasureDTOByTruckId_nullId_NoTruckException() {
-        assertThrows(NoTruckException.class, ()-> measureService.getListOfMeasureDTOByTruckId(null),
+        assertThrows(NoTruckException.class, () -> measureService.getListOfMeasureDTOByTruckId(null),
                 "Checking if it throws NoTruckException with null id.");
         verify(measureRepository, times(1)).getAll();
         verify(truckRepository, times(1)).getById(any());
         verify(truckRepository, times(1)).getById(null);
     }
-
-
-
 
 
 }

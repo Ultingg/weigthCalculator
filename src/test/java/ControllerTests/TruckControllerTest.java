@@ -50,7 +50,6 @@ public class TruckControllerTest {
     public void getTruckList_200OKTruckList() throws Exception {
         mockMvc.perform(get("/trucks/list")).andExpect(status().isOk())
                 .andExpect(view().name("truckList"));
-
     }
 
 
@@ -77,12 +76,10 @@ public class TruckControllerTest {
                 .andExpect(view().name("truckCard"))
                 .andExpect(model().attribute("truck", expectedTruck))
                 .andDo(MockMvcResultHandlers.print());
-
     }
 
     @Test
     public void deleteTruck_validId_deleteTruck() throws Exception {
-
         mockMvc.perform(delete("/trucks/{id}", "1"))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/trucks/list"));

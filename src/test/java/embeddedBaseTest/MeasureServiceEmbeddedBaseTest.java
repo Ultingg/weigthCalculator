@@ -43,6 +43,7 @@ public class MeasureServiceEmbeddedBaseTest {
     public void setUp() {
         measureService = new MeasureService(measureRepository, truckRepository);
     }
+
     @Test
     public void addMeasure_validMeasure_measureAddedToTable() {
         Truck newTruck = Truck.builder()
@@ -75,10 +76,10 @@ public class MeasureServiceEmbeddedBaseTest {
 
 
         assertEquals(expected, actual, "Checking if correct measure was added to table.");
-        assertEquals(5,measureList.size());
+        assertEquals(5, measureList.size(), "Checking if measure was added to table by size of table.");
     }
 
-//    @Test
+    //    @Test
     public void getById_validId_validMeasure() {
         Measure expected = Measure.builder()
                 .completeWeight(41500)
@@ -98,24 +99,22 @@ public class MeasureServiceEmbeddedBaseTest {
 
         Measure actual = measureService.getById(1L);
 
-        assertEquals(expected, actual, "Checking if correct measure was gotten from table.");
+        assertEquals(expected, actual,
+                "Checking if correct measure was gotten from table.");
     }
+
     @Test
     public void deleteMeasureById_validId_MeasureDeleted() {
-        List<Measure>  measureList = measureService.getAll();
-        System.out.println("MEASURE LIST SIZE " +measureList.size());
+        List<Measure> measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE " + measureList.size());
 
 
         measureService.deleteById(1L);
-          measureList = measureService.getAll();
-        System.out.println("MEASURE LIST SIZE after delete"+ measureList.size());
-        assertEquals(3, measureList.size(), "Checking if measure was deleted from table.");
+        measureList = measureService.getAll();
+        System.out.println("MEASURE LIST SIZE after delete" + measureList.size());
+        assertEquals(3, measureList.size(),
+                "Checking if measure was deleted from table.");
     }
-
-
-
-
-
 
 
 }
